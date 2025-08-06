@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPI - Casamento Plano Infalível</title>
+    <!-- Link para o seu arquivo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" class="logo"></a>
+            <ul>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#mentoria">Mentoria</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SEÇÃO INICIAL -->
+        <section id="inicio">
+            <h1>Fortalecendo casamentos, construindo lares sobre a rocha.</h1>
+            <p>Conheça nossa mentoria para casais e transforme seu relacionamento.</p>
+            <a href="#mentoria" class="cta-button">Quero Saber Mais</a>
+        </section>
+
+        <!-- SEÇÃO SOBRE NÓS -->
+        <section id="sobre">
+            <h2>Nossa História</h2>
+            <p>Aqui você contará a história do projeto, a visão e os princípios bíblicos...</p>
+        </section>
+
+        <!-- SEÇÃO MENTORIA -->
+        <section id="mentoria">
+            <h2>Mentoria para Casais</h2>
+            <p>Detalhes sobre como funciona a mentoria, metodologia, temas, etc.</p>
+        </section>
+        
+        <!-- SEÇÃO RECURSOS (Integração com Instagram) -->
+        <section id="recursos">
+            <h2>Nossas Mídias e Recursos</h2>
+            <p>Siga-nos no Instagram para dicas diárias!</p>
+            <!-- Futuramente, podemos adicionar o feed do Instagram aqui com JS -->
+            <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel/" target="_blank">@cpi_casamentoplanoinfalivel</a>
+        </section>
+
+         <!-- SEÇÃO DEPOIMENTOS -->
+        <section id="depoimentos">
+            <h2>O que dizem sobre nós</h2>
+            <blockquote>"A mentoria transformou nosso casamento!"<cite>- Casal Anônimo</cite></blockquote>
+        </section>
+
+    </main>
+
+    <footer id="contato">
+        <h3>Fale Conosco</h3>
+        <p>Email: contato@cpi.com</p>
+        <p>WhatsApp: (XX) XXXXX-XXXX</p>
+        <!-- Formulário de Contato -->
+    </footer>
+    
+    <!-- Link para o seu arquivo JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

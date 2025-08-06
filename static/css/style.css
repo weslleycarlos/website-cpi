@@ -1,0 +1,49 @@
+/* Importe a fonte que você usa no Canva, se possível (ex: do Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.logo {
+    max-height: 50px;
+}
+
+section {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+#inicio {
+    background-color: #f8f8f8; /* Um cinza bem claro */
+}
+
+.cta-button {
+    background-color: #d4a373; /* Cor inspirada no seu Canva */
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
