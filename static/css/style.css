@@ -47,3 +47,45 @@ section {
     border-radius: 5px;
     font-weight: bold;
 }
+
+
+footer form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 1rem auto;
+    gap: 0.5rem;
+}
+
+footer input, footer textarea, footer button {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+footer button {
+    background-color: #d4a373; /* Cor do botão principal */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Adicione no final do seu arquivo CSS */
+
+@media (max-width: 768px) {
+    /* Para telas de até 768px de largura (tablets e celulares) */
+    
+    nav ul {
+        /* Faz o menu empilhar verticalmente em vez de ficar lado a lado */
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Você pode precisar de um 'botão hamburguer' com JS para mostrar/esconder o menu */
+
+    section {
+        padding: 2rem 1rem;
+    }
+}
