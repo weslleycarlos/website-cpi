@@ -16,4 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     menuLinks.forEach(link => {
         link.addEventListener('click', smoothScroll);
     });
+
+     const hamburger = document.getElementById('hamburger-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+        // Adiciona ou remove a classe 'active' na lista de links
+        navLinks.classList.toggle('active');
+    });
+    
 });
+

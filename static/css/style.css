@@ -8,6 +8,21 @@ body {
     color: #333;
 }
 
+/* Estilo do botão hambúrguer */
+.hamburger-menu {
+    display: none; /* Escondido por padrão */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+}
+
 header {
     background-color: #fff;
     padding: 1rem 2rem;
@@ -36,7 +51,49 @@ section {
 }
 
 #inicio {
-    background-color: #f8f8f8; /* Um cinza bem claro */
+    /* Cor de fundo que será exibida enquanto a imagem carrega */
+    background-color: #333; 
+
+    /* === A IMAGEM DE FUNDO === */
+    /* Substitua 'seu-background.jpg' pelo nome do seu arquivo! */
+    background-image: url('../images/background.jpg');
+    
+    /* Faz a imagem cobrir toda a área da seção sem distorcer */
+    background-size: cover;
+
+    /* Centraliza a imagem na seção, garantindo um bom recorte */
+    background-position: center center;
+
+    /* Garante que a imagem não se repita */
+    background-repeat: no-repeat;
+    
+    /* Ajusta a cor do texto para branco para contrastar com o fundo escuro */
+    color: white;
+
+    /* Essencial para o funcionamento do overlay */
+    position: relative;
+    z-index: 1;
+}
+
+/* === O OVERLAY SEMI-TRANSPARENTE === */
+#inicio::before {
+    content: ''; /* Pseudo-elementos precisam disso */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Cor preta com 60% de opacidade. Ajuste o 0.6 para mais ou menos escuro */
+    background-color: rgba(0, 0, 0, 0.6); 
+
+    /* Coloca o overlay entre a imagem de fundo e o conteúdo */
+    z-index: -1; 
+}
+
+/* Garante que o conteúdo (h1, p) fique acima do overlay */
+#inicio h1, #inicio p, #inicio a {
+    position: relative;
 }
 
 .cta-button {
@@ -72,20 +129,57 @@ footer button {
     font-weight: bold;
 }
 
-/* Adicione no final do seu arquivo CSS */
+.sobre-container {
+    display: flex;         /* Ativa o Flexbox */
+    align-items: center;   /* Alinha verticalmente a imagem e o texto */
+    gap: 2rem;             /* Cria um espaço entre a imagem e o texto */
+    max-width: 1000px;     /* Limita a largura da seção para melhor leitura */
+    margin: 0 auto;        /* Centraliza o container */
+    text-align: left;      /* Alinha o texto à esquerda, fica mais legível */
+}
 
+.sobre-imagem, .sobre-texto {
+    flex: 1; /* Faz com que ambos ocupem metade do espaço disponível */
+}
+
+.sobre-imagem img {
+    width: 100%;           /* Garante que a imagem seja responsiva e ocupe todo o espaço da div */
+    height: auto;
+    border-radius: 10px;   /* Adiciona bordas arredondadas para um visual suave */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Adiciona uma sombra sutil */
+}
+
+/* Regras para telas pequenas (mobile) */
 @media (max-width: 768px) {
-    /* Para telas de até 768px de largura (tablets e celulares) */
     
-    nav ul {
-        /* Faz o menu empilhar verticalmente em vez de ficar lado a lado */
-        flex-direction: column;
-        gap: 1rem;
+    .nav-links {
+        /* Esconde o menu de links */
+        display: none; 
+        position: absolute;
+        top: 70px; /* Altura do seu header */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    /* Você pode precisar de um 'botão hamburguer' com JS para mostrar/esconder o menu */
+    .nav-links.active {
+        /* Mostra o menu quando a classe 'active' está presente */
+        display: block;
+    }
 
-    section {
-        padding: 2rem 1rem;
+    .nav-links ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .hamburger-menu {
+        display: flex; /* Mostra o botão hambúrguer */
+    }
+
+    .sobre-container {
+        flex-direction: column; /* Empilha a imagem e o texto verticalmente */
+        text-align: center;     /* Centraliza o texto no mobile */
     }
 }
