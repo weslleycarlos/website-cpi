@@ -99,33 +99,33 @@ section {
 }
 
 #depoimentos {
-    background-color: #f8f9fa; /* Um cinza muito leve para diferenciar a seção */
+  background-color: #f8f9fa; /* Um cinza muito leve para diferenciar a seção */
 }
 
 .depoimento-card {
-    background-color: white;
-    max-width: 600px;
-    margin: 1rem auto; /* Espaçamento entre os cards */
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    border-left: 5px solid #d4a373; /* Cor de destaque, da sua identidade visual */
-    text-align: left;
+  background-color: white;
+  max-width: 600px;
+  margin: 1rem auto; /* Espaçamento entre os cards */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #d4a373; /* Cor de destaque, da sua identidade visual */
+  text-align: left;
 }
 
 .depoimento-card blockquote {
-    margin: 0;
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #555;
+  margin: 0;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #555;
 }
 
 .depoimento-card cite {
-    display: block; /* Para que o 'cite' vá para a linha de baixo */
-    margin-top: 1rem;
-    font-weight: bold;
-    color: #333;
-    text-align: right;
+  display: block; /* Para que o 'cite' vá para a linha de baixo */
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: right;
 }
 
 .cta-button {
@@ -146,25 +146,25 @@ footer form {
 }
 
 .mentoria-passos {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo em telas menores */
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo em telas menores */
 }
 
 .passo {
-    background-color: white;
-    padding: 2rem;
-    flex-basis: 300px; /* Define uma largura base para cada card */
-    flex-grow: 1; /* Permite que os cards cresçam para ocupar o espaço */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    text-align: center;
+  background-color: white;
+  padding: 2rem;
+  flex-basis: 300px; /* Define uma largura base para cada card */
+  flex-grow: 1; /* Permite que os cards cresçam para ocupar o espaço */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
 }
 
 .passo h3 {
-    color: #d4a373; /* Cor de destaque */
+  color: #d4a373; /* Cor de destaque */
 }
 
 footer input,
@@ -203,6 +203,35 @@ footer button {
   height: auto;
   border-radius: 10px; /* Adiciona bordas arredondadas para um visual suave */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
+}
+
+.social-icons-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Garante que os ícones quebrem a linha em telas pequenas */
+  gap: 2rem; /* Espaço entre os ícones */
+  margin-top: 2rem;
+}
+
+.social-icons-container a {
+  font-size: 2.5rem; /* Tamanho do ícone */
+  color: #333; /* Cor padrão do ícone */
+  transition: color 0.3s ease, transform 0.3s ease; /* Efeito de transição suave */
+}
+
+/* Efeito HOVER: A mágica acontece aqui */
+.social-icons-container a:hover {
+  color: #d4a373; /* Muda para a cor da sua identidade visual */
+  transform: scale(1.2); /* Aumenta levemente o ícone ao passar o mouse */
+}
+
+/* Novo estilo para o rodapé minimalista */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  color: #6c757d;
+  font-size: 0.9rem;
 }
 
 /* Regras para telas pequenas (mobile) */

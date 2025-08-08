@@ -9,6 +9,13 @@
     </title>
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
   </head>
@@ -48,23 +55,11 @@
       {% block content %}{% endblock %}
     </main>
 
-    <footer id="contato">
-      <h3>Fale Conosco</h3>
-      <p>Email: contato@cpi.com</p>
-      <p>WhatsApp: (XX) XXXXX-XXXX</p>
-      <!-- O formulário de contato virá aqui em breve -->
-
-      <form action="/enviar_contato" method="post">
-        <input type="text" name="nome" placeholder="Seu Nome" required />
-        <input type="email" name="email" placeholder="Seu E-mail" required />
-        <textarea
-          name="mensagem"
-          rows="4"
-          placeholder="Sua Mensagem"
-          required
-        ></textarea>
-        <button type="submit">Enviar Mensagem</button>
-      </form>
+    <footer>
+      <p>
+        &copy; {% raw %}{{ 'now' | date('Y') }}{% endraw %} Casamento Plano
+        Infalível. Todos os direitos reservados.
+      </p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
