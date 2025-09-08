@@ -80,7 +80,62 @@ body {
     border-radius: 50%;
 }
 
+
+/* ===================== ESTILOS DO BLOG (ADICIONAL) ===================== */
+
+/* Estilos para a página de um post individual */
+#post-detail .container {
+    text-align: left; /* Alinha todo o conteúdo à esquerda para melhor leitura */
+}
+
+#post-detail h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+.post-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.post-body {
+    line-height: 1.8; /* Aumenta o espaçamento entre linhas */
+    font-size: 1.1rem; /* Tamanho de fonte confortável para leitura */
+}
+
+.post-body p {
+    margin-bottom: 1.5rem; /* Espaçamento entre parágrafos */
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #d4a373;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #333;
+}
+
+
 /* ===================== SEÇÕES ===================== */
+
+.page-section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto; /* Centraliza o container da página */
+}
+
 .full-screen-section {
     height: 100vh;
     display: flex;
