@@ -1,68 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- O título poderá ser dinâmico no futuro -->
-    <title>
-      {% block title %}CPI - Casamento Plano Infalível{% endblock %}
-    </title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body>
-    <header>
-      <!-- Dentro do seu <header> em base.html, modifique o <nav> -->
-      <nav>
-        <a href="/"
-          ><img
-            src="{{ url_for('static', filename='images/logo.png') }}"
-            alt="Logo CPI"
-            class="logo"
-        /></a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CPI - Casamento Plano Infalível{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
 
-        <!-- O botão hambúrguer (inicialmente escondido no desktop) -->
-        <div class="hamburger-menu" id="hamburger-menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
+<!-- SIDEBAR DESKTOP -->
+<nav class="sidebar-nav">
+    <a href="/#inicio" class="sidebar-logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI">
+    </a>
+    <ul>
+        <li><a href="/#inicio" data-section="inicio">Início</a></li>
+        <li><a href="/#mentoria" data-section="mentoria">Mentoria</a></li>
+        <li><a href="/#sobre" data-section="sobre">Sobre Nós</a></li>  
+        <li><a href="/#depoimentos" data-section="depoimentos">Depoimentos</a></li>
+        <li><a href="/#recursos" data-section="recursos">Contato</a></li>
+        <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
+    </ul>
+</nav>
 
-        <!-- A lista de links agora dentro de um container com ID -->
-        <div class="nav-links" id="nav-links">
-          <ul>
-            <li><a href="/#sobre">Sobre Nós</a></li>
-            <li><a href="/#mentoria">Mentoria</a></li>
-            <li><a href="/#eventos">Eventos</a></li>
-            <li><a href="/#recursos">Recursos</a></li>
-            <li><a href="/#contato">Contato</a></li>
-            <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+<!-- HEADER MOBILE -->
+<header class="mobile-header">
+    <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" class="logo"></a>
+    <div class="hamburger-menu" id="hamburger-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+</header>
 
-    <main>
-      <!-- Este bloco será substituído pelo conteúdo da página específica -->
-      {% block content %}{% endblock %}
-    </main>
+<!-- PAINEL MOBILE -->
+<div class="mobile-nav-panel" id="mobile-nav-panel">
+    <ul>
+        <li><a href="/#inicio">Início</a></li>
+        <li><a href="/#mentoria">Mentoria</a></li>
+        <li><a href="/#sobre">Sobre Nós</a></li>        
+        <li><a href="/#depoimentos">Depoimentos</a></li>
+        <li><a href="/#recursos">Contato</a></li>
+        <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
+        
+    </ul>
+</div>
 
-    <footer>
-      <p>
-        &copy; {{ current_year }} Casamento Plano Infalível. Todos os direitos
-        reservados.
-      </p>
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="main-content">
+    {% block content %}{% endblock %}
+    <footer class="main-footer">
+        <p>&copy; {{ current_year }} Casamento Plano Infalível. Todos os direitos reservados.</p>
     </footer>
+</div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  </body>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
 </html>

@@ -1,43 +1,66 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // --- CÓDIGO DO MENU HAMBÚRGUER ---
-  const hamburger = document.getElementById("hamburger-menu");
-  const navLinks = document.getElementById("nav-links");
-  const allNavLinks = document.querySelectorAll(".nav-links a"); // Pega todos os links do menu
+document.addEventListener('DOMContentLoaded', () => {
 
-  // Função para abrir/fechar o menu
-  function toggleMenu() {
-    navLinks.classList.toggle("active");
-    hamburger.classList.toggle("active"); // Também adiciona a classe ao ícone para animá-lo
-  }
+    // --- LÓGICA DA SIDEBAR ATIVA (DESKTOP) ---
+    const sections = document.querySelectorAll('.main-content .full-screen-section');
+    const navLinks = document.querySelectorAll('.sidebar-nav a[data-section]');
 
-  // Adiciona o evento de clique ao botão hambúrguer
-  if (hamburger) {
-    hamburger.addEventListener("click", toggleMenu);
-  }
+    if (sections.length > 0 && navLinks.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
 
-  // Adiciona o evento de clique a CADA link do menu para fechá-lo após o clique
-  allNavLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      // Se o menu estiver aberto, feche-o
-      if (navLinks.classList.contains("active")) {
-        toggleMenu();
-      }
-    });
-  });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const sectionId = entry.target.id;
+                    const activeLink = document.querySelector(`.sidebar-nav a[data-section="${sectionId}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
-  // --- CÓDIGO DO SCROLL SUAVE (se você ainda o tiver) ---
-  const menuLinksWithHash = document.querySelectorAll('a[href^="#"]');
-  menuLinksWithHash.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        window.scrollTo({
-          top: targetSection.offsetTop - 70, // Desconto para a altura do header
-          behavior: "smooth",
+        sections.forEach(section => observer.observe(section));
+    }
+
+    // --- SMOOTH SCROLL para links internos (sidebar e mobile) ---
+    const allLinks = document.querySelectorAll('.sidebar-nav a[data-section], .mobile-nav-panel a');
+    allLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) { // só scroll para links internos
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            // links externos continuam funcionando normalmente
         });
-      }
     });
-  });
+
+    // --- LÓGICA DO MENU HAMBÚRGUER (MOBILE) ---
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileNavPanel = document.getElementById('mobile-nav-panel');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-panel a');
+
+    if (hamburger && mobileNavPanel) {
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            mobileNavPanel.classList.toggle('active');
+        }
+
+        // Clique no hambúrguer
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Fecha o menu ao clicar em qualquer link mobile
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileNavPanel.classList.contains('active')) toggleMenu();
+            });
+        });
+    }
+
 });

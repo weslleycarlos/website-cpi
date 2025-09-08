@@ -1,323 +1,265 @@
-/* GERAL */
+/* ===================== RESET E CONFIGURAÇÕES GLOBAIS ===================== */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Montserrat", sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #333;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    line-height: 1.6;
 }
 
-section {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-/* HEADER & NAVEGAÇÃO */
-header {
-  background-color: #fff;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #eee;
-  position: sticky; /* Mantém o header fixo no topo */
-  top: 0;
-  z-index: 1000; /* Garante que o header fique acima de outros elementos */
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  max-height: 50px;
-}
-
-nav .nav-links ul {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-}
-
-/* MENU HAMBÚRGUER (ESCONDIDO POR PADRÃO) */
-.hamburger-menu {
-  display: none;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 1001; /* Garante que fique acima do menu */
-}
-
-.hamburger-menu .bar {
-  width: 25px;
-  height: 3px;
-  background-color: #333;
-  border-radius: 2px;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Animação do X no menu ativo */
-.hamburger-menu.active .bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.hamburger-menu.active .bar:nth-child(2) {
-  opacity: 0;
-}
-.hamburger-menu.active .bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-
-/* SEÇÃO INÍCIO (HERO) */
-#inicio {
-  background-color: #333;
-  background-image: url("../images/background.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
-
-#inicio::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
-#inicio h1, #inicio p, #inicio a {
-  position: relative;
-}
-
-.cta-button {
-  background-color: #d4a373;
-  color: white;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-/* SEÇÃO SOBRE NÓS */
-.sobre-container {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.sobre-imagem, .sobre-texto {
-  flex: 1;
-}
-
-.sobre-imagem img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* SEÇÃO MENTORIA */
-.mentoria-passos {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-}
-
-.passo {
-  background-color: white;
-  padding: 2rem;
-  flex-basis: 300px;
-  flex-grow: 1;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.passo h3 {
-  color: #d4a373;
-}
-
-/* SEÇÃO DEPOIMENTOS */
-#depoimentos {
-  background-color: #f8f9fa;
-}
-
-.depoimento-card {
-  background-color: white;
-  max-width: 600px;
-  margin: 1rem auto;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  border-left: 5px solid #d4a373;
-  text-align: left;
-}
-
-.depoimento-card blockquote {
-  margin: 0;
-  font-size: 1.1rem;
-  font-style: italic;
-  color: #555;
-}
-
-.depoimento-card cite {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-  color: #333;
-  text-align: right;
-}
-
-/* SEÇÃO DE ÍCONES SOCIAIS */
-.social-icons-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.social-icons-container a {
-  font-size: 2.5rem;
-  color: #333;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icons-container a:hover {
-  color: #d4a373;
-  transform: scale(1.2);
-}
-
-/* RODAPÉ */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background-color: #f8f9fa;
-  color: #6c757d;
-  font-size: 0.9rem;
-}
-
-
-/* === ESTILOS PARA MOBILE (TELA PEQUENA) === */
-@media (max-width: 768px) {
-  
-  /* ESCONDE A NAVEGAÇÃO DE DESKTOP */
-  nav .nav-links ul {
-    display: none;
-  }
-  
-  /* MOSTRA O BOTÃO HAMBÚRGUER */
-  .hamburger-menu {
-    display: flex;
-  }
-  
-  /* ESTILO DO PAINEL DO MENU MOBILE (QUE DESLIZA) */
-  .nav-links {
+/* ===================== LAYOUT PRINCIPAL ===================== */
+.sidebar-nav {
     position: fixed;
+    left: 0;
     top: 0;
-    right: -100%; /* Começa fora da tela */
-    width: 80%;
+    width: 240px;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
-    
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-    transition: right 0.4s ease-in-out;
-  }
-
-  /* Quando o painel está ativo, ele desliza para dentro */
-  .nav-links.active {
-    right: 0;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estiliza a lista de links DENTRO do painel ativo */
-  .nav-links.active ul {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .nav-links.active ul a {
-    font-size: 1.5rem;
-    color: #333;
-  }
-
-  /* Ajuste no layout da seção Sobre Nós */
-  .sobre-container {
-    flex-direction: column;
-    text-align: center;
-  }
+    padding: 2rem;
+    z-index: 1000;
 }
 
-/* === ESTILOS DO BLOG === */
-.page-section .container {
-    max-width: 900px;
-    margin: 0 auto;
+.main-content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    transition: margin 0.3s ease;
 }
 
-.section-subtitle {
-    font-size: 1.2rem;
-    color: #666;
+/* ===================== SIDEBAR ===================== */
+.sidebar-logo {
     margin-bottom: 3rem;
 }
-
-.posts-container {
-    display: grid;
-    gap: 2rem;
+.sidebar-logo img {
+    max-width: 100px;
 }
-
-.post-card {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.sidebar-nav ul {
+    list-style: none;
+    text-align: center;
 }
-
-.post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+.sidebar-nav ul li {
+    margin-bottom: 1.5rem;
 }
-
-.post-meta {
-    font-size: 0.9rem;
-    color: #888;
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
-}
-
-#post-detail .container.text-left {
-    text-align: left;
-}
-
-.post-body {
-    line-height: 1.8;
+.sidebar-nav ul a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
     font-size: 1.1rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.sidebar-nav ul a:hover,
+.sidebar-nav ul a.active {
+    color: #d4a373;
+}
+.sidebar-nav ul a.active::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #d4a373;
+    border-radius: 50%;
 }
 
-.back-link {
-    display: inline-block;
-    margin-top: 2rem;
-    color: #d4a373;
+/* ===================== SEÇÕES ===================== */
+.full-screen-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    position: relative;
+}
+
+/* Seção inicial com imagem de fundo */
+#inicio {
+    background-color: #333;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+#inicio::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.65); /* Overlay mais forte */
+    z-index: 1;
+}
+#inicio > * { z-index: 2; text-align: center; }
+#inicio h1 { font-size: 3rem; margin-bottom: 1rem; }
+#inicio p { font-size: 1.3rem; margin-bottom: 2rem; }
+
+.cta-button {
+    background-color: #d4a373;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
+    transition: background-color 0.3s;
+}
+.cta-button:hover { background-color: #b5835a; }
+
+/* Demais seções: cores sólidas suaves */
+#sobre { background-color: #fff6e5; }
+#mentoria { background-color: #e0d8c9; }
+#depoimentos { background-color: #f8f9fa; }
+#recursos { background-color: #f5f5f5; }
+
+/* ===================== SOBRE ===================== */
+.sobre-container {
+    display: flex;
+    gap: 2rem;
+    max-width: 1100px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.sobre-imagem img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+.sobre-texto { max-width: 600px; font-size: 1.1rem; }
+
+/* ===================== MENTORIA ===================== */
+.mentoria-passos {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1100px;
+}
+.passo {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex: 1 1 250px;
+    text-align: center;
+}
+.passo h3 { margin-bottom: 1rem; color: #d4a373; }
+
+/* ===================== DEPOIMENTOS ===================== */
+.depoimento-card {
+    background-color: #fff;
+    padding: 2rem;
+    margin: 1rem;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.depoimento-card blockquote { font-style: italic; margin-bottom: 1rem; }
+
+/* ===================== RECURSOS ===================== */
+.social-icons-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.social-icons-container a {
+    color: #333;
+    font-size: 1.8rem;
+    transition: color 0.3s;
+}
+.social-icons-container a:hover { color: #d4a373; }
+
+/* ===================== FOOTER ===================== */
+.main-footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #333;
+    color: #aaa;
+}
+
+/* ===================== MOBILE ===================== */
+/* Header e painel mobile escondidos no desktop */
+.mobile-header,
+.mobile-nav-panel {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .sidebar-nav { display: none; }
+    .main-content { margin-left: 0; width: 100%; }
+    .full-screen-section { height: auto; min-height: 100vh; padding: 6rem 2rem; }
+
+    .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+        position: fixed;
+        top: 0; width: 100%; z-index: 1000;
+    }
+    .logo { max-height: 40px; }
+
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    .hamburger-menu .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-nav-panel {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(5px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.4s ease-in-out;
+        z-index: 999;
+    }
+    .mobile-nav-panel.active { right: 0; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+    .mobile-nav-panel ul { list-style: none; text-align: center; }
+    .mobile-nav-panel li { margin-bottom: 2rem; }
+    .mobile-nav-panel a { text-decoration: none; color: #333; font-size: 1.5rem; font-weight: bold; }
 }

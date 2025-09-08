@@ -1,148 +1,72 @@
-<!-- Diz ao Jinja para usar o base.html como molde -->
 {% extends "base.html" %}
 
-<!-- Inicia o bloco de conteúdo que será inserido no 'base.html' -->
 {% block content %}
-
-<!-- SEÇÃO INICIAL -->
-<section id="inicio">
-  <h1>Fortalecendo casamentos, construindo lares sobre a rocha.</h1>
-  <p>Conheça nossa mentoria para casais e transforme seu relacionamento.</p>
-  <a href="#mentoria" class="cta-button">Quero Saber Mais</a>
+<!-- INÍCIO -->
+<section id="inicio" class="full-screen-section">
+    <h1>Fortalecendo casamentos, construindo lares sobre a rocha.</h1>
+    <p>Conheça nossa mentoria para casais e transforme seu relacionamento.</p>
+    <a href="#mentoria" class="cta-button">Quero Saber Mais</a>
 </section>
 
-<!-- SEÇÃO SOBRE NÓS -->
-<section id="sobre">
-  <h2>Nossa História e Missão</h2>
-  <div class="sobre-container">
-    <!-- Div para a imagem -->
-    <div class="sobre-imagem">
-      <!-- Substitua 'casal-feliz.jpg' pelo nome da sua imagem -->
-      <img
-        src="{{ url_for('static', filename='images/casal-feliz.jpg') }}"
-        alt="Casal feliz sendo orientado pelo projeto CPI"
-      />
+<!-- MENTORIA -->
+<section id="mentoria" class="full-screen-section">
+    <h2>Mentoria Transformadora</h2>
+    <div class="mentoria-passos">
+        <div class="passo">
+            <h3>1. Diagnóstico</h3>
+            <p>Conversa inicial para entendermos sua história, desafios e objetivos.</p>
+        </div>
+        <div class="passo">
+            <h3>2. Fundamentos</h3>
+            <p>Módulos focados em comunicação, finanças, intimidade e perdão.</p>
+        </div>
+        <div class="passo">
+            <h3>3. Plano de Ação</h3>
+            <p>Plano prático com metas alcançáveis para o crescimento contínuo do casal.</p>
+        </div>
     </div>
-
-    <!-- Div para o texto (que você já tem) -->
-    <div class="sobre-texto">
-      <p>
-        O projeto Casamento Plano Infalível (CPI) nasceu de um chamado de Deus
-        em nossos corações e de uma jornada pessoal que nos mostrou a
-        importância de construir um casamento sobre a rocha sólida dos
-        princípios bíblicos. Acreditamos que todo casamento, com a orientação
-        correta e um coração disposto, pode não apenas sobreviver aos desafios,
-        mas florescer em um ambiente de amor, respeito e cumplicidade.
-      </p>
-      <p>
-        Nossa missão é oferecer ferramentas práticas, mentoria e apoio
-        espiritual para casais em todas as fases: desde noivos se preparando
-        para o altar, até casais que buscam reacender a chama ou superar crises
-        profundas.
-      </p>
-    </div>
-  </div>
 </section>
 
-<!-- SEÇÃO MENTORIA -->
-<section id="mentoria">
-  <h2>Mentoria Transformadora</h2>
-  <p>
-    Nossa mentoria é um processo de acompanhamento personalizado, focado nas
-    necessidades específicas do seu relacionamento.
-  </p>
-  <div class="mentoria-passos">
-    <div class="passo">
-      <h3>1. Diagnóstico</h3>
-      <p>
-        Uma conversa inicial para entendermos sua história, seus desafios e seus
-        objetivos como casal.
-      </p>
+
+<!-- SOBRE -->
+<section id="sobre" class="full-screen-section">
+    <h2>Nossa História e Missão</h2>
+    <div class="sobre-container">
+        <div class="sobre-imagem">
+            <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal feliz sendo orientado pelo projeto CPI">
+        </div>
+        <div class="sobre-texto">
+            <p>O projeto Casamento Plano Infalível (CPI) nasceu de um chamado de Deus e de uma jornada pessoal que nos mostrou a importância de construir um casamento sobre princípios sólidos.</p>
+            <p>Nossa missão é oferecer ferramentas práticas, mentoria e apoio espiritual para casais em todas as fases da vida juntos.</p>
+        </div>
     </div>
-    <div class="passo">
-      <h3>2. Fundamentos</h3>
-      <p>
-        Módulos focados em comunicação, finanças, intimidade e perdão, sempre à
-        luz da Palavra de Deus.
-      </p>
-    </div>
-    <div class="passo">
-      <h3>3. Plano de Ação</h3>
-      <p>
-        Desenvolvemos juntos um plano prático com metas alcançáveis para o
-        crescimento contínuo do casal.
-      </p>
-    </div>
-  </div>
 </section>
 
-<!-- SEÇÃO RECURSOS -->
-<section id="recursos">
-  <h2>Nossas Mídias e Recursos</h2>
-  <p>
-    Acompanhe-nos nas redes sociais e entre em contato direto para mentoria.
-    Estamos aqui para servir!
-  </p>
-
-  <div class="social-icons-container">
-    <!-- Link do Instagram -->
-    <a
-      href="https://www.instagram.com/cpi_casamentoplanoinfalivel/"
-      target="_blank"
-      aria-label="Instagram"
-    >
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-    <!-- Link do WhatsApp (use a API do WhatsApp) -->
-    <a
-      href="https://api.whatsapp.com/send?phone=SEUNUMERO"
-      target="_blank"
-      aria-label="WhatsApp"
-    >
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-    <!-- Link do YouTube (adicione o link do seu canal) -->
-    <a
-      href="https://www.youtube.com/SEUCANAL"
-      target="_blank"
-      aria-label="YouTube"
-    >
-      <i class="fa-brands fa-youtube"></i>
-    </a>
-    <!-- Link do TikTok (adicione o link do seu perfil) -->
-    <a
-      href="https://www.tiktok.com/@SEUPERFIL"
-      target="_blank"
-      aria-label="TikTok"
-    >
-      <i class="fa-brands fa-tiktok"></i>
-    </a>
-    <!-- Link de Email -->
-    <a href="mailto:SEUEMAIL@DOMINIO.COM" aria-label="Email">
-      <i class="fa-solid fa-envelope"></i>
-    </a>
-  </div>
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="full-screen-section">
+    <h2>O que os Casais Dizem</h2>
+    <div class="depoimento-card-container">
+        <div class="depoimento-card">
+            <blockquote>"A mentoria do CPI foi um divisor de águas para nós. Aprendemos a dialogar em vez de brigar e a colocar Deus no centro de tudo."</blockquote>
+            <cite>- João & Maria S.</cite>
+        </div>
+        <div class="depoimento-card">
+            <blockquote>"Estávamos quase desistindo, mas encontramos no CPI a esperança e as ferramentas que precisávamos. Hoje, nosso casamento é mais forte do que nunca."</blockquote>
+            <cite>- Pedro & Ana L.</cite>
+        </div>
+    </div>
 </section>
 
-<!-- SEÇÃO DEPOIMENTOS -->
-<section id="depoimentos">
-  <h2>O que os Casais Dizem</h2>
-  <div class="depoimento-card">
-    <blockquote>
-      "A mentoria do CPI foi um divisor de águas para nós. Aprendemos a dialogar
-      em vez de brigar e a colocar Deus no centro de tudo. Somos imensamente
-      gratos!"
-    </blockquote>
-    <cite>- João & Maria S.</cite>
-  </div>
-  <div class="depoimento-card">
-    <blockquote>
-      "Estávamos quase desistindo, mas encontramos no CPI a esperança e as
-      ferramentas que precisávamos. Hoje, nosso casamento é mais forte do que
-      nunca. Recomendamos de olhos fechados."
-    </blockquote>
-    <cite>- Pedro & Ana L.</cite>
-  </div>
+<!-- RECURSOS -->
+<section id="recursos" class="full-screen-section">
+    <h2>Nossas Mídias e Recursos</h2>
+    <p class="section-subtitle">Acompanhe-nos nas redes sociais e entre em contato direto para mentoria.</p>
+    <div class="social-icons-container">
+        <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=61998039461" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@SEUPERFIL" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="mailto:casamentoplanoinfalivel@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
 </section>
-
 {% endblock %}
