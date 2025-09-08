@@ -266,3 +266,58 @@ footer {
     text-align: center;
   }
 }
+
+/* === ESTILOS DO BLOG === */
+.page-section .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.posts-container {
+    display: grid;
+    gap: 2rem;
+}
+
+.post-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+#post-detail .container.text-left {
+    text-align: left;
+}
+
+.post-body {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #d4a373;
+    text-decoration: none;
+    font-weight: bold;
+}

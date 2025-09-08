@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Artigos para Casais{% endblock %}
+
+{% block content %}
+<section id="blog-list" class="page-section">
+    <div class="container">
+        <h2>Nosso Blog</h2>
+        <p class="section-subtitle">Artigos e reflexões para fortalecer seu casamento.</p>
+        <div class="posts-container">
+            {% for post in posts %}
+                <div class="post-card">
+                    <h3>{{ post.title }}</h3>
+                    <p class="post-meta">Por {{ post.author.username }} em {{ post.date_posted.strftime('%d de %B de %Y') }}</p>
+                    <p>{{ post.summary }}</p>
+                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="cta-button">Leia Mais</a>
+                </div>
+            {% else %}
+                <p>Nenhum post encontrado. Volte em breve!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

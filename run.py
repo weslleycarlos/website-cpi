@@ -50,3 +50,7 @@ def seed_db():
 
     db.session.commit()
     print("Banco de dados semeado com sucesso!")
+
+# === ADICIONE ESTE BLOCO NO FINAL ===
+if __name__ == '__main__':
+    app.run(debug=True)
