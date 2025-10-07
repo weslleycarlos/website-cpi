@@ -1,20 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.title }}{% endblock %}
+{% block title %}{{ post.title }} - CPI Blog{% endblock %}
 
 {% block content %}
-<!-- Note a classe 'page-section' em vez de 'full-screen-section' -->
 <section id="post-detail" class="page-section">
-    <!-- Removi o text-left do container, vamos controlar isso no CSS -->
     <div class="container">
-        <h1>{{ post.title }}</h1>
-        <p class="post-meta">Por {{ post.author.username }} em {{ post.date_posted.strftime('%d de %B de %Y') }}</p>
-        <hr class="post-divider">
-        <div class="post-body">
-            <!-- O filtro 'safe' permite renderizar HTML que você possa salvar no banco, como negrito ou parágrafos -->
-            {{ post.content | safe }}
-        </div>
-        <a href="{{ url_for('main.blog_list') }}" class="back-link">← Voltar para todos os posts</a>
+        <article class="blog-post">
+            <header class="post-header">
+                <h1>{{ post.title }}</h1>
+                <div class="post-meta">
+                    <span class="author">
+                        <i class="fa-regular fa-user"></i>
+                        Por {{ post.author.username }}
+                    </span>
+                    <span class="date">
+                        <i class="fa-regular fa-calendar"></i>
+                        {{ post.date_posted.strftime('%d de %B de %Y') }}
+                    </span>
+                </div>
+            </header>
+
+            <hr class="post-divider">
+
+            <div class="post-body">
+                {{ post.content | safe }}
+            </div>
+
+            <footer class="post-footer">
+                <a href="{{ url_for('main.blog_list') }}" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Voltar para todos os posts
+                </a>
+            </footer>
+        </article>
     </div>
 </section>
 {% endblock %}

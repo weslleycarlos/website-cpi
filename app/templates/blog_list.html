@@ -5,18 +5,32 @@
 {% block content %}
 <section id="blog-list" class="page-section">
     <div class="container">
-        <h2>Nosso Blog</h2>
-        <p class="section-subtitle">Artigos e reflexões para fortalecer seu casamento.</p>
+        <div class="blog-header">
+            <h1>Nosso Blog</h1>
+            <p class="section-subtitle">Artigos e reflexões para fortalecer seu casamento e construir relacionamentos saudáveis.</p>
+        </div>
+        
         <div class="posts-container">
             {% for post in posts %}
-                <div class="post-card">
+                <article class="post-card">
                     <h3>{{ post.title }}</h3>
-                    <p class="post-meta">Por {{ post.author.username }} em {{ post.date_posted.strftime('%d de %B de %Y') }}</p>
+                    <p class="post-meta">
+                        <i class="fa-regular fa-calendar"></i>
+                        {{ post.date_posted.strftime('%d de %B de %Y') }} | 
+                        <i class="fa-regular fa-user"></i>
+                        {{ post.author.username }}
+                    </p>
                     <p>{{ post.summary }}</p>
-                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="cta-button">Leia Mais</a>
-                </div>
+                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="cta-button">
+                        Leia Mais <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
             {% else %}
-                <p>Nenhum post encontrado. Volte em breve!</p>
+                <div class="no-posts">
+                    <i class="fa-regular fa-file-lines" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                    <h3>Nenhum post encontrado</h3>
+                    <p>Volte em breve para conferir nossos novos artigos!</p>
+                </div>
             {% endfor %}
         </div>
     </div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin - CPI{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- SIDEBAR DESKTOP -->
+    <nav class="sidebar-nav">
+        <a href="{{ url_for('admin.dashboard') }}" class="sidebar-logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI">
+        </a>
+        <ul>
+            <li><a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.posts') }}" class="{{ 'active' if 'posts' in request.endpoint }}">Posts</a></li>
+            <li><a href="{{ url_for('admin.depoimentos') }}" class="{{ 'active' if 'depoimentos' in request.endpoint }}">Depoimentos</a></li>
+            <li><a href="{{ url_for('admin.eventos') }}" class="{{ 'active' if 'eventos' in request.endpoint }}">Eventos</a></li>
+            <li><a href="{{ url_for('admin.usuarios') }}" class="{{ 'active' if 'usuarios' in request.endpoint }}">Usuários</a></li>
+            <li><a href="{{ url_for('main.home') }}" target="_blank">Ver Site</a></li>
+            <li><a href="{{ url_for('admin.logout') }}">Sair</a></li>
+        </ul>
+    </nav>
+
+    <!-- HEADER MOBILE -->
+    <header class="mobile-header">
+        <a href="{{ url_for('admin.dashboard') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" class="logo"></a>
+        <div class="hamburger-menu" id="hamburger-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <!-- PAINEL MOBILE -->
+    <div class="mobile-nav-panel" id="mobile-nav-panel">
+        <ul>
+            <li><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.posts') }}">Posts</a></li>
+            <li><a href="{{ url_for('admin.depoimentos') }}">Depoimentos</a></li>
+            <li><a href="{{ url_for('admin.eventos') }}">Eventos</a></li>
+            <li><a href="{{ url_for('admin.usuarios') }}">Usuários</a></li>
+            <li><a href="{{ url_for('main.home') }}" target="_blank">Ver Site</a></li>
+            <li><a href="{{ url_for('admin.logout') }}">Sair</a></li>
+        </ul>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

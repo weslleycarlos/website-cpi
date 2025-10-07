@@ -1,0 +1,57 @@
+{% extends "admin/base.html" %}
+{% from "admin/includes/breadcrumb.html" import breadcrumb %}
+
+{% block title %}{{ 'Editar Depoimento' if depoimento else 'Novo Depoimento' }}{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        {{ breadcrumb([
+            {'text': 'Depoimentos', 'url': url_for('admin.depoimentos')},
+            {'text': ('Editar Depoimento' if depoimento else 'Novo Depoimento')}
+        ]) }}
+        
+        <div class="admin-header">
+            <h2>{{ 'Editar Depoimento' if depoimento else 'Novo Depoimento' }}</h2>
+            <a href="{{ url_for('admin.depoimentos') }}" class="btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" class="post-form">
+            <div class="form-group">
+                <label for="quote">Depoimento:</label>
+                <textarea id="quote" name="quote" rows="4" required>{{ depoimento.quote if depoimento }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="author">Autor:</label>
+                <input type="text" id="author" name="author" 
+                       value="{{ depoimento.author if depoimento }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="is_visible" {{ 'checked' if not depoimento or depoimento.is_visible }}>
+                    Visível no site
+                </label>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="cta-button">
+                    {{ 'Atualizar Depoimento' if depoimento else 'Criar Depoimento' }}
+                </button>
+                <a href="{{ url_for('admin.depoimentos') }}" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

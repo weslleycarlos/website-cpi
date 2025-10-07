@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Editar Evento' if evento else 'Novo Evento' }}{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2>{{ 'Editar Evento' if evento else 'Novo Evento' }}</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" class="post-form">
+            <div class="form-group">
+                <label for="title">Título do Evento:</label>
+                <input type="text" id="title" name="title" 
+                       value="{{ evento.title if evento }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Descrição:</label>
+                <textarea id="description" name="description" required>{{ evento.description if evento }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="event_date">Data e Hora do Evento:</label>
+                <input type="datetime-local" id="event_date" name="event_date" 
+                       value="{{ evento.event_date.strftime('%Y-%m-%dT%H:%M') if evento }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Local:</label>
+                <input type="text" id="location" name="location" 
+                       value="{{ evento.location if evento }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="registration_link">Link de Inscrição (opcional):</label>
+                <input type="url" id="registration_link" name="registration_link" 
+                       value="{{ evento.registration_link if evento }}">
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="is_active" {{ 'checked' if not evento or evento.is_active }}>
+                    Evento ativo (visível no site)
+                </label>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="cta-button">Salvar Evento</button>
+                <a href="{{ url_for('admin.eventos') }}" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

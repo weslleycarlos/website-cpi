@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% from "admin/includes/breadcrumb.html" import breadcrumb %}
+
+{% block title %}Gerenciar Posts{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        {{ breadcrumb([{'text': 'Posts'}]) }}
+        
+        <div class="admin-header">
+            <h2>Gerenciar Posts</h2>
+            <a href="{{ url_for('admin.new_post') }}" class="cta-button">
+                <i class="fa-solid fa-plus"></i> Novo Post
+            </a>
+        </div>
+
+       <div class="posts-list">
+            {% for post in posts %}
+            <div class="post-item {% if not post.is_published %}unpublished{% endif %}">
+                <div class="post-info">
+                    <h3>{{ post.title }}</h3>
+                    <p class="post-meta">
+                        {{ post.date_posted.strftime('%d/%m/%Y') }} | 
+                        Status: {{ 'Publicado' if post.is_published else 'Rascunho' }}
+                    </p>
+                </div>
+                <div class="post-actions">
+                    <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="btn-edit" title="Editar Post">Editar</a>
+                    <a href="{{ url_for('admin.delete_post', post_id=post.id) }}" 
+                       class="btn-delete" 
+                       onclick="return confirm('Tem certeza que deseja deletar este post?')">Deletar</a>
+                </div>
+            </div>
+            {% else %}
+            <p>Nenhum post encontrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

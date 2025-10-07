@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Editar Usuário' if usuario else 'Novo Usuário' }}{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2>{{ 'Editar Usuário' if usuario else 'Novo Usuário' }}</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" class="post-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" 
+                       value="{{ usuario.username if usuario }}" required 
+                       {{ 'readonly' if usuario and usuario.id == current_user.id }}>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email (opcional):</label>
+                <input type="email" id="email" name="email" 
+                       value="{{ usuario.email if usuario }}"
+                       placeholder="usuario@exemplo.com">
+            </div>
+            
+            {% if usuario %}
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="is_active" {{ 'checked' if usuario.is_active }}
+                           {{ 'disabled' if usuario.id == current_user.id }}>
+                    Usuário ativo
+                    {% if usuario.id == current_user.id %}
+                    <small>(Você não pode desativar seu próprio usuário)</small>
+                    {% endif %}
+                </label>
+            </div>
+            
+            <div class="password-reset">
+                <h3>Resetar Senha</h3>
+                <div class="form-group">
+                    <label for="new_password">Nova Senha:</label>
+                    <input type="password" id="new_password" name="new_password"
+                           placeholder="Deixe em branco para manter a senha atual">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirmar Nova Senha:</label>
+                    <input type="password" id="confirm_password" name="confirm_password"
+                           placeholder="Confirme a nova senha">
+                </div>
+            </div>
+            {% else %}
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirmar Senha:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            {% endif %}
+            
+            <div class="form-actions">
+                <button type="submit" class="cta-button">
+                    {{ 'Atualizar Usuário' if usuario else 'Criar Usuário' }}
+                </button>
+                <a href="{{ url_for('admin.usuarios') }}" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

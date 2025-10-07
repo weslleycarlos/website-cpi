@@ -3,70 +3,97 @@
 {% block content %}
 <!-- INÍCIO -->
 <section id="inicio" class="full-screen-section">
-    <h1>Fortalecendo casamentos, construindo lares sobre a rocha.</h1>
-    <p>Conheça nossa mentoria para casais e transforme seu relacionamento.</p>
-    <a href="#mentoria" class="cta-button">Quero Saber Mais</a>
+    <div class="section-container">
+        <h1>Fortalecendo casamentos, construindo lares sobre a rocha.</h1>
+        <p>Conheça nossa mentoria para casais e transforme seu relacionamento.</p>
+        <a href="#mentoria" class="cta-button">Quero Saber Mais</a>
+    </div>
 </section>
 
 <!-- MENTORIA -->
 <section id="mentoria" class="full-screen-section">
-    <h2>Mentoria Transformadora</h2>
-    <div class="mentoria-passos">
-        <div class="passo">
-            <h3>1. Diagnóstico</h3>
-            <p>Conversa inicial para entendermos sua história, desafios e objetivos.</p>
-        </div>
-        <div class="passo">
-            <h3>2. Fundamentos</h3>
-            <p>Módulos focados em comunicação, finanças, intimidade e perdão.</p>
-        </div>
-        <div class="passo">
-            <h3>3. Plano de Ação</h3>
-            <p>Plano prático com metas alcançáveis para o crescimento contínuo do casal.</p>
+    <div class="section-container">
+        <h2>Mentoria Transformadora</h2>
+        <div class="mentoria-passos">
+            <div class="passo">
+                <h3>1. Diagnóstico</h3>
+                <p>Conversa inicial para entendermos sua história, desafios e objetivos como casal.</p>
+            </div>
+            <div class="passo">
+                <h3>2. Fundamentos</h3>
+                <p>Módulos focados em comunicação, finanças, intimidade e perdão, baseados em princípios bíblicos.</p>
+            </div>
+            <div class="passo">
+                <h3>3. Plano de Ação</h3>
+                <p>Plano prático com metas alcançáveis para o crescimento contínuo do casal.</p>
+            </div>
         </div>
     </div>
 </section>
 
-
 <!-- SOBRE -->
 <section id="sobre" class="full-screen-section">
-    <h2>Nossa História e Missão</h2>
-    <div class="sobre-container">
-        <div class="sobre-imagem">
-            <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal feliz sendo orientado pelo projeto CPI">
-        </div>
-        <div class="sobre-texto">
-            <p>O projeto Casamento Plano Infalível (CPI) nasceu de um chamado de Deus e de uma jornada pessoal que nos mostrou a importância de construir um casamento sobre princípios sólidos.</p>
-            <p>Nossa missão é oferecer ferramentas práticas, mentoria e apoio espiritual para casais em todas as fases da vida juntos.</p>
+    <div class="section-container">
+        <div class="sobre-container">
+            <div class="sobre-imagem">
+                <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal feliz sendo orientado pelo projeto CPI">
+            </div>
+            <div class="sobre-texto">
+                <h2>Nossa História e Missão</h2>
+                <p>O projeto Casamento Plano Infalível (CPI) nasceu de um chamado de Deus e de uma jornada pessoal que nos mostrou a importância de construir um casamento sobre princípios sólidos.</p>
+                <p>Nossa missão é oferecer ferramentas práticas, mentoria e apoio espiritual para casais em todas as fases da vida juntos.</p>
+                
+                <div class="sobre-highlights">
+                    <div class="highlight-item">
+                        <h3>Nossa Abordagem</h3>
+                        <p>Combinamos ensinamentos bíblicos com técnicas de aconselhamento modernas, focando em comunicação, resolução de conflitos e intimidade emocional e espiritual.</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h3>Nossos Valores</h3>
+                        <p>Nossos valores são fé cristã, integridade, empatia, crescimento contínuo e excelência no serviço. Acreditamos no poder da oração e na aplicação dos princípios bíblicos.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- DEPOIMENTOS -->
 <section id="depoimentos" class="full-screen-section">
-    <h2>O que os Casais Dizem</h2>
-    <div class="depoimento-card-container">
-        <div class="depoimento-card">
-            <blockquote>"A mentoria do CPI foi um divisor de águas para nós. Aprendemos a dialogar em vez de brigar e a colocar Deus no centro de tudo."</blockquote>
-            <cite>- João & Maria S.</cite>
-        </div>
-        <div class="depoimento-card">
-            <blockquote>"Estávamos quase desistindo, mas encontramos no CPI a esperança e as ferramentas que precisávamos. Hoje, nosso casamento é mais forte do que nunca."</blockquote>
-            <cite>- Pedro & Ana L.</cite>
+    <div class="section-container">
+        <h2>O que os Casais Dizem</h2>
+        <div class="depoimento-card-container">
+            {% for depoimento in depoimentos %}
+            <div class="depoimento-card">
+                <blockquote>"{{ depoimento.quote }}"</blockquote>
+                <cite>- {{ depoimento.author }}</cite>
+            </div>
+            {% else %}
+            <div class="depoimento-card">
+                <blockquote>"A mentoria do CPI foi um divisor de águas para nós. Aprendemos a dialogar em vez de brigar e a colocar Deus no centro de tudo."</blockquote>
+                <cite>- João & Maria S.</cite>
+            </div>
+            <div class="depoimento-card">
+                <blockquote>"Estávamos quase desistindo, mas encontramos no CPI a esperança e as ferramentas que precisávamos. Hoje, nosso casamento é mais forte do que nunca."</blockquote>
+                <cite>- Pedro & Ana L.</cite>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
 <!-- RECURSOS -->
 <section id="recursos" class="full-screen-section">
-    <h2>Nossas Mídias e Recursos</h2>
-    <p class="section-subtitle">Acompanhe-nos nas redes sociais e entre em contato direto para mentoria.</p>
-    <div class="social-icons-container">
-        <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://api.whatsapp.com/send?phone=61998039461" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@SEUPERFIL" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="mailto:casamentoplanoinfalivel@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    <div class="section-container">
+        <h2>Nossas Mídias e Recursos</h2>
+        <p class="section-subtitle">Acompanhe-nos nas redes sociais e entre em contato direto para mentoria.</p>
+        <div class="social-icons-container">
+            <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=61998039461" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@cpi_plano" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="mailto:casamentoplanoinfalivel@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
     </div>
 </section>
 {% endblock %}

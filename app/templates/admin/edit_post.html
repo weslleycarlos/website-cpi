@@ -1,0 +1,57 @@
+{% extends "admin/base.html" %}
+{% from "admin/includes/breadcrumb.html" import breadcrumb %}
+
+{% block title %}{{ 'Editar Post' if post else 'Novo Post' }}{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        {{ breadcrumb([
+            {'text': 'Posts', 'url': url_for('admin.posts')},
+            {'text': ('Editar: ' + post.title) if post else 'Novo Post'}
+        ]) }}
+        
+        <div class="admin-header">
+            <h2>{{ 'Editar Post' if post else 'Novo Post' }}</h2>
+            <a href="{{ url_for('admin.posts') }}" class="btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+       <form method="POST" class="post-form">
+            <div class="form-group">
+                <label for="slug">Slug (URL):</label>
+                <input type="text" id="slug" name="slug" 
+                       value="{{ post.slug if post }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" 
+                       value="{{ post.title if post }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="summary">Resumo:</label>
+                <textarea id="summary" name="summary" required>{{ post.summary if post }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="content">Conteúdo:</label>
+                <textarea id="content" name="content" rows="10" required>{{ post.content if post }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="is_published" 
+                           {{ 'checked' if post and post.is_published }}>
+                    Publicar post
+                </label>
+            </div>
+            
+            <button type="submit" class="cta-button">Salvar Post</button>
+            <a href="{{ url_for('admin.posts') }}" class="btn-cancel">Cancelar</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

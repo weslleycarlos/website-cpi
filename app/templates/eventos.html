@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Eventos - CPI{% endblock %}
+
+{% block content %}
+<section id="eventos" class="page-section">
+    <div class="container">
+        <div class="section-header">
+            <h1>Nossos Eventos</h1>
+            <p class="section-subtitle">Participe dos nossos encontros, workshops e eventos especiais para casais.</p>
+        </div>
+
+        <div class="eventos-public-container">
+            {% for evento in eventos %}
+            <div class="evento-public-card">
+                <div class="evento-date">
+                    <span class="evento-day">{{ evento.event_date.strftime('%d') }}</span>
+                    <span class="evento-month">{{ evento.event_date.strftime('%b') }}</span>
+                </div>
+                <div class="evento-content">
+                    <h3>{{ evento.title }}</h3>
+                    <p class="evento-meta">
+                        <i class="fa-regular fa-clock"></i>
+                        {{ evento.event_date.strftime('%d/%m/%Y às %H:%M') }} |
+                        <i class="fa-solid fa-location-dot"></i>
+                        {{ evento.location }}
+                    </p>
+                    <p class="evento-description">{{ evento.description }}</p>
+                    {% if evento.registration_link %}
+                    <a href="{{ evento.registration_link }}" target="_blank" class="cta-button">
+                        Inscreva-se <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="no-eventos">
+                <i class="fa-regular fa-calendar-xmark" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                <h3>Nenhum evento programado</h3>
+                <p>Fique atento às nossas redes sociais para novos eventos!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

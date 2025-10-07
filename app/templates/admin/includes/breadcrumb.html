@@ -1,0 +1,16 @@
+{% macro breadcrumb(items) %}
+<nav class="breadcrumb">
+    <a href="{{ url_for('admin.dashboard') }}" class="breadcrumb-item">
+        <i class="fa-solid fa-house"></i> Dashboard
+    </a>
+    {% for item in items %}
+        {% if item.url %}
+            <span class="breadcrumb-separator">/</span>
+            <a href="{{ item.url }}" class="breadcrumb-item">{{ item.text }}</a>
+        {% else %}
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-item current">{{ item.text }}</span>
+        {% endif %}
+    {% endfor %}
+</nav>
+{% endmacro %}

@@ -1,0 +1,64 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <h2>Dashboard Admin</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>Total de Posts</h3>
+                <p class="stat-number">{{ posts_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Posts Publicados</h3>
+                <p class="stat-number">{{ published_posts }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Depoimentos</h3>
+                <p class="stat-number">{{ depoimentos_count }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Eventos Ativos</h3>
+                <p class="stat-number">{{ eventos_count }}</p>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <a href="{{ url_for('admin.new_post') }}" class="quick-action-card">
+                <i class="fa-solid fa-file-pen"></i>
+                <h3>Novo Post</h3>
+            </a>
+            <a href="{{ url_for('admin.depoimentos') }}" class="quick-action-card">
+                <i class="fa-solid fa-comment"></i>
+                <h3>Depoimentos</h3>
+            </a>
+            <a href="{{ url_for('admin.new_evento') }}" class="quick-action-card">
+                <i class="fa-solid fa-calendar-plus"></i>
+                <h3>Novo Evento</h3>
+            </a>
+            <a href="{{ url_for('admin.usuarios') }}" class="quick-action-card">
+                <i class="fa-solid fa-users"></i>
+                <h3>Usuários</h3>
+            </a>
+        </div>
+
+        <div class="admin-actions">
+            <a href="{{ url_for('admin.posts') }}" class="cta-button">Gerenciar Posts</a>
+            <a href="{{ url_for('admin.depoimentos') }}" class="cta-button">Gerenciar Depoimentos</a>
+            <a href="{{ url_for('admin.eventos') }}" class="cta-button">Gerenciar Eventos</a>
+            <a href="{{ url_for('admin.usuarios') }}" class="cta-button">Gerenciar Usuários</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

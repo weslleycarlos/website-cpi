@@ -1,0 +1,72 @@
+{% extends "admin/base.html" %}
+{% from "admin/includes/breadcrumb.html" import breadcrumb %}
+
+{% block title %}Gerenciar Usuários{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        {{ breadcrumb([{'text': 'Usuários'}]) }}
+        
+        <div class="admin-header">
+            <h2>Gerenciar Usuários</h2>
+            <a href="{{ url_for('admin.new_usuario') }}" class="cta-button">
+                <i class="fa-solid fa-plus"></i> Novo Usuário
+            </a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="usuarios-list">
+            {% for usuario in usuarios %}
+            <div class="usuario-item {% if not usuario.is_active %}inactive{% endif %}">
+                <div class="usuario-info">
+                    <h3>{{ usuario.username }}</h3>
+                    <p class="usuario-meta">
+                        <i class="fa-regular fa-envelope"></i>
+                        {{ usuario.email or 'Sem email' }} |
+                        <i class="fa-regular fa-calendar"></i>
+                        Criado em {{ usuario.date_created.strftime('%d/%m/%Y') }} |
+                        Status: {{ 'Ativo' if usuario.is_active else 'Inativo' }}
+                    </p>
+                    {% if usuario.last_login %}
+                    <p class="usuario-meta">
+                        <i class="fa-regular fa-clock"></i>
+                        Último login: {{ usuario.last_login.strftime('%d/%m/%Y às %H:%M') }}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="usuario-actions">
+                    {% if usuario.id != current_user.id %}
+                        <a href="{{ url_for('admin.edit_usuario', usuario_id=usuario.id) }}" class="btn-edit">Editar</a>
+                        {% if usuario.is_active %}
+                            <a href="{{ url_for('admin.toggle_active_usuario', usuario_id=usuario.id) }}" 
+                               class="btn-warning" 
+                               onclick="return confirm('Desativar este usuário?')">Desativar</a>
+                        {% else %}
+                            <a href="{{ url_for('admin.toggle_active_usuario', usuario_id=usuario.id) }}" 
+                               class="btn-success">Ativar</a>
+                        {% endif %}
+                        <a href="{{ url_for('admin.delete_usuario', usuario_id=usuario.id) }}" 
+                           class="btn-delete" 
+                           onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</a>
+                    {% else %}
+                        <span class="current-user">Você</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="no-items">
+                <p>Nenhum usuário encontrado.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

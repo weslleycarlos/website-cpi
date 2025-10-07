@@ -1,6 +1,63 @@
 # .gitignore
+
+# Ambiente virtual
 venv/
+env/
+ENV/
+
+# Python
 __pycache__/
-.DS_Store
-local_db.sqlite3
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Banco de dados
+*.db
+*.sqlite3
+site.db
+instance/
+
+# Ambiente
 .env
+.env.local
+.env.production
+.venv
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Deploy
+.cache
+.coverage
+htmlcov/

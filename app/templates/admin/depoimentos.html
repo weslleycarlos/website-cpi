@@ -1,0 +1,52 @@
+{% extends "admin/base.html" %}
+{% from "admin/includes/breadcrumb.html" import breadcrumb %}
+
+{% block title %}Gerenciar Depoimentos{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        {{ breadcrumb([{'text': 'Depoimentos'}]) }}
+        
+        <div class="admin-header">
+            <h2>Gerenciar Depoimentos</h2>
+            <a href="{{ url_for('admin.new_depoimento') }}" class="cta-button">
+                <i class="fa-solid fa-plus"></i> Novo Depoimento
+            </a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="depoimentos-list">
+            {% for depoimento in depoimentos %}
+            <div class="depoimento-item {% if not depoimento.is_visible %}inactive{% endif %}">
+                <div class="depoimento-info">
+                    <blockquote>"{{ depoimento.quote }}"</blockquote>
+                    <p class="depoimento-author">— {{ depoimento.author }}</p>
+                    <p class="depoimento-meta">
+                        Status: {{ 'Visível' if depoimento.is_visible else 'Oculto' }} |
+                        ID: {{ depoimento.id }}
+                    </p>
+                </div>
+                <div class="depoimento-actions">
+                    <a href="{{ url_for('admin.edit_depoimento', depoimento_id=depoimento.id) }}" class="btn-edit">Editar</a>
+                    <a href="{{ url_for('admin.delete_depoimento', depoimento_id=depoimento.id) }}" 
+                       class="btn-delete" 
+                       onclick="return confirm('Tem certeza que deseja deletar este depoimento?')">Deletar</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="no-items">
+                <p>Nenhum depoimento encontrado.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
