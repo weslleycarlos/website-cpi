@@ -2,8 +2,16 @@ from app import create_app, db
 from app.models import Usuario, Depoimento, Post, Evento
 from datetime import datetime, timezone
 import os
+import sys
+import traceback
 
-app = create_app()
+try:
+    app = create_app()
+    print("✅ App criado com sucesso!")
+except Exception as e:
+    print(f"❌ Erro ao criar app: {e}")
+    traceback.print_exc()
+    sys.exit(1)
 
 @app.cli.command("seed-db")
 def seed_db():
@@ -79,11 +87,16 @@ def seed_db_command():
     """Comando CLI para semear o banco de dados."""
     seed_database()
 
+@app.route('/health')
+def health():
+    return 'OK', 200
+
 # Configuração para produção
 if __name__ == '__main__':
-    # Em desenvolvimento, usar debug mode
-    if os.environ.get('FLASK_ENV') == 'development':
-        app.run(debug=True, host='0.0.0.0', port=5000)
-    else:
-        # Em produção, não usar debug mode
-        app.run(host='0.0.0.0', port=5000)
+    try:
+        port = int(os.environ.get('PORT', 5000))
+        print(f"🚀 Iniciando servidor na porta {port}")
+        app.run(host='0.0.0.0', port=port, debug=False)
+    except Exception as e:
+        print(f"❌ Erro ao iniciar servidor: {e}")
+        traceback.print_exc()
