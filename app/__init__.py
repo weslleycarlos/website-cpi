@@ -11,7 +11,6 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    
     # CONFIGURAÇÕES DE SEGURANÇA
     # ===========================
     
@@ -61,6 +60,8 @@ def create_app():
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
     
+
+
     # Criar tabelas
     with app.app_context():
         db.create_all()

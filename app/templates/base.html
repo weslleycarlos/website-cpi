@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+    <meta name="description" content="{% block meta_description %}Mentoria cristã para casais - Fortalecendo casamentos através de princípios bíblicos, comunicação saudável e reconciliação{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}casamento cristão, mentoria para casais, reconciliação conjugal, comunicação no casamento, relacionamento conjugal, terapia para casais, casamento na igreja, crise conjugal, restauração de casamento{% endblock %}">
+    <meta name="author" content="Casamento Plano Infalível">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}Casamento Plano Infalível - Mentoria para Casais Cristãos{% endblock %}">
+    <meta property="og:description" content="Fortalecendo casamentos através de princípios bíblicos e ferramentas práticas para comunicação e reconciliação.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Casamento Plano Infalível">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Casamento Plano Infalível - Mentoria para Casais">
+    <meta name="twitter:description" content="Fortalecendo casamentos através de princípios bíblicos.">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CPI - Casamento Plano Infalível{% endblock %}</title>
@@ -12,6 +27,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Casamento Plano Infalível",
+  "url": "https://casamentoplanoinfalivel.com.br",
+  "logo": "https://casamentoplanoinfalivel.com.br/static/images/logo.png",
+  "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "BR"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+55-61-99803-9461",
+    "contactType": "customer service",
+    "areaServed": "BR",
+    "availableLanguage": "Portuguese"
+  },
+  "sameAs": [
+    "https://www.instagram.com/cpi_casamentoplanoinfalivel",
+    "https://www.youtube.com/@C.P.I.casamento"
+  ]
+}
+</script>
 <body>
 
 <!-- SIDEBAR DESKTOP -->
@@ -25,6 +65,7 @@
         <li><a href="/#sobre" data-section="sobre">Sobre Nós</a></li>  
         <li><a href="/#depoimentos" data-section="depoimentos">Depoimentos</a></li>
         <li><a href="/#recursos" data-section="recursos">Contato</a></li>
+        <li><a href="/casamento-em-crise">Casamento em Crise</a></li>
         <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
         <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
     </ul>
@@ -48,6 +89,7 @@
         <li><a href="/#sobre">Sobre Nós</a></li>        
         <li><a href="/#depoimentos">Depoimentos</a></li>
         <li><a href="/#recursos">Contato</a></li>
+        <li><a href="/casamento-em-crise">Casamento em Crise</a></li>
         <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
         <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
     </ul>

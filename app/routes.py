@@ -33,3 +33,23 @@ def blog_post(slug):
 def eventos_public():
     eventos = Evento.query.filter_by(is_active=True).order_by(Evento.event_date.asc()).all()
     return render_template('eventos.html', eventos=eventos)
+
+@main_bp.route('/casamento-em-crise')
+def casamento_crise():
+    """Página otimizada para 'casamento em crise'"""
+    return render_template('casamento_crise.html')
+
+# Sitemap estático simples
+@main_bp.route('/sitemap.xml')
+def sitemap():
+    """Sitemap estático simples"""
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://casamentoplanoinfalivel.com.br/</loc><priority>1.0</priority></url>
+  <url><loc>https://casamentoplanoinfalivel.com.br/blog</loc><priority>0.8</priority></url>
+  <url><loc>https://casamentoplanoinfalivel.com.br/eventos</loc><priority>0.7</priority></url>
+  <url><loc>https://casamentoplanoinfalivel.com.br/casamento-em-crise</loc><priority>0.9</priority></url>
+  <url><loc>https://casamentoplanoinfalivel.com.br/mentoria-para-casais</loc><priority>0.9</priority></url>
+  <url><loc>https://casamentoplanoinfalivel.com.br/comunicacao-casamento</loc><priority>0.8</priority></url>
+  <url><loc>https://casamentoplanoinfalivel.com.br/reconciliacao-conjugal</loc><priority>0.8</priority></url>
+</urlset>''', 200, {'Content-Type': 'application/xml'}

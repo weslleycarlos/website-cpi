@@ -561,6 +561,91 @@ h1, h2, h3, h4 {
     margin-left: 1rem;
 }
 
+/* ===================== PÁGINAS DE CONTEÚDO ===================== */
+.content-section {
+    margin-bottom: 3rem;
+}
+
+.content-section h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.benefit-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border-left: 4px solid var(--primary-color);
+}
+
+.benefit-card h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.cta-section h2 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.cta-section .cta-button {
+    background: white;
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+}
+
+.cta-section .cta-button:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+}
+
+.blog-preview {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 3rem;
+}
+
+.posts-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.post-link {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s;
+    border-left: 4px solid var(--primary-color);
+}
+
+.post-link:hover {
+    transform: translateX(5px);
+    box-shadow: var(--card-shadow);
+}
+
 /* ===================== RECURSOS ===================== */
 #recursos h2 {
     text-align: center;
