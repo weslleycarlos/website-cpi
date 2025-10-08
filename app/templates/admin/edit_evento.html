@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+{% extends "admin/base.html" %}
+{% from "admin/includes/breadcrumb.html" import breadcrumb %}
 
 {% block title %}{{ 'Editar Evento' if evento else 'Novo Evento' }}{% endblock %}
 
