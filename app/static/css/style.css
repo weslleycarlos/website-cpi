@@ -490,7 +490,7 @@ h1, h2, h3, h4 {
 }
 
 .depoimento-card::before {
-    content: "depoimento";
+    content: "";
     position: absolute;
     top: 20px;
     left: 20px;
