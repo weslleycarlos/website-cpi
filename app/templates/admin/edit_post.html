@@ -19,16 +19,26 @@
         </div>
 
        <form method="POST" class="post-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            
             <div class="form-group">
                 <label for="slug">Slug (URL):</label>
                 <input type="text" id="slug" name="slug" 
-                       value="{{ post.slug if post }}" required>
+                       value="{{ post.slug if post }}" 
+                       placeholder="exemplo-de-slug-url"
+                       pattern="[a-z0-9-]+"
+                       required>
+                <span class="form-help">Use apenas letras minúsculas, números e hífens</span>
             </div>
             
             <div class="form-group">
                 <label for="title">Título:</label>
                 <input type="text" id="title" name="title" 
-                       value="{{ post.title if post }}" required>
+                       value="{{ post.title if post }}" 
+                       placeholder="Digite o título do post"
+                       maxlength="200"
+                       required>
+                <span class="form-help">Máximo 200 caracteres</span>
             </div>
             
             <div class="form-group">

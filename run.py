@@ -4,6 +4,10 @@ from datetime import datetime, timezone
 import os
 import sys
 import traceback
+from dotenv import load_dotenv
+
+# Carrega variáveis do .env quando rodar python run.py diretamente
+load_dotenv()
 
 try:
     app = create_app()
@@ -20,12 +24,18 @@ def seed_db():
         print("❌ ERRO: Não execute seed-db em produção!")
         return
     with app.app_context():
+        # Garante que o schema existe antes de manipular dados
+        db.create_all()
+
         print("🗑️  Limpando tabelas antigas...")
-        # A ordem importa por causa das chaves estrangeiras
-        db.session.query(Post).delete()
-        db.session.query(Usuario).delete()
+        # A ordem importa por causa das chaves estrangeiras - deletar filhos antes dos pais
+        db.session.query(Post).delete()       # Tem FK para Usuario
         db.session.query(Depoimento).delete()
         db.session.query(Evento).delete()
+        db.session.query(Usuario).delete()    # Deletar por último
+
+        # Confirma limpeza antes de inserir
+        db.session.commit()
 
         # VERIFICAR SE JÁ EXISTE ADMIN
         admin_exists = Usuario.query.filter_by(username='admin').first()
@@ -81,15 +91,9 @@ def seed_db():
 
         db.session.commit()
         print("✅ Banco de dados semeado com sucesso!")
-        
-@app.cli.command("seed-db")
-def seed_db_command():
-    """Comando CLI para semear o banco de dados."""
-    seed_database()
 
-@app.route('/health')
-def health():
-    return 'OK', 200
+        # Feedback das contagens após semear
+        print(f"👤 Usuarios: {Usuario.query.count()} | 📰 Posts: {Post.query.count()} | 💬 Depoimentos: {Depoimento.query.count()} | 📅 Eventos: {Evento.query.count()}")
 
 # Configuração para produção
 if __name__ == '__main__':

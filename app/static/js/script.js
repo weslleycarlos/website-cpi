@@ -44,16 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DO MENU HAMBÚRGUER (MOBILE) ---
     const hamburger = document.getElementById('hamburger-menu');
     const mobileNavPanel = document.getElementById('mobile-nav-panel');
+    const mobileOverlay = document.getElementById('mobile-overlay');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-panel a');
 
-    if (hamburger && mobileNavPanel) {
+    if (hamburger && mobileNavPanel && mobileOverlay) {
         function toggleMenu() {
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !isExpanded);
             hamburger.classList.toggle('active');
             mobileNavPanel.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
         }
 
         // Clique no hambúrguer
         hamburger.addEventListener('click', toggleMenu);
+
+        // Clique no overlay fecha o menu
+        mobileOverlay.addEventListener('click', toggleMenu);
 
         // Fecha o menu ao clicar em qualquer link mobile
         mobileNavLinks.forEach(link => {

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="description" content="{% block meta_description %}Mentoria cristã para casais - Fortalecendo casamentos através de princípios bíblicos, comunicação saudável e reconciliação{% endblock %}">
     <meta name="keywords" content="{% block meta_keywords %}casamento cristão, mentoria para casais, reconciliação conjugal, comunicação no casamento, relacionamento conjugal, terapia para casais, casamento na igreja, crise conjugal, restauração de casamento{% endblock %}">
     <meta name="author" content="Casamento Plano Infalível">
@@ -16,8 +19,6 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Casamento Plano Infalível - Mentoria para Casais">
     <meta name="twitter:description" content="Fortalecendo casamentos através de princípios bíblicos.">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CPI - Casamento Plano Infalível{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
           integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
@@ -27,41 +28,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
-</head>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Casamento Plano Infalível",
-  "url": "https://casamentoplanoinfalivel.com.br",
-  "logo": "https://casamentoplanoinfalivel.com.br/static/images/logo.png",
-  "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "BR"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+55-61-99803-9461",
-    "contactType": "customer service",
-    "areaServed": "BR",
-    "availableLanguage": "Portuguese"
-  },
-  "sameAs": [
-    "https://www.instagram.com/cpi_casamentoplanoinfalivel",
-    "https://www.youtube.com/@C.P.I.casamento"
-  ]
-}
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Casamento Plano Infalível",
+      "url": "https://casamentoplanoinfalivel.com.br",
+      "logo": "https://casamentoplanoinfalivel.com.br/static/images/logo.png",
+      "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-61-99803-9461",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/cpi_casamentoplanoinfalivel",
+        "https://www.youtube.com/@C.P.I.casamento"
+      ]
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
+    <script nonce="{{ g.csp_nonce }}">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-5QWHHDMTCS');
-</script>
+      gtag('config', 'G-5QWHHDMTCS');
+    </script>
+</head>
 <body>
 
 <!-- SIDEBAR DESKTOP -->
@@ -84,15 +85,23 @@
 <!-- HEADER MOBILE -->
 <header class="mobile-header">
     <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" class="logo"></a>
-    <div class="hamburger-menu" id="hamburger-menu">
+    <button class="hamburger-menu" 
+            id="hamburger-menu"
+            role="button"
+            aria-label="Menu de navegação"
+            aria-expanded="false"
+            aria-controls="mobile-nav-panel">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
-    </div>
+    </button>
 </header>
 
 <!-- PAINEL MOBILE -->
-<div class="mobile-nav-panel" id="mobile-nav-panel">
+<nav class="mobile-nav-panel" 
+     id="mobile-nav-panel"
+     role="navigation"
+     aria-label="Menu principal mobile">
     <ul>
         <li><a href="/#inicio">Início</a></li>
         <li><a href="/#mentoria">Mentoria</a></li>
@@ -103,7 +112,10 @@
         <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
         <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
     </ul>
-</div>
+</nav>
+
+<!-- OVERLAY MOBILE -->
+<div class="mobile-overlay" id="mobile-overlay"></div>
 
 <!-- CONTEÚDO PRINCIPAL -->
 <div class="main-content">

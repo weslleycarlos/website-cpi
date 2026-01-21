@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Página Não Encontrada - CPI{% endblock %}
+
+{% block content %}
+<main class="container" style="padding: 100px 20px; text-align: center; min-height: 60vh;">
+    <div class="error-page">
+        <h1 style="font-size: 120px; color: #8B4513; margin: 0;">404</h1>
+        <h2 style="color: #333; margin: 20px 0;">Página Não Encontrada</h2>
+        <p style="font-size: 18px; color: #666; margin: 30px 0;">
+            Desculpe, a página que você procura não existe ou foi movida.
+        </p>
+        <div style="margin-top: 40px;">
+            <a href="{{ url_for('main.home') }}" class="btn" style="display: inline-block; padding: 15px 40px; background: #8B4513; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+                <i class="fas fa-home"></i> Voltar para Home
+            </a>
+            <a href="{{ url_for('main.blog_list') }}" class="btn" style="display: inline-block; padding: 15px 40px; background: #5D4E37; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px; font-weight: 600;">
+                <i class="fas fa-book"></i> Ver Blog
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %}
