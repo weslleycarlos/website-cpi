@@ -53,7 +53,7 @@ def seed_db():
             return
         admin_user = Usuario(
             username='admin', 
-            email=os.environ.get('ADMIN_EMAIL', 'weslley.unemat@gmail.com'),
+            email=os.environ.get('ADMIN_EMAIL', 'seuemail@seumail.com'),
             is_active=True,
             date_created=datetime.now(timezone.utc)
         )
