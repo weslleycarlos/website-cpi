@@ -7,7 +7,7 @@
 <section class="page-section">
     <div class="container">
         {{ breadcrumb([{'text': 'Depoimentos'}]) }}
-        
+
         <div class="admin-header">
             <h2>Gerenciar Depoimentos</h2>
             <a href="{{ url_for('admin.new_depoimento') }}" class="cta-button">
@@ -16,11 +16,11 @@
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
 
         <div class="depoimentos-list">
@@ -35,10 +35,13 @@
                     </p>
                 </div>
                 <div class="depoimento-actions">
-                    <a href="{{ url_for('admin.edit_depoimento', depoimento_id=depoimento.id) }}" class="btn-edit">Editar</a>
-                    <a href="{{ url_for('admin.delete_depoimento', depoimento_id=depoimento.id) }}" 
-                       class="btn-delete" 
-                       onclick="return confirm('Tem certeza que deseja deletar este depoimento?')">Deletar</a>
+                    <a href="{{ url_for('admin.edit_depoimento', depoimento_id=depoimento.id) }}"
+                        class="btn-edit">Editar</a>
+                    <form method="POST" action="{{ url_for('admin.delete_depoimento', depoimento_id=depoimento.id) }}"
+                        style="display:inline"
+                        onsubmit="return confirm('Tem certeza que deseja deletar este depoimento?')">
+                        <button type="submit" class="btn-delete">Deletar</button>
+                    </form>
                 </div>
             </div>
             {% else %}

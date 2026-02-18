@@ -27,9 +27,10 @@
                 </div>
                 <div class="post-actions">
                     <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="btn-edit" title="Editar Post">Editar</a>
-                    <a href="{{ url_for('admin.delete_post', post_id=post.id) }}" 
-                       class="btn-delete" 
-                       onclick="return confirm('Tem certeza que deseja deletar este post?')">Deletar</a>
+                    <form method="POST" action="{{ url_for('admin.delete_post', post_id=post.id) }}" style="display:inline"
+                          onsubmit="return confirm('Tem certeza que deseja deletar este post?')">
+                        <button type="submit" class="btn-delete">Deletar</button>
+                    </form>
                 </div>
             </div>
             {% else %}

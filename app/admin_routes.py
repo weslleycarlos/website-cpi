@@ -104,7 +104,7 @@ def edit_post(post_id):
     
     return render_template('admin/edit_post.html', post=post)
 
-@admin_bp.route('/posts/delete/<int:post_id>')
+@admin_bp.route('/posts/delete/<int:post_id>', methods=['POST'])
 @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -152,7 +152,7 @@ def edit_depoimento(depoimento_id):
     
     return render_template('admin/edit_depoimento.html', depoimento=depoimento)
 
-@admin_bp.route('/depoimentos/delete/<int:depoimento_id>')
+@admin_bp.route('/depoimentos/delete/<int:depoimento_id>', methods=['POST'])
 @login_required
 def delete_depoimento(depoimento_id):
     depoimento = Depoimento.query.get_or_404(depoimento_id)
@@ -220,7 +220,7 @@ def edit_evento(evento_id):
     
     return render_template('admin/edit_evento.html', evento=evento)
 
-@admin_bp.route('/eventos/delete/<int:evento_id>')
+@admin_bp.route('/eventos/delete/<int:evento_id>', methods=['POST'])
 @login_required
 def delete_evento(evento_id):
     evento = Evento.query.get_or_404(evento_id)
@@ -335,7 +335,7 @@ def reset_password(usuario_id):
     flash('Senha resetada com sucesso!', 'success')
     return redirect(url_for('admin.usuarios'))
 
-@admin_bp.route('/usuarios/toggle-active/<int:usuario_id>')
+@admin_bp.route('/usuarios/toggle-active/<int:usuario_id>', methods=['POST'])
 @login_required
 def toggle_active_usuario(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)
@@ -350,7 +350,7 @@ def toggle_active_usuario(usuario_id):
     flash(f'Usuário {status} com sucesso!', 'success')
     return redirect(url_for('admin.usuarios'))
 
-@admin_bp.route('/usuarios/delete/<int:usuario_id>')
+@admin_bp.route('/usuarios/delete/<int:usuario_id>', methods=['POST'])
 @login_required
 def delete_usuario(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)

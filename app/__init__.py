@@ -1,7 +1,7 @@
 # app/__init__.py
 import os
 from flask import Flask
-from flask_talisman import Talisman
+# from flask_talisman import Talisman
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -15,38 +15,12 @@ def create_app():
 
     # CONFIGURAÇÕES DE SEGURANÇA
     # ===========================
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ByN4kBVLS0uwhnGS')
-
-    # Configurações de segurança
-    csp = {
-        'default-src': [
-            "'self'",
-            'https://cdnjs.cloudflare.com',
-            'https://fonts.googleapis.com',
-            'https://fonts.gstatic.com'
-        ],
-        'style-src': [
-            "'self'",
-            "'unsafe-inline'",  # Necessário para alguns estilos
-            'https://cdnjs.cloudflare.com',
-            'https://fonts.googleapis.com'
-        ],
-        'font-src': [
-            "'self'",
-            'https://cdnjs.cloudflare.com',
-            'https://fonts.gstatic.com'
-        ]
-    }
-
-    Talisman(
-        app,
-        content_security_policy=csp,
-        content_security_policy_nonce_in=['script-src'],
-        force_https=os.environ.get('FLASK_ENV') == 'production',
-        strict_transport_security=True,
-        session_cookie_secure=True,
-        session_cookie_http_only=True
-    )
+    secret_key = os.environ.get('SECRET_KEY')
+    if not secret_key:
+        raise RuntimeError(
+            "SECRET_KEY não definida. Defina a variável de ambiente SECRET_KEY."
+        )
+    app.config['SECRET_KEY'] = secret_key
 
     # Configuração do banco de dados
     database_url = os.environ.get('DATABASE_URL')
@@ -79,10 +53,15 @@ def create_app():
     login_manager.session_protection = 'strong'
 
     from .models import Usuario
+    from datetime import datetime
 
     @login_manager.user_loader
     def load_user(user_id):
         return Usuario.query.get(int(user_id))
+
+    @app.context_processor
+    def inject_globals():
+        return {'current_year': datetime.now().year}
 
     # Registrar blueprints
     from .routes import main_bp

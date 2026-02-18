@@ -7,7 +7,7 @@
 <section class="page-section">
     <div class="container">
         {{ breadcrumb([{'text': 'Usuários'}]) }}
-        
+
         <div class="admin-header">
             <h2>Gerenciar Usuários</h2>
             <a href="{{ url_for('admin.new_usuario') }}" class="cta-button">
@@ -16,11 +16,11 @@
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
 
         <div class="usuarios-list">
@@ -44,20 +44,20 @@
                 </div>
                 <div class="usuario-actions">
                     {% if usuario.id != current_user.id %}
-                        <a href="{{ url_for('admin.edit_usuario', usuario_id=usuario.id) }}" class="btn-edit">Editar</a>
-                        {% if usuario.is_active %}
-                            <a href="{{ url_for('admin.toggle_active_usuario', usuario_id=usuario.id) }}" 
-                               class="btn-warning" 
-                               onclick="return confirm('Desativar este usuário?')">Desativar</a>
-                        {% else %}
-                            <a href="{{ url_for('admin.toggle_active_usuario', usuario_id=usuario.id) }}" 
-                               class="btn-success">Ativar</a>
-                        {% endif %}
-                        <a href="{{ url_for('admin.delete_usuario', usuario_id=usuario.id) }}" 
-                           class="btn-delete" 
-                           onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</a>
+                    <a href="{{ url_for('admin.edit_usuario', usuario_id=usuario.id) }}" class="btn-edit">Editar</a>
+                    <form method="POST" action="{{ url_for('admin.toggle_active_usuario', usuario_id=usuario.id) }}"
+                        style="display:inline" onsubmit="return confirm('Alterar status deste usuário?')">
+                        <button type="submit" class="{{ 'btn-warning' if usuario.is_active else 'btn-success' }}">
+                            {{ 'Desativar' if usuario.is_active else 'Ativar' }}
+                        </button>
+                    </form>
+                    <form method="POST" action="{{ url_for('admin.delete_usuario', usuario_id=usuario.id) }}"
+                        style="display:inline"
+                        onsubmit="return confirm('Tem certeza que deseja deletar este usuário?')">
+                        <button type="submit" class="btn-delete">Deletar</button>
+                    </form>
                     {% else %}
-                        <span class="current-user">Você</span>
+                    <span class="current-user">Você</span>
                     {% endif %}
                 </div>
             </div>

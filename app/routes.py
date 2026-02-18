@@ -1,18 +1,15 @@
 # app/routes.py
-from flask import Blueprint, render_template, abort
-from datetime import datetime
+from flask import Blueprint, render_template
 from .models import Depoimento, Post, Evento
 
 main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def home():
-    current_year = datetime.now().year
     depoimentos_db = Depoimento.query.filter_by(is_visible=True).order_by(Depoimento.id.desc()).all()
     eventos_ativos = Evento.query.filter_by(is_active=True).order_by(Evento.event_date.asc()).all()
     
-    return render_template('index.html', 
-                         current_year=current_year, 
+    return render_template('index.html',
                          depoimentos=depoimentos_db,
                          eventos=eventos_ativos)
 

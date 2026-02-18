@@ -7,7 +7,7 @@
 <section class="page-section">
     <div class="container">
         {{ breadcrumb([{'text': 'Eventos'}]) }}
-        
+
         <div class="admin-header">
             <h2>Gerenciar Eventos</h2>
             <a href="{{ url_for('admin.new_evento') }}" class="cta-button">
@@ -16,11 +16,11 @@
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
 
         <div class="eventos-list">
@@ -35,7 +35,8 @@
                         {{ evento.location }} |
                         Status: {{ 'Ativo' if evento.is_active else 'Inativo' }}
                     </p>
-                    <p class="evento-description">{{ evento.description[:150] }}{% if evento.description|length > 150 %}...{% endif %}</p>
+                    <p class="evento-description">{{ evento.description[:150] }}{% if evento.description|length > 150
+                        %}...{% endif %}</p>
                     {% if evento.registration_link %}
                     <p class="evento-link">
                         <i class="fa-solid fa-link"></i>
@@ -45,9 +46,10 @@
                 </div>
                 <div class="evento-actions">
                     <a href="{{ url_for('admin.edit_evento', evento_id=evento.id) }}" class="btn-edit">Editar</a>
-                    <a href="{{ url_for('admin.delete_evento', evento_id=evento.id) }}" 
-                       class="btn-delete" 
-                       onclick="return confirm('Tem certeza que deseja deletar este evento?')">Deletar</a>
+                    <form method="POST" action="{{ url_for('admin.delete_evento', evento_id=evento.id) }}"
+                        style="display:inline" onsubmit="return confirm('Tem certeza que deseja deletar este evento?')">
+                        <button type="submit" class="btn-delete">Deletar</button>
+                    </form>
                 </div>
             </div>
             {% else %}

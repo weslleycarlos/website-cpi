@@ -1,9 +1,12 @@
 from app import create_app, db
 from app.models import Usuario, Depoimento, Post, Evento
 from datetime import datetime, timezone
+from dotenv import load_dotenv
 import os
 import sys
 import traceback
+
+load_dotenv()  # Carrega variáveis do arquivo .env
 
 try:
     app = create_app()
@@ -20,18 +23,18 @@ def seed_db():
         print("❌ ERRO: Não execute seed-db em produção!")
         return
     with app.app_context():
+        # VERIFICAR SE JÁ EXISTE ADMIN antes de deletar qualquer coisa
+        admin_exists = Usuario.query.filter_by(username='admin').first()
+        if admin_exists:
+            print("✅ Usuário admin já existe. Pulando seed...")
+            return
+
         print("🗑️  Limpando tabelas antigas...")
         # A ordem importa por causa das chaves estrangeiras
         db.session.query(Post).delete()
-        db.session.query(Usuario).delete()
         db.session.query(Depoimento).delete()
         db.session.query(Evento).delete()
-
-        # VERIFICAR SE JÁ EXISTE ADMIN
-        admin_exists = Usuario.query.filter_by(username='admin').first()
-        if admin_exists:
-            print("✅ Usuário admin já existe. Pulando criação...")
-            return
+        db.session.query(Usuario).delete()
             
         print("👤 Criando usuário admin...")
         
@@ -82,10 +85,7 @@ def seed_db():
         db.session.commit()
         print("✅ Banco de dados semeado com sucesso!")
         
-@app.cli.command("seed-db")
-def seed_db_command():
-    """Comando CLI para semear o banco de dados."""
-    seed_database()
+
 
 @app.route('/health')
 def health():
