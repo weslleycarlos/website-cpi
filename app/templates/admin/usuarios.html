@@ -47,6 +47,7 @@
                     <a href="{{ url_for('admin.edit_usuario', usuario_id=usuario.id) }}" class="btn-edit">Editar</a>
                     <form method="POST" action="{{ url_for('admin.toggle_active_usuario', usuario_id=usuario.id) }}"
                         style="display:inline" onsubmit="return confirm('Alterar status deste usuário?')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <button type="submit" class="{{ 'btn-warning' if usuario.is_active else 'btn-success' }}">
                             {{ 'Desativar' if usuario.is_active else 'Ativar' }}
                         </button>
@@ -54,6 +55,7 @@
                     <form method="POST" action="{{ url_for('admin.delete_usuario', usuario_id=usuario.id) }}"
                         style="display:inline"
                         onsubmit="return confirm('Tem certeza que deseja deletar este usuário?')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <button type="submit" class="btn-delete">Deletar</button>
                     </form>
                     {% else %}
@@ -67,6 +69,18 @@
             </div>
             {% endfor %}
         </div>
+
+        {% if pagination and pagination.pages > 1 %}
+        <nav class="pagination-nav" aria-label="Paginação de usuários">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('admin.usuarios', page=pagination.prev_num) }}" class="btn-secondary">Anterior</a>
+            {% endif %}
+            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a href="{{ url_for('admin.usuarios', page=pagination.next_num) }}" class="btn-secondary">Próxima</a>
+            {% endif %}
+        </nav>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

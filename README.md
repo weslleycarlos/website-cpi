@@ -9,7 +9,7 @@ Website oficial do projeto **Casamento Plano Infalível** - Mentoria cristã par
 - **ORM:** SQLAlchemy 2.0 + Flask-Migrate
 - **Auth:** Flask-Login + bcrypt
 - **Security:** Flask-Talisman (CSP, HTTPS)
-- **Frontend:** HTML5, CSS3 (Grid/Flexbox), Vanilla JavaScript
+- **Frontend:** HTML5, CSS3 (layout moderno mobile-first), Vanilla JavaScript
 - **Deploy:** Railway + Gunicorn
 
 ## 📋 Pré-requisitos
@@ -214,6 +214,7 @@ website-cpi/
 │   ├── admin_routes.py      # Rotas admin (autenticadas)
 │   ├── static/
 │   │   ├── css/style.css
+│   │   ├── css/public.css      # Novo design público (home/blog/eventos/crise)
 │   │   ├── js/script.js
 │   │   └── images/
 │   └── templates/
@@ -262,6 +263,14 @@ O site foi otimizado para dispositivos móveis com:
 - ✅ Responsive design (320px+)
 - ✅ Menu mobile com overlay
 
+### Frontend público (refatorado)
+
+- `app/templates/base.html`: header moderno fixo + navegação desktop/mobile
+- `app/templates/index.html`: landing page em seções com hierarquia de conversão
+- `app/templates/blog_list.html`, `blog_post.html`, `eventos.html`, `casamento_crise.html`: páginas públicas no mesmo design system
+- `app/static/css/public.css`: estilos exclusivos do frontend público (sem impactar admin)
+- `app/static/js/script.js`: interações leves (menu mobile, transições de seção, contadores, ajuste de âncoras)
+
 ## 🐛 Troubleshooting
 
 ### Erro: "The CSRF token is missing"
@@ -281,9 +290,13 @@ O site foi otimizado para dispositivos móveis com:
 
 ### Erro: "Address already in use"
 
-**Solução:** Porta 5000 ocupada. Mate o processo ou use outra porta:
+**Solução:** Porta 5000 ocupada. Mate o processo ou defina outra porta antes de iniciar:
 ```bash
-python run.py --port 5001
+# Linux/Mac
+PORT=5001 python run.py
+
+# Windows PowerShell
+$env:PORT=5001; python run.py
 ```
 
 ### Erro: "ModuleNotFoundError"

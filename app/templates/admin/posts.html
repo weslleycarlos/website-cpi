@@ -29,6 +29,7 @@
                     <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="btn-edit" title="Editar Post">Editar</a>
                     <form method="POST" action="{{ url_for('admin.delete_post', post_id=post.id) }}" style="display:inline"
                           onsubmit="return confirm('Tem certeza que deseja deletar este post?')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <button type="submit" class="btn-delete">Deletar</button>
                     </form>
                 </div>
@@ -37,6 +38,18 @@
             <p>Nenhum post encontrado.</p>
             {% endfor %}
         </div>
+
+        {% if pagination and pagination.pages > 1 %}
+        <nav class="pagination-nav" aria-label="Paginação de posts">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('admin.posts', page=pagination.prev_num) }}" class="btn-secondary">Anterior</a>
+            {% endif %}
+            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a href="{{ url_for('admin.posts', page=pagination.next_num) }}" class="btn-secondary">Próxima</a>
+            {% endif %}
+        </nav>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

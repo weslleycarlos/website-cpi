@@ -3,55 +3,59 @@
 {% block title %}Eventos - CPI{% endblock %}
 
 {% block content %}
-<section id="eventos" class="page-section">
-    <div class="container">
-        <div class="section-header">
-            <h1>Nossos Eventos</h1>
-            <p class="section-subtitle">Participe dos nossos encontros, workshops e eventos especiais para casais.</p>
-        </div>
+<section class="page-hero page-hero--events">
+    <div class="public-container reveal">
+        <span class="eyebrow">Agenda CPI</span>
+        <h1>Encontros para transformar relacionamentos</h1>
+        <p>Participe de eventos presenciais e online voltados para casais que desejam fortalecer sua aliança.</p>
+    </div>
+</section>
 
-        <div class="eventos-public-container">
+<section id="eventos" class="section">
+    <div class="public-container">
+        <div class="cards cards--events">
             {% for evento in eventos %}
-            <div class="evento-public-card">
-                <div class="evento-date">
-                    <span class="evento-day">{{ evento.event_date.strftime('%d') }}</span>
-                    <span class="evento-month">{{ evento.event_date.strftime('%b') }}</span>
+            <article class="event-card reveal">
+                <div class="event-card__date">
+                    <span>{{ evento.event_date.strftime('%d') }}</span>
+                    <small>{{ evento.event_date.strftime('%b').upper() }}</small>
                 </div>
-                <div class="evento-content">
-                    <h3>{{ evento.title }}</h3>
-                    <p class="evento-meta">
-                        <i class="fa-regular fa-clock"></i>
-                        {{ evento.event_date.strftime('%d/%m/%Y às %H:%M') }} |
-                        <i class="fa-solid fa-location-dot"></i>
-                        {{ evento.location }}
+                <div class="event-card__content">
+                    <h2>{{ evento.title }}</h2>
+                    <p class="event-card__meta">
+                        <i class="fa-regular fa-clock"></i> {{ evento.event_date.strftime('%d/%m/%Y às %H:%M') }}
+                        <span>•</span>
+                        <i class="fa-solid fa-location-dot"></i> {{ evento.location }}
                     </p>
-                    <p class="evento-description">{{ evento.description }}</p>
+                    <p>{{ evento.description }}</p>
                     {% if evento.registration_link %}
-                    <a href="{{ evento.registration_link }}" target="_blank" class="cta-button">
-                        Inscreva-se <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <a href="{{ evento.registration_link }}" target="_blank" rel="noopener noreferrer nofollow" class="btn btn--primary">
+                        Garantir minha vaga <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                     {% endif %}
                 </div>
-            </div>
+            </article>
             {% else %}
-            <div class="empty-state">
-                <div class="empty-state-icon">
-                    <i class="fa-regular fa-calendar-check"></i>
-                </div>
-                <h3>Novos eventos em breve!</h3>
-                <p>Estamos planejando experiências incríveis para casais. Siga nossas redes sociais e seja o primeiro a saber quando abrirmos as inscrições.</p>
-                <div class="empty-state-actions">
-                    <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" class="cta-button">
-                        <i class="fa-brands fa-instagram"></i>
-                        Siga no Instagram
-                    </a>
-                    <a href="/" class="btn-secondary">
-                        Voltar ao Início
-                    </a>
-                </div>
+            <div class="empty-block reveal">
+                <i class="fa-regular fa-calendar-check"></i>
+                <h3>Sem eventos ativos no momento</h3>
+                <p>Siga nossas redes e acompanhe novidades para não perder as próximas turmas e encontros.</p>
+                <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Acompanhar no Instagram</a>
             </div>
             {% endfor %}
         </div>
+
+        {% if pagination and pagination.pages > 1 %}
+        <nav class="pagination-nav" aria-label="Paginação de eventos públicos">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('main.eventos_public', page=pagination.prev_num) }}" class="btn btn--ghost">Anterior</a>
+            {% endif %}
+            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a href="{{ url_for('main.eventos_public', page=pagination.next_num) }}" class="btn btn--ghost">Próxima</a>
+            {% endif %}
+        </nav>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

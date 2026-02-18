@@ -1,156 +1,116 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- HERO PARALLAX -->
-<section id="inicio" class="hero-section" data-scroll-section>
-    <div class="hero-bg-container">
-        <div class="hero-bg" data-speed="0.5"></div>
-        <div class="hero-overlay"></div>
-    </div>
-    <div class="hero-content" data-speed="1.2">
-        <span class="hero-subtitle fade-up">Mentoria Cristã para Casais</span>
-        <h1 class="fade-up delay-1">Construindo<br>Lares sobre<br>a Rocha.</h1>
-        <p class="fade-up delay-2">Transforme seu relacionamento através de princípios bíblicos e ferramentas práticas.
-        </p>
-        <div class="hero-actions fade-up delay-3">
-            <a href="#mentoria" class="cta-button primary">Começar Jornada</a>
-            <a href="https://www.youtube.com/watch?v=FTuPH9P42cA" target="_blank" rel="noopener noreferrer"
-                class="cta-button outline"><i class="fa-solid fa-play"></i> Assista ao Vídeo</a>
+<div class="landing-page">
+<section id="inicio" class="hero">
+    <div class="hero__media" aria-hidden="true"></div>
+    <div class="public-container hero__content reveal">
+        <span class="eyebrow">Mentoria Cristã para Casais</span>
+        <h1>Recomeçar o casamento é possível, com direção, fé e prática.</h1>
+        <p>Ajudamos casais a restaurar comunicação, confiança e propósito por meio de princípios bíblicos e ferramentas aplicáveis no dia a dia.</p>
+        <div class="hero__actions">
+            <a href="#mentoria" class="btn btn--primary">Começar Jornada</a>
+            <a href="https://www.youtube.com/watch?v=FTuPH9P42cA" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+                <i class="fa-solid fa-play"></i> Conhecer o Método
+            </a>
         </div>
-    </div>
-
-</section>
-
-<!-- SOBRE (LAYOUT ASSIMÉTRICO) -->
-<section id="sobre" class="about-section" data-scroll-section>
-    <div class="container-fluid">
-        <div class="rotation-wrapper">
-            <div class="about-grid">
-                <div class="about-image reveal-image">
-                    <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal feliz"
-                        data-speed="0.8" loading="lazy">
-                </div>
-                <div class="about-text">
-                    <span class="section-label">Nossa Missão</span>
-                    <h2 class="split-text">Restaurando<br>Alianças.</h2>
-                    <p class="big-p">O projeto Casamento Plano Infalível (CPI) nasceu de um chamado para fortalecer a
-                        base da sociedade: a família.</p>
-                    <p>Combinamos a sabedoria milenar das Escrituras com técnicas modernas de resolução de conflitos
-                        para criar um caminho claro de restauração e crescimento.</p>
-
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number" data-count="500">500+</span>
-                            <span class="stat-label">Casais Mentorados</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" data-count="98">98%</span>
-                            <span class="stat-label">Restaurados</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="hero__stats">
+            <div><strong class="counter" data-count="500">500</strong><span>Casais mentorados</span></div>
+            <div><strong class="counter" data-count="98">98</strong><span>% de satisfação</span></div>
+            <div><strong>100%</strong><span>Atendimento humanizado</span></div>
         </div>
     </div>
 </section>
 
-<!-- MENTORIA (CARDS MINIMALISTAS) -->
-<section id="mentoria" class="mentoria-section" data-scroll-section>
-    <div class="container">
-        <div class="section-header text-center">
-            <span class="section-label">O Processo</span>
-            <h2>Jornada de Transformação</h2>
+<section id="sobre" class="section">
+    <div class="public-container about-layout">
+        <div class="about-layout__image reveal">
+            <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal sorrindo durante mentoria" loading="lazy">
         </div>
-
-        <div class="steps-container">
-            <div class="step-card" data-speed="1">
-                <div class="step-number">01</div>
-                <h3>Diagnóstico</h3>
-                <p>Mergulhamos na história do casal para identificar raízes e padrões comportamentais.</p>
-            </div>
-            <div class="step-card featured" data-speed="1.1">
-                <div class="step-number">02</div>
-                <h3>Fundamentos</h3>
-                <p>Reconstrução baseada em comunicação, perdão, intimidade e alinhamento espiritual.</p>
-            </div>
-            <div class="step-card" data-speed="1">
-                <div class="step-number">03</div>
-                <h3>Plano de Ação</h3>
-                <p>Estratégias práticas e metas claras para garantir um crescimento contínuo e sustentável.</p>
-            </div>
+        <div class="about-layout__content reveal">
+            <span class="eyebrow">Sobre o CPI</span>
+            <h2>Fortalecendo famílias, um casamento por vez</h2>
+            <p>O Casamento Plano Infalível nasceu para apoiar casais em momentos de crise ou estagnação, com um processo estruturado de restauração relacional e espiritual.</p>
+            <p>Nosso foco é gerar transformação real: menos desgaste, mais conexão, mais propósito em conjunto.</p>
+            <a href="{{ url_for('main.casamento_crise') }}" class="text-link">Seu casamento está em crise? Veja como podemos ajudar <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
 
-<!-- DEPOIMENTOS (SLIDER HORIZONTAL) -->
-<section id="depoimentos" class="testimonials-section" data-scroll-section>
-    <div class="container">
-        <span class="section-label">Testemunhos</span>
-        <h2>Histórias Reais</h2>
+<section id="mentoria" class="section section--soft">
+    <div class="public-container">
+        <div class="section-head reveal">
+            <span class="eyebrow">Método CPI</span>
+            <h2>Uma jornada clara, acolhedora e prática</h2>
+        </div>
 
-        <div class="testimonials-grid">
+        <div class="cards cards--3">
+            <article class="feature-card reveal">
+                <span class="feature-card__index">01</span>
+                <h3>Diagnóstico do Casal</h3>
+                <p>Mapeamos dores, padrões de conflito e necessidades emocionais de ambos para criar um plano personalizado.</p>
+            </article>
+
+            <article class="feature-card reveal feature-card--highlight">
+                <span class="feature-card__index">02</span>
+                <h3>Reconstrução de Base</h3>
+                <p>Trabalhamos comunicação, perdão, aliança e intimidade com ferramentas aplicáveis em casa, semana a semana.</p>
+            </article>
+
+            <article class="feature-card reveal">
+                <span class="feature-card__index">03</span>
+                <h3>Plano de Continuidade</h3>
+                <p>Vocês saem com direção prática para manter progresso, prevenir recaídas e avançar com segurança no relacionamento.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="depoimentos" class="section">
+    <div class="public-container">
+        <div class="section-head reveal">
+            <span class="eyebrow">Depoimentos</span>
+            <h2>Histórias de restauração</h2>
+        </div>
+
+        <div class="cards cards--testimonials">
             {% for depoimento in depoimentos %}
-            <div class="testimonial-item">
-                <div class="quote-icon">“</div>
-                <p class="quote-text">{{ depoimento.quote }}</p>
-                <div class="author-info">
-                    <span class="author-name">{{ depoimento.author }}</span>
-                    <span class="author-role">Casal Restaurado</span>
-                </div>
-            </div>
+            <article class="testimonial-card reveal">
+                <i class="fa-solid fa-quote-left"></i>
+                <p>{{ depoimento.quote }}</p>
+                <strong>{{ depoimento.author }}</strong>
+            </article>
             {% else %}
-            <!-- Fallback para design -->
-            <div class="testimonial-item">
-                <div class="quote-icon">“</div>
-                <p class="quote-text">O CPI nos ensinou a lutar pelo nosso casamento da maneira certa. Não lutando um
-                    contra o outro, mas juntos contra o problema.</p>
-                <div class="author-info">
-                    <span class="author-name">Carlos & Amanda</span>
-                    <span class="author-role">Casados há 12 anos</span>
-                </div>
-            </div>
-            <div class="testimonial-item">
-                <div class="quote-icon">“</div>
-                <p class="quote-text">Foi um divisor de águas. Entendemos o propósito de Deus para nossa união.</p>
-                <div class="author-info">
-                    <span class="author-name">Rafael & Julia</span>
-                    <span class="author-role">Recém-casados</span>
-                </div>
-            </div>
+            <article class="testimonial-card reveal">
+                <i class="fa-solid fa-quote-left"></i>
+                <p>O CPI nos ensinou a resolver conflitos sem nos destruir no processo. Voltamos a caminhar juntos.</p>
+                <strong>Casal mentorado</strong>
+            </article>
             {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- CONTATO / RECURSOS -->
-<section id="recursos" class="contact-section inverted" data-scroll-section>
-    <div class="container">
-        <div class="contact-wrapper fade-up">
-            <h2>Fique por Dentro</h2>
-            <p>Siga-nos nas redes sociais para conteúdos diários ou entre em contato diretamente.</p>
+<section id="recursos" class="section section--dark">
+    <div class="public-container reveal">
+        <div class="cta-block">
+            <h2>Prontos para dar o próximo passo?</h2>
+            <p>Fale com a equipe CPI e agende uma conversa inicial. O primeiro movimento pode mudar toda a história do seu casamento.</p>
+            <div class="cta-block__actions">
+                <a href="https://wa.me/5561996452243" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+                    <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp
+                </a>
+                <a href="{{ url_for('main.blog_list') }}" class="btn btn--ghost-light">Ver conteúdos gratuitos</a>
+            </div>
 
-            <div class="social-links-large">
-                <a href="https://wa.me/5561996452243" target="_blank" rel="noopener noreferrer"
-                    class="social-btn whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
-                </a>
-                <a href="https://instagram.com/casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer"
-                    class="social-btn instagram">
-                    <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
-                </a>
-                <a href="https://www.tiktok.com/@cpi_plano" target="_blank" rel="noopener noreferrer"
-                    class="social-btn tiktok">
-                    <i class="fa-brands fa-tiktok"></i> <span>TikTok</span>
-                </a>
-                <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" rel="noopener noreferrer"
-                    class="social-btn youtube">
-                    <i class="fa-brands fa-youtube"></i> <span>YouTube</span>
-                </a>
-                <a href="mailto:contato@casamentoplanoinfalivel.com.br" class="social-btn email">
-                    <i class="fa-regular fa-envelope"></i> <span>E-mail</span>
-                </a>
+            <div class="social-quick-links">
+                <a href="https://instagram.com/casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@cpi_plano" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="mailto:contato@casamentoplanoinfalivel.com.br" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
             </div>
         </div>
     </div>
 </section>
+</div>
 {% endblock %}

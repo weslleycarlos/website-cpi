@@ -3,35 +3,29 @@
 {% block title %}{{ post.title }} - CPI Blog{% endblock %}
 
 {% block content %}
-<section id="post-detail" class="page-section">
-    <div class="container">
-        <article class="blog-post">
-            <header class="post-header">
-                <h1>{{ post.title }}</h1>
-                <div class="post-meta">
-                    <span class="author">
-                        <i class="fa-regular fa-user"></i>
-                        Por {{ post.author.username }}
-                    </span>
-                    <span class="date">
-                        <i class="fa-regular fa-calendar"></i>
-                        {{ post.date_posted.strftime('%d de %B de %Y') }}
-                    </span>
-                </div>
-            </header>
+<section class="page-hero page-hero--post">
+    <div class="public-container reveal">
+        <span class="eyebrow">Blog CPI</span>
+        <h1>{{ post.title }}</h1>
+        <p>
+            <i class="fa-regular fa-user"></i> {{ post.author.username }}
+            &nbsp;•&nbsp;
+            <i class="fa-regular fa-calendar"></i> {{ post.date_posted.strftime('%d/%m/%Y') }}
+        </p>
+    </div>
+</section>
 
-            <hr class="post-divider">
-
-            <div class="post-body">
+<section id="post-detail" class="section">
+    <div class="public-container">
+        <article class="article-shell reveal">
+            <div class="post-body article-content">
                 {{ post.content | safe }}
             </div>
 
-            <footer class="post-footer">
-                <a href="{{ url_for('main.blog_list') }}" class="back-link">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Voltar para todos os posts
-                </a>
-            </footer>
+            <div class="article-footer">
+                <a href="{{ url_for('main.blog_list') }}" class="btn btn--ghost"><i class="fa-solid fa-arrow-left"></i> Voltar ao blog</a>
+                <a href="https://wa.me/5561996452243" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Quero ajuda para meu casamento</a>
+            </div>
         </article>
     </div>
 </section>

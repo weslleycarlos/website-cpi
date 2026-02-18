@@ -3,47 +3,48 @@
 {% block title %}Blog - Artigos para Casais{% endblock %}
 
 {% block content %}
-<section id="blog-list" class="page-section">
-    <div class="container">
-        <div class="blog-header">
-            <h1>Nosso Blog</h1>
-            <p class="section-subtitle">Artigos e reflexões para fortalecer seu casamento e construir relacionamentos saudáveis.</p>
-        </div>
-        
-        <div class="posts-container">
+<section class="page-hero page-hero--blog">
+    <div class="public-container reveal">
+        <span class="eyebrow">Conteúdo CPI</span>
+        <h1>Artigos para fortalecer casamento e família</h1>
+        <p>Reflexões práticas, princípios bíblicos e direcionamento para casais que desejam viver um relacionamento saudável.</p>
+    </div>
+</section>
+
+<section id="blog-list" class="section">
+    <div class="public-container">
+        <div class="cards cards--blog">
             {% for post in posts %}
-                <article class="post-card">
-                    <h3>{{ post.title }}</h3>
-                    <p class="post-meta">
-                        <i class="fa-regular fa-calendar"></i>
-                        {{ post.date_posted.strftime('%d de %B de %Y') }} | 
-                        <i class="fa-regular fa-user"></i>
-                        {{ post.author.username }}
-                    </p>
-                    <p>{{ post.summary }}</p>
-                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="cta-button">
-                        Leia Mais <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </article>
+            <article class="blog-card reveal">
+                <span class="blog-card__meta">
+                    <i class="fa-regular fa-calendar"></i>
+                    {{ post.date_posted.strftime('%d/%m/%Y') }}
+                </span>
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.summary }}</p>
+                <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="text-link">Ler artigo completo <i class="fa-solid fa-arrow-right"></i></a>
+            </article>
             {% else %}
-                <div class="empty-state">
-                    <div class="empty-state-icon">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <h3>Novos conteúdos estão a caminho!</h3>
-                    <p>Estamos preparando artigos incríveis para fortalecer seu casamento. Fique ligado nas nossas redes sociais para não perder nenhuma novidade.</p>
-                    <div class="empty-state-actions">
-                        <a href="/#recursos" class="cta-button">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            Fale Conosco
-                        </a>
-                        <a href="/" class="btn-secondary">
-                            Voltar ao Início
-                        </a>
-                    </div>
-                </div>
+            <div class="empty-block reveal">
+                <i class="fa-regular fa-heart"></i>
+                <h3>Novos conteúdos em breve</h3>
+                <p>Estamos preparando novos materiais para apoiar casais na jornada de restauração e crescimento.</p>
+                <a href="https://wa.me/5561996452243" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Falar com a equipe</a>
+            </div>
             {% endfor %}
         </div>
+
+        {% if pagination and pagination.pages > 1 %}
+        <nav class="pagination-nav" aria-label="Paginação do blog">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('main.blog_list', page=pagination.prev_num) }}" class="btn btn--ghost">Anterior</a>
+            {% endif %}
+            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a href="{{ url_for('main.blog_list', page=pagination.next_num) }}" class="btn btn--ghost">Próxima</a>
+            {% endif %}
+        </nav>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

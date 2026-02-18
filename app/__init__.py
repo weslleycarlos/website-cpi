@@ -11,59 +11,20 @@ db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 csrf = CSRFProtect()
+talisman = Talisman()
 
 def create_app():
     app = Flask(__name__)
+    is_production = os.environ.get('FLASK_ENV') == 'production'
 
     # CONFIGURAÇÕES DE SEGURANÇA
     # ===========================
     secret_key = os.environ.get('SECRET_KEY')
     if not secret_key:
-        if os.environ.get('FLASK_ENV') == 'production':
-            raise ValueError("SECRET_KEY must be set in production environment")
-        secret_key = 'dev-key-change-in-production'
+        raise RuntimeError(
+            "SECRET_KEY não definida. Defina a variável de ambiente SECRET_KEY."
+        )
     app.config['SECRET_KEY'] = secret_key
-
-    # Configurações de segurança
-    csp = {
-        'default-src': [
-            "'self'",
-            'https://cdnjs.cloudflare.com',
-            'https://fonts.googleapis.com',
-            'https://fonts.gstatic.com'
-        ],
-        'script-src': [
-            "'self'",
-            'https://www.googletagmanager.com',
-            'https://www.google-analytics.com'
-        ],
-        'style-src': [
-            "'self'",
-            "'unsafe-inline'",  # Necessário para alguns estilos
-            'https://cdnjs.cloudflare.com',
-            'https://fonts.googleapis.com'
-        ],
-        'font-src': [
-            "'self'",
-            'https://cdnjs.cloudflare.com',
-            'https://fonts.gstatic.com'
-        ],
-        'connect-src': [
-            "'self'",
-            'https://www.google-analytics.com',
-            'https://analytics.google.com'
-        ]
-    }
-
-    Talisman(
-        app,
-        content_security_policy=csp,
-        content_security_policy_nonce_in=['script-src'],
-        force_https=os.environ.get('FLASK_ENV') == 'production',
-        strict_transport_security=True,
-        session_cookie_secure=True,
-        session_cookie_http_only=True
-    )
 
     # Configuração do banco de dados
     database_url = os.environ.get('DATABASE_URL')
@@ -91,15 +52,50 @@ def create_app():
     }
 
     # Segurança adicional
-    app.config['SESSION_COOKIE_SECURE'] = os.environ.get('FLASK_ENV') == 'production'
+    app.config['SESSION_COOKIE_SECURE'] = is_production
     app.config['SESSION_COOKIE_HTTPONLY'] = True
-    app.config['REMEMBER_COOKIE_SECURE'] = os.environ.get('FLASK_ENV') == 'production'
+    app.config['REMEMBER_COOKIE_SECURE'] = is_production
     app.config['REMEMBER_COOKIE_HTTPONLY'] = True
+
+    csp = {
+        'default-src': ["'self'"],
+        'script-src': [
+            "'self'",
+            'https://www.googletagmanager.com',
+            'https://cdnjs.cloudflare.com',
+            "'nonce-{nonce}'"
+        ],
+        'style-src': [
+            "'self'",
+            "'unsafe-inline'",
+            'https://fonts.googleapis.com',
+            'https://cdnjs.cloudflare.com'
+        ],
+        'font-src': [
+            "'self'",
+            'https://fonts.gstatic.com',
+            'https://cdnjs.cloudflare.com'
+        ],
+        'img-src': ["'self'", 'data:', 'https:'],
+        'connect-src': [
+            "'self'",
+            'https://www.google-analytics.com',
+            'https://region1.google-analytics.com'
+        ],
+        'object-src': ["'none'"],
+        'base-uri': ["'self'"]
+    }
 
     # Inicializar extensões
     db.init_app(app)
     migrate.init_app(app, db)
     csrf.init_app(app)
+    talisman.init_app(
+        app,
+        force_https=is_production,
+        content_security_policy=csp,
+        content_security_policy_nonce_in=['script']
+    )
 
     # Configurar Flask-Login
     login_manager.init_app(app)
@@ -108,10 +104,15 @@ def create_app():
     login_manager.session_protection = 'strong'
 
     from .models import Usuario
+    from datetime import datetime
 
     @login_manager.user_loader
     def load_user(user_id):
         return Usuario.query.get(int(user_id))
+
+    @app.context_processor
+    def inject_globals():
+        return {'current_year': datetime.now().year}
 
     # Registrar blueprints
     from .routes import main_bp
@@ -123,10 +124,10 @@ def create_app():
     # Garantir que a nonce CSP está disponível antes de renderizar qualquer template
     @app.before_request
     def ensure_csp_nonce():
-        from flask import g
+        from flask import g, request
         from secrets import token_hex
         if 'csp_nonce' not in g:
-            g.csp_nonce = token_hex(16)
+            g.csp_nonce = getattr(request, 'csp_nonce', None) or token_hex(16)
 
     # Configurar logging
     if os.environ.get('FLASK_ENV') == 'production':

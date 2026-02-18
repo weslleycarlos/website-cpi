@@ -24,6 +24,12 @@ def seed_db():
         print("❌ ERRO: Não execute seed-db em produção!")
         return
     with app.app_context():
+        # VERIFICAR SE JÁ EXISTE ADMIN antes de deletar qualquer coisa
+        admin_exists = Usuario.query.filter_by(username='admin').first()
+        if admin_exists:
+            print("✅ Usuário admin já existe. Pulando seed...")
+            return
+
         # Garante que o schema existe antes de manipular dados
         db.create_all()
 
@@ -33,15 +39,6 @@ def seed_db():
         db.session.query(Depoimento).delete()
         db.session.query(Evento).delete()
         db.session.query(Usuario).delete()    # Deletar por último
-
-        # Confirma limpeza antes de inserir
-        db.session.commit()
-
-        # VERIFICAR SE JÁ EXISTE ADMIN
-        admin_exists = Usuario.query.filter_by(username='admin').first()
-        if admin_exists:
-            print("✅ Usuário admin já existe. Pulando criação...")
-            return
             
         print("👤 Criando usuário admin...")
         

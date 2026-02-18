@@ -40,7 +40,7 @@
                     {% if evento.registration_link %}
                     <p class="evento-link">
                         <i class="fa-solid fa-link"></i>
-                        <a href="{{ evento.registration_link }}" target="_blank">{{ evento.registration_link }}</a>
+                        <a href="{{ evento.registration_link }}" target="_blank" rel="noopener noreferrer nofollow">{{ evento.registration_link }}</a>
                     </p>
                     {% endif %}
                 </div>
@@ -48,6 +48,7 @@
                     <a href="{{ url_for('admin.edit_evento', evento_id=evento.id) }}" class="btn-edit">Editar</a>
                     <form method="POST" action="{{ url_for('admin.delete_evento', evento_id=evento.id) }}"
                         style="display:inline" onsubmit="return confirm('Tem certeza que deseja deletar este evento?')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <button type="submit" class="btn-delete">Deletar</button>
                     </form>
                 </div>
@@ -58,6 +59,18 @@
             </div>
             {% endfor %}
         </div>
+
+        {% if pagination and pagination.pages > 1 %}
+        <nav class="pagination-nav" aria-label="Paginação de eventos">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('admin.eventos', page=pagination.prev_num) }}" class="btn-secondary">Anterior</a>
+            {% endif %}
+            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a href="{{ url_for('admin.eventos', page=pagination.next_num) }}" class="btn-secondary">Próxima</a>
+            {% endif %}
+        </nav>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

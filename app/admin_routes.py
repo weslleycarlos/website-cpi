@@ -4,6 +4,7 @@ from flask_login import login_required, current_user, login_user, logout_user
 from app import db
 from app.models import Post, Depoimento, Usuario, Evento
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 import bleach
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
@@ -41,19 +42,45 @@ def sanitize_html(content):
         strip=True
     )
 
+def normalize_external_url(raw_url):
+    """Aceita apenas URLs externas com protocolo HTTP/HTTPS."""
+    if not raw_url:
+        return None
+
+    value = raw_url.strip()
+    parsed = urlparse(value)
+    if parsed.scheme not in ('http', 'https'):
+        return None
+    return value
+
+def get_page_number():
+    """Obtém o número da página atual para paginação."""
+    return request.args.get('page', 1, type=int)
+
 # Rota de login
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
+
+        if not username or not password:
+            flash('Usuário e senha são obrigatórios.', 'error')
+            return render_template('admin/login.html'), 400
         
         user = Usuario.query.filter_by(username=username).first()
         
         if user and user.check_password(password):
+            if not user.is_active:
+                flash('Usuário desativado. Contate outro administrador.', 'error')
+                return render_template('admin/login.html'), 403
+
+            if not login_user(user):
+                flash('Não foi possível iniciar a sessão.', 'error')
+                return render_template('admin/login.html'), 401
+
             user.last_login = datetime.now(timezone.utc)
             db.session.commit()
-            login_user(user)
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('admin.dashboard'))
         else:
@@ -61,7 +88,7 @@ def login():
     
     return render_template('admin/login.html')
 
-@admin_bp.route('/logout')
+@admin_bp.route('/logout', methods=['POST'])
 @login_required
 def logout():
     logout_user()
@@ -87,8 +114,9 @@ def dashboard():
 @admin_bp.route('/posts')
 @login_required
 def posts():
-    all_posts = Post.query.order_by(Post.date_posted.desc()).all()
-    return render_template('admin/posts.html', posts=all_posts)
+    page = get_page_number()
+    pagination = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=10, error_out=False)
+    return render_template('admin/posts.html', posts=pagination.items, pagination=pagination)
 
 @admin_bp.route('/posts/new', methods=['GET', 'POST'])
 @login_required
@@ -162,8 +190,9 @@ def delete_post(post_id):
 @admin_bp.route('/depoimentos')
 @login_required
 def depoimentos():
-    all_depoimentos = Depoimento.query.order_by(Depoimento.id.desc()).all()
-    return render_template('admin/depoimentos.html', depoimentos=all_depoimentos)
+    page = get_page_number()
+    pagination = Depoimento.query.order_by(Depoimento.id.desc()).paginate(page=page, per_page=10, error_out=False)
+    return render_template('admin/depoimentos.html', depoimentos=pagination.items, pagination=pagination)
 
 @admin_bp.route('/depoimentos/new', methods=['GET', 'POST'])
 @login_required
@@ -210,19 +239,25 @@ def delete_depoimento(depoimento_id):
 @admin_bp.route('/eventos')
 @login_required
 def eventos():
-    all_eventos = Evento.query.order_by(Evento.event_date.desc()).all()
-    return render_template('admin/eventos.html', eventos=all_eventos)
+    page = get_page_number()
+    pagination = Evento.query.order_by(Evento.event_date.desc()).paginate(page=page, per_page=10, error_out=False)
+    return render_template('admin/eventos.html', eventos=pagination.items, pagination=pagination)
 
 @admin_bp.route('/eventos/new', methods=['GET', 'POST'])
 @login_required
 def new_evento():
     if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
+        title = request.form.get('title', '').strip()
+        description = request.form.get('description', '').strip()
         event_date_str = request.form.get('event_date')
-        location = request.form.get('location')
-        registration_link = request.form.get('registration_link')
+        location = request.form.get('location', '').strip()
+        raw_registration_link = request.form.get('registration_link')
+        registration_link = normalize_external_url(raw_registration_link)
         is_active = 'is_active' in request.form
+
+        if raw_registration_link and not registration_link:
+            flash('Link de inscrição inválido. Use apenas URLs http/https.', 'error')
+            return render_template('admin/edit_evento.html')
         
         # Converter string para datetime com tratamento de erro
         try:
@@ -253,11 +288,16 @@ def edit_evento(evento_id):
     evento = Evento.query.get_or_404(evento_id)
     
     if request.method == 'POST':
-        evento.title = request.form.get('title')
-        evento.description = request.form.get('description')
+        evento.title = request.form.get('title', '').strip()
+        evento.description = request.form.get('description', '').strip()
         event_date_str = request.form.get('event_date')
-        evento.location = request.form.get('location')
-        evento.registration_link = request.form.get('registration_link')
+        evento.location = request.form.get('location', '').strip()
+        raw_registration_link = request.form.get('registration_link')
+        registration_link = normalize_external_url(raw_registration_link)
+        if raw_registration_link and not registration_link:
+            flash('Link de inscrição inválido. Use apenas URLs http/https.', 'error')
+            return render_template('admin/edit_evento.html', evento=evento)
+        evento.registration_link = registration_link
         evento.is_active = 'is_active' in request.form
         
         # Converter string para datetime com tratamento de erro
@@ -287,8 +327,9 @@ def delete_evento(evento_id):
 @admin_bp.route('/usuarios')
 @login_required
 def usuarios():
-    all_usuarios = Usuario.query.order_by(Usuario.date_created.desc()).all()
-    return render_template('admin/usuarios.html', usuarios=all_usuarios)
+    page = get_page_number()
+    pagination = Usuario.query.order_by(Usuario.date_created.desc()).paginate(page=page, per_page=10, error_out=False)
+    return render_template('admin/usuarios.html', usuarios=pagination.items, pagination=pagination)
 
 @admin_bp.route('/usuarios/new', methods=['GET', 'POST'])
 @login_required
@@ -394,6 +435,11 @@ def reset_password(usuario_id):
     
     if new_password != confirm_password:
         flash('As senhas não coincidem.', 'error')
+        return redirect(url_for('admin.edit_usuario', usuario_id=usuario_id))
+
+    is_valid, msg = validate_password(new_password)
+    if not is_valid:
+        flash(msg, 'error')
         return redirect(url_for('admin.edit_usuario', usuario_id=usuario_id))
     
     usuario.set_password(new_password)
