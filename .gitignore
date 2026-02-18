@@ -1,15 +1,13 @@
-# .gitignore
+# .gitignore - Website CPI
 
-# Ambiente virtual
-venv/
-env/
-ENV/
-
-# Python
+# ==================== PYTHON ====================
+# Bytecode
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -23,42 +21,158 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Banco de dados
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# ==================== AMBIENTE VIRTUAL ====================
+venv/
+env/
+ENV/
+.venv
+venv.bak/
+env.bak/
+
+# ==================== BANCO DE DADOS ====================
 *.db
 *.sqlite3
+*.sqlite
 site.db
 instance/
+migrations/versions/*.pyc
 
-# Ambiente
+# ==================== VARIÁVEIS DE AMBIENTE ====================
 .env
 .env.local
+.env.*.local
 .env.production
-.venv
+.env.development
+.env.test
+.flaskenv
 
-# Sistema
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Logs
+# ==================== LOGS ====================
 *.log
 logs/
+*.log.*
+app.log
 
-# Arquivos temporários
+# ==================== SISTEMA OPERACIONAL ====================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ==================== IDEs ====================
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+*.swp
+*.swo
+*.swn
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# ==================== DEPLOY ====================
+.cache
+.vercel
+.netlify
+.railway
+
+# ==================== ARQUIVOS TEMPORÁRIOS ====================
 *.tmp
 *.temp
 *.bak
+*.old
+*.orig
+*-copy
 
-# Deploy
-.cache
-.coverage
-htmlcov/
+# ==================== NODE (se adicionar frontend tools) ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ==================== ASSETS GERADOS ====================
+# Imagens otimizadas/redimensionadas
+app/static/images/optimized/
+app/static/images/thumbnails/
+
+# CSS/JS minificados
+app/static/css/*.min.css
+app/static/js/*.min.js
+
+# ==================== DOCUMENTAÇÃO LOCAL ====================
+# Rascunhos e notas pessoais
+notas.txt
+TODO.txt
+RASCUNHO.md
+
+# ==================== SEGURANÇA ====================
+# Chaves SSH
+*.pem
+*.key
+*.crt
+*.cer
+
+# Secrets
+secrets/
+.secrets/
+*.secret

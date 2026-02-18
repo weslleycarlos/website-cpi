@@ -34,10 +34,21 @@
                 </div>
             </div>
             {% else %}
-            <div class="no-eventos">
-                <i class="fa-regular fa-calendar-xmark" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
-                <h3>Nenhum evento programado</h3>
-                <p>Fique atento às nossas redes sociais para novos eventos!</p>
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <h3>Novos eventos em breve!</h3>
+                <p>Estamos planejando experiências incríveis para casais. Siga nossas redes sociais e seja o primeiro a saber quando abrirmos as inscrições.</p>
+                <div class="empty-state-actions">
+                    <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" class="cta-button">
+                        <i class="fa-brands fa-instagram"></i>
+                        Siga no Instagram
+                    </a>
+                    <a href="/" class="btn-secondary">
+                        Voltar ao Início
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>

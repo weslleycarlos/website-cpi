@@ -1,133 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta name="description"
-    content="{% block meta_description %}Mentoria cristã para casais - Fortalecendo casamentos através de princípios bíblicos, comunicação saudável e reconciliação{% endblock %}">
-  <meta name="keywords"
-    content="{% block meta_keywords %}casamento cristão, mentoria para casais, reconciliação conjugal, comunicação no casamento, relacionamento conjugal, terapia para casais, casamento na igreja, crise conjugal, restauração de casamento{% endblock %}">
-  <meta name="author" content="Casamento Plano Infalível">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="{% block meta_description %}Mentoria cristã para casais - Fortalecendo casamentos através de princípios bíblicos, comunicação saudável e reconciliação{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}casamento cristão, mentoria para casais, reconciliação conjugal, comunicação no casamento, relacionamento conjugal, terapia para casais, casamento na igreja, crise conjugal, restauração de casamento{% endblock %}">
+    <meta name="author" content="Casamento Plano Infalível">
 
-  <!-- Open Graph -->
-  <meta property="og:title"
-    content="{% block og_title %}Casamento Plano Infalível - Mentoria para Casais Cristãos{% endblock %}">
-  <meta property="og:description"
-    content="Fortalecendo casamentos através de princípios bíblicos e ferramentas práticas para comunicação e reconciliação.">
-  <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
-  <meta property="og:url" content="{{ request.url }}">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Casamento Plano Infalível">
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}Casamento Plano Infalível - Mentoria para Casais Cristãos{% endblock %}">
+    <meta property="og:description" content="Fortalecendo casamentos através de princípios bíblicos e ferramentas práticas para comunicação e reconciliação.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Casamento Plano Infalível">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Casamento Plano Infalível - Mentoria para Casais">
-  <meta name="twitter:description" content="Fortalecendo casamentos através de princípios bíblicos.">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}CPI - Casamento Plano Infalível{% endblock %}</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Montserrat:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Casamento Plano Infalível - Mentoria para Casais">
+    <meta name="twitter:description" content="Fortalecendo casamentos através de princípios bíblicos.">
+    <title>{% block title %}CPI - Casamento Plano Infalível{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Casamento Plano Infalível",
+      "url": "https://casamentoplanoinfalivel.com.br",
+      "logo": "https://casamentoplanoinfalivel.com.br/static/images/logo.png",
+      "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-61-99803-9461",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/cpi_casamentoplanoinfalivel",
+        "https://www.youtube.com/@C.P.I.casamento"
+      ]
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
+    <script nonce="{{ g.csp_nonce }}">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
+      gtag('config', 'G-5QWHHDMTCS');
+    </script>
 </head>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Casamento Plano Infalível",
-  "url": "https://casamentoplanoinfalivel.com.br",
-  "logo": "https://casamentoplanoinfalivel.com.br/static/images/logo.png",
-  "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "BR"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+55-61-99803-9461",
-    "contactType": "customer service",
-    "areaServed": "BR",
-    "availableLanguage": "Portuguese"
-  },
-  "sameAs": [
-    "https://www.instagram.com/cpi_casamentoplanoinfalivel",
-    "https://www.youtube.com/@C.P.I.casamento"
-  ]
-}
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-
-  gtag('config', 'G-5QWHHDMTCS');
-</script>
-
 <body>
 
-  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
-
-  <!-- SIDEBAR DESKTOP -->
-  <nav class="sidebar-nav" aria-label="Navegação principal">
+<!-- SIDEBAR DESKTOP -->
+<nav class="sidebar-nav">
     <a href="/#inicio" class="sidebar-logo">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" loading="lazy">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI">
     </a>
     <ul>
-      <li><a href="/#inicio" data-section="inicio">Início</a></li>
-      <li><a href="/#sobre" data-section="sobre">Sobre Nós</a></li>
-      <li><a href="/#mentoria" data-section="mentoria">Mentoria</a></li>
-      <li><a href="/#depoimentos" data-section="depoimentos">Depoimentos</a></li>
-      <li><a href="/#recursos" data-section="recursos">Contato</a></li>
-      <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
-      <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
+        <li><a href="/#inicio" data-section="inicio">Início</a></li>
+        <li><a href="/#mentoria" data-section="mentoria">Mentoria</a></li>
+        <li><a href="/#sobre" data-section="sobre">Sobre Nós</a></li>  
+        <li><a href="/#depoimentos" data-section="depoimentos">Depoimentos</a></li>
+        <li><a href="/#recursos" data-section="recursos">Contato</a></li>
+        <li><a href="/casamento-em-crise">Casamento em Crise</a></li>
+        <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
+        <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
     </ul>
-  </nav>
+</nav>
 
-  <!-- HEADER MOBILE -->
-  <header class="mobile-header">
-    <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" class="logo"
-        loading="lazy"></a>
-    <button class="hamburger-menu" id="hamburger-menu" aria-label="Abrir menu de navegação" aria-expanded="false">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+<!-- HEADER MOBILE -->
+<header class="mobile-header">
+    <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI" class="logo"></a>
+    <button class="hamburger-menu" 
+            id="hamburger-menu"
+            role="button"
+            aria-label="Menu de navegação"
+            aria-expanded="false"
+            aria-controls="mobile-nav-panel">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
     </button>
-  </header>
+</header>
 
-  <!-- PAINEL MOBILE -->
-  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-label="Menu de navegação mobile" role="dialog"
-    aria-modal="true">
-    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Fechar menu">&times;</button>
+<!-- PAINEL MOBILE -->
+<nav class="mobile-nav-panel" 
+     id="mobile-nav-panel"
+     role="navigation"
+     aria-label="Menu principal mobile">
     <ul>
-      <li><a href="/#inicio">Início</a></li>
-      <li><a href="/#sobre">Sobre Nós</a></li>
-      <li><a href="/#mentoria">Mentoria</a></li>
-      <li><a href="/#depoimentos">Depoimentos</a></li>
-      <li><a href="/#recursos">Contato</a></li>
-      <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
-      <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
+        <li><a href="/#inicio">Início</a></li>
+        <li><a href="/#mentoria">Mentoria</a></li>
+        <li><a href="/#sobre">Sobre Nós</a></li>        
+        <li><a href="/#depoimentos">Depoimentos</a></li>
+        <li><a href="/#recursos">Contato</a></li>
+        <li><a href="/casamento-em-crise">Casamento em Crise</a></li>
+        <li><a href="{{ url_for('main.blog_list') }}">Blog</a></li>
+        <li><a href="{{ url_for('main.eventos_public') }}">Eventos</a></li>
     </ul>
-  </div>
+</nav>
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <div class="main-content" id="main-content">
+<!-- OVERLAY MOBILE -->
+<div class="mobile-overlay" id="mobile-overlay"></div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="main-content">
     {% block content %}{% endblock %}
     <footer class="main-footer">
-      <p>&copy; {{ current_year }} Casamento Plano Infalível. Todos os direitos reservados.</p>
+        <p>&copy; {{ current_year }} Casamento Plano Infalível. Todos os direitos reservados.</p>
     </footer>
-  </div>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
-
 </html>

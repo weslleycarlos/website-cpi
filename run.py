@@ -1,12 +1,13 @@
 from app import create_app, db
 from app.models import Usuario, Depoimento, Post, Evento
 from datetime import datetime, timezone
-from dotenv import load_dotenv
 import os
 import sys
 import traceback
+from dotenv import load_dotenv
 
-load_dotenv()  # Carrega variáveis do arquivo .env
+# Carrega variáveis do .env quando rodar python run.py diretamente
+load_dotenv()
 
 try:
     app = create_app()
@@ -23,18 +24,24 @@ def seed_db():
         print("❌ ERRO: Não execute seed-db em produção!")
         return
     with app.app_context():
-        # VERIFICAR SE JÁ EXISTE ADMIN antes de deletar qualquer coisa
-        admin_exists = Usuario.query.filter_by(username='admin').first()
-        if admin_exists:
-            print("✅ Usuário admin já existe. Pulando seed...")
-            return
+        # Garante que o schema existe antes de manipular dados
+        db.create_all()
 
         print("🗑️  Limpando tabelas antigas...")
-        # A ordem importa por causa das chaves estrangeiras
-        db.session.query(Post).delete()
+        # A ordem importa por causa das chaves estrangeiras - deletar filhos antes dos pais
+        db.session.query(Post).delete()       # Tem FK para Usuario
         db.session.query(Depoimento).delete()
         db.session.query(Evento).delete()
-        db.session.query(Usuario).delete()
+        db.session.query(Usuario).delete()    # Deletar por último
+
+        # Confirma limpeza antes de inserir
+        db.session.commit()
+
+        # VERIFICAR SE JÁ EXISTE ADMIN
+        admin_exists = Usuario.query.filter_by(username='admin').first()
+        if admin_exists:
+            print("✅ Usuário admin já existe. Pulando criação...")
+            return
             
         print("👤 Criando usuário admin...")
         
@@ -46,7 +53,7 @@ def seed_db():
             return
         admin_user = Usuario(
             username='admin', 
-            email=os.environ.get('ADMIN_EMAIL', 'weslley.unemat@gmail.com'),
+            email=os.environ.get('ADMIN_EMAIL', 'seuemail@seumail.com'),
             is_active=True,
             date_created=datetime.now(timezone.utc)
         )
@@ -84,12 +91,9 @@ def seed_db():
 
         db.session.commit()
         print("✅ Banco de dados semeado com sucesso!")
-        
 
-
-@app.route('/health')
-def health():
-    return 'OK', 200
+        # Feedback das contagens após semear
+        print(f"👤 Usuarios: {Usuario.query.count()} | 📰 Posts: {Post.query.count()} | 💬 Depoimentos: {Depoimento.query.count()} | 📅 Eventos: {Evento.query.count()}")
 
 # Configuração para produção
 if __name__ == '__main__':

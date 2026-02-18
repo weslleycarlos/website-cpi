@@ -17,33 +17,51 @@
         {% endwith %}
         
         <form method="POST" class="post-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            
             <div class="form-group">
                 <label for="title">Título do Evento:</label>
                 <input type="text" id="title" name="title" 
-                       value="{{ evento.title if evento }}" required>
+                       value="{{ evento.title if evento }}" 
+                       placeholder="Workshop para Casais"
+                       maxlength="200"
+                       required>
+                <span class="form-help">Nome atrativo do evento (máx. 200 caracteres)</span>
             </div>
             
             <div class="form-group">
                 <label for="description">Descrição:</label>
-                <textarea id="description" name="description" required>{{ evento.description if evento }}</textarea>
+                <textarea id="description" name="description" 
+                          placeholder="Descreva o conteúdo e objetivos do evento..."
+                          rows="5"
+                          required>{{ evento.description if evento }}</textarea>
+                <span class="form-help">Descreva o que os participantes irão aprender/vivenciar</span>
             </div>
             
             <div class="form-group">
                 <label for="event_date">Data e Hora do Evento:</label>
                 <input type="datetime-local" id="event_date" name="event_date" 
-                       value="{{ evento.event_date.strftime('%Y-%m-%dT%H:%M') if evento }}" required>
+                       value="{{ evento.event_date.strftime('%Y-%m-%dT%H:%M') if evento }}" 
+                       required>
+                <span class="form-help">Selecione data e horário de início</span>
             </div>
             
             <div class="form-group">
                 <label for="location">Local:</label>
                 <input type="text" id="location" name="location" 
-                       value="{{ evento.location if evento }}" required>
+                       value="{{ evento.location if evento }}" 
+                       placeholder="Salão da Igreja, Rua Exemplo 123"
+                       required>
+                <span class="form-help">Endereço completo ou nome do local</span>
             </div>
             
             <div class="form-group">
                 <label for="registration_link">Link de Inscrição (opcional):</label>
                 <input type="url" id="registration_link" name="registration_link" 
-                       value="{{ evento.registration_link if evento }}">
+                       value="{{ evento.registration_link if evento }}"
+                       placeholder="https://forms.google.com/..."
+                       inputmode="url">
+                <span class="form-help">URL completa do formulário de inscrição</span>
             </div>
             
             <div class="form-group">

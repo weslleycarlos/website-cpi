@@ -27,6 +27,8 @@
         {% endwith %}
         
         <form method="POST" class="post-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            
             <div class="form-group">
                 <label for="quote">Depoimento:</label>
                 <textarea id="quote" name="quote" rows="4" required>{{ depoimento.quote if depoimento }}</textarea>

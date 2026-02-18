@@ -26,10 +26,21 @@
                     </a>
                 </article>
             {% else %}
-                <div class="no-posts">
-                    <i class="fa-regular fa-file-lines" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
-                    <h3>Nenhum post encontrado</h3>
-                    <p>Volte em breve para conferir nossos novos artigos!</p>
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <h3>Novos conteúdos estão a caminho!</h3>
+                    <p>Estamos preparando artigos incríveis para fortalecer seu casamento. Fique ligado nas nossas redes sociais para não perder nenhuma novidade.</p>
+                    <div class="empty-state-actions">
+                        <a href="/#recursos" class="cta-button">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            Fale Conosco
+                        </a>
+                        <a href="/" class="btn-secondary">
+                            Voltar ao Início
+                        </a>
+                    </div>
                 </div>
             {% endfor %}
         </div>

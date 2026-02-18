@@ -1,6 +1,6 @@
 # app/models.py
 from . import db
-from datetime import datetime
+from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -8,10 +8,10 @@ from flask_login import UserMixin
 class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=True)  # Novo campo opcional
+    email = db.Column(db.String(120), nullable=True)  # Email opcional sem unique constraint
     password_hash = db.Column(db.String(256), nullable=False)
     is_active = db.Column(db.Boolean, default=True)  # Para desativar usuários
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     last_login = db.Column(db.DateTime, nullable=True)
 
     def set_password(self, password):
@@ -29,7 +29,7 @@ class Post(db.Model):
     title = db.Column(db.String(200), nullable=False)
     summary = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_posted = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))
     is_published = db.Column(db.Boolean, default=False)
     author_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     

@@ -3,9 +3,43 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user, login_user, logout_user
 from app import db
 from app.models import Post, Depoimento, Usuario, Evento
-from datetime import datetime
+from datetime import datetime, timezone
+import bleach
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
+
+# Configuração de sanitização HTML
+ALLOWED_TAGS = [
+    'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'hr', 'div', 'span'
+]
+ALLOWED_ATTRIBUTES = {
+    'a': ['href', 'title', 'target'],
+    'img': ['src', 'alt', 'title']
+}
+
+def validate_password(password):
+    """Valida força da senha"""
+    if not password:
+        return False, "Senha é obrigatória"
+    if len(password) < 8:
+        return False, "Senha deve ter no mínimo 8 caracteres"
+    if not any(c.isupper() for c in password):
+        return False, "Senha deve conter pelo menos uma letra maiúscula"
+    if not any(c.islower() for c in password):
+        return False, "Senha deve conter pelo menos uma letra minúscula"
+    if not any(c.isdigit() for c in password):
+        return False, "Senha deve conter pelo menos um número"
+    return True, ""
+
+def sanitize_html(content):
+    """Sanitiza conteúdo HTML"""
+    return bleach.clean(
+        content,
+        tags=ALLOWED_TAGS,
+        attributes=ALLOWED_ATTRIBUTES,
+        strip=True
+    )
 
 # Rota de login
 @admin_bp.route('/login', methods=['GET', 'POST'])
@@ -17,6 +51,8 @@ def login():
         user = Usuario.query.filter_by(username=username).first()
         
         if user and user.check_password(password):
+            user.last_login = datetime.now(timezone.utc)
+            db.session.commit()
             login_user(user)
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('admin.dashboard'))
@@ -61,7 +97,7 @@ def new_post():
         slug = request.form.get('slug')
         title = request.form.get('title')
         summary = request.form.get('summary')
-        content = request.form.get('content')
+        content = sanitize_html(request.form.get('content'))  # Sanitizar HTML
         is_published = 'is_published' in request.form
         
         # Verificar se o slug já existe
@@ -92,10 +128,19 @@ def edit_post(post_id):
     post = Post.query.get_or_404(post_id)
     
     if request.method == 'POST':
-        post.slug = request.form.get('slug')
+        new_slug = request.form.get('slug')
+        
+        # Verificar se slug mudou e se já existe
+        if new_slug != post.slug:
+            existing = Post.query.filter_by(slug=new_slug).first()
+            if existing:
+                flash('Já existe um post com este slug. Escolha outro.', 'error')
+                return render_template('admin/edit_post.html', post=post)
+        
+        post.slug = new_slug
         post.title = request.form.get('title')
         post.summary = request.form.get('summary')
-        post.content = request.form.get('content')
+        post.content = sanitize_html(request.form.get('content'))  # Sanitizar HTML
         post.is_published = 'is_published' in request.form
         
         db.session.commit()
@@ -179,8 +224,12 @@ def new_evento():
         registration_link = request.form.get('registration_link')
         is_active = 'is_active' in request.form
         
-        # Converter string para datetime
-        event_date = datetime.strptime(event_date_str, '%Y-%m-%dT%H:%M')
+        # Converter string para datetime com tratamento de erro
+        try:
+            event_date = datetime.strptime(event_date_str, '%Y-%m-%dT%H:%M')
+        except (ValueError, TypeError):
+            flash('Data/hora inválida. Use o formato correto (YYYY-MM-DD HH:MM).', 'error')
+            return render_template('admin/edit_evento.html')
         
         new_evento = Evento(
             title=title,
@@ -211,8 +260,12 @@ def edit_evento(evento_id):
         evento.registration_link = request.form.get('registration_link')
         evento.is_active = 'is_active' in request.form
         
-        # Converter string para datetime
-        evento.event_date = datetime.strptime(event_date_str, '%Y-%m-%dT%H:%M')
+        # Converter string para datetime com tratamento de erro
+        try:
+            evento.event_date = datetime.strptime(event_date_str, '%Y-%m-%dT%H:%M')
+        except (ValueError, TypeError):
+            flash('Data/hora inválida. Use o formato correto (YYYY-MM-DD HH:MM).', 'error')
+            return render_template('admin/edit_evento.html', evento=evento)
         
         db.session.commit()
         flash('Evento atualizado com sucesso!', 'success')
@@ -253,6 +306,12 @@ def new_usuario():
         
         if password != confirm_password:
             flash('As senhas não coincidem.', 'error')
+            return render_template('admin/edit_usuario.html')
+        
+        # Validar força da senha
+        is_valid, msg = validate_password(password)
+        if not is_valid:
+            flash(msg, 'error')
             return render_template('admin/edit_usuario.html')
         
         # Verificar se username já existe
@@ -301,6 +360,13 @@ def edit_usuario(usuario_id):
             if new_password != confirm_password:
                 flash('As senhas não coincidem.', 'error')
                 return render_template('admin/edit_usuario.html', usuario=usuario)
+            
+            # Validar força da senha
+            is_valid, msg = validate_password(new_password)
+            if not is_valid:
+                flash(msg, 'error')
+                return render_template('admin/edit_usuario.html', usuario=usuario)
+            
             usuario.set_password(new_password)
             flash('Senha resetada com sucesso!', 'success')
         
