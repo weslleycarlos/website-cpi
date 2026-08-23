@@ -2,6 +2,18 @@
 
 {% block title %}{{ post.title }} - CPI Blog{% endblock %}
 
+{% block meta_description %}{{ post.summary|striptags|truncate(160) }}{% endblock %}
+
+{% block meta_keywords %}casamento cristão, mentoria para casais, {{ post.title|striptags|lower }}{% endblock %}
+
+{% block og_title %}{{ post.title }} - CPI Blog{% endblock %}
+
+{% block og_description %}{{ post.summary|striptags|truncate(160) }}{% endblock %}
+
+{% block twitter_title %}{{ post.title }} - CPI Blog{% endblock %}
+
+{% block twitter_description %}{{ post.summary|striptags|truncate(160) }}{% endblock %}
+
 {% block content %}
 <section class="page-hero page-hero--post">
     <div class="public-container reveal">
@@ -24,7 +36,7 @@
 
             <div class="article-footer">
                 <a href="{{ url_for('main.blog_list') }}" class="btn btn--ghost"><i class="fa-solid fa-arrow-left"></i> Voltar ao blog</a>
-                <a href="https://wa.me/5561996452243" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Quero ajuda para meu casamento</a>
+                <a href="https://wa.me/5561998039461" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Quero ajuda para meu casamento</a>
             </div>
         </article>
     </div>

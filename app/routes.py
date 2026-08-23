@@ -1,5 +1,5 @@
 # app/routes.py
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, current_app
 from .models import Depoimento, Post, Evento
 
 main_bp = Blueprint('main', __name__)
@@ -42,6 +42,11 @@ def casamento_crise():
 def health():
     """Health check endpoint para monitoramento"""
     return 'OK', 200
+
+@main_bp.route('/robots.txt')
+def robots_txt():
+    """Serve robots.txt na raiz do domínio (exigido pelos buscadores)"""
+    return current_app.send_static_file('robots.txt')
 
 # Sitemap dinâmico com posts
 @main_bp.route('/sitemap.xml')

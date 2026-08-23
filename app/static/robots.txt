@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /login
 
-Sitemap: https://casamentoplanoinfalivel.com.br/sitemap.xml
+Sitemap: https://www.casamentoplanoinfalivel.com.br/sitemap.xml

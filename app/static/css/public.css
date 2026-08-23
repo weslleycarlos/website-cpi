@@ -742,14 +742,27 @@ p {
     padding-top: 84px;
   }
 
+  html {
+    scroll-padding-top: 84px;
+  }
+
   .hero {
     min-height: 74vh;
   }
 
+  /* No mobile, cada seção flui naturalmente em vez de forçar 100vh */
   .landing-page > .hero,
   .landing-page > .section {
-    min-height: calc(var(--app-vh, 1vh) * 100 - 84px);
+    min-height: auto;
     padding-block: 3.2rem;
+  }
+
+  .hero__stats div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 auto;
   }
 
   .event-card {
@@ -758,6 +771,45 @@ p {
 
   .event-card__date {
     width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .public-container {
+    width: calc(100% - 1.5rem);
+  }
+
+  .site-header__container {
+    height: 68px;
+    width: calc(100% - 1.5rem);
+  }
+
+  .site-main {
+    padding-top: 78px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .cta-block__actions {
+    flex-direction: column;
+  }
+
+  .cta-block__actions .btn {
+    width: 100%;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .article-content {
+    font-size: 1rem;
   }
 }
 
