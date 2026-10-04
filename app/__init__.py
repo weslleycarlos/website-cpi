@@ -62,8 +62,7 @@ def create_app():
         'script-src': [
             "'self'",
             'https://www.googletagmanager.com',
-            'https://cdnjs.cloudflare.com',
-            "'nonce-{nonce}'"
+            'https://cdnjs.cloudflare.com'
         ],
         'style-src': [
             "'self'",
@@ -79,8 +78,10 @@ def create_app():
         'img-src': ["'self'", 'data:', 'https:'],
         'connect-src': [
             "'self'",
-            'https://www.google-analytics.com',
-            'https://region1.google-analytics.com'
+            'https://www.googletagmanager.com',
+            'https://*.google-analytics.com',
+            'https://*.analytics.google.com',
+            'https://*.google.com'
         ],
         'object-src': ["'none'"],
         'base-uri': ["'self'"]
@@ -94,7 +95,7 @@ def create_app():
         app,
         force_https=is_production,
         content_security_policy=csp,
-        content_security_policy_nonce_in=['script']
+        content_security_policy_nonce_in=['script-src']
     )
 
     # Configurar Flask-Login
