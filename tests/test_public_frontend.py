@@ -148,6 +148,55 @@ class PublicFrontendTests(unittest.TestCase):
         self.assertIn(b'css/style.css', dashboard.data)
         self.assertNotIn(b'css/public.css', dashboard.data)
 
+    def test_inline_scripts_are_authorized_by_response_csp(self):
+        previous_nonces = set()
+        for path in ['/', '/', '/blog', '/eventos', '/casamento-em-crise',
+                     '/pagina-inexistente', '/admin/login']:
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                soup = BeautifulSoup(response.data, 'html.parser')
+                policy = response.headers['Content-Security-Policy']
+                directives = dict(part.strip().split(' ', 1)
+                                  for part in policy.split(';'))
+                script_sources = directives['script-src'].split()
+                self.assertNotIn("'nonce-{nonce}'", script_sources)
+                self.assertNotIn("'unsafe-inline'", script_sources)
+                inline_scripts = soup.select('script:not([src])')
+                self.assertTrue(inline_scripts)
+                nonces = {script.get('nonce') for script in inline_scripts}
+                self.assertEqual(len(nonces), 1)
+                nonce = nonces.pop()
+                self.assertTrue(nonce)
+                self.assertIn(f"'nonce-{nonce}'", script_sources)
+                self.assertNotIn(nonce, previous_nonces)
+                previous_nonces.add(nonce)
+
+    def test_analytics_tag_and_collection_permissions_on_public_pages(self):
+        with self.app.app_context():
+            seed_content()
+        for path in ['/', '/blog', '/blog/reflexao-0', '/eventos',
+                     '/casamento-em-crise']:
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                soup = BeautifulSoup(response.data, 'html.parser')
+                tags = soup.select('script[src*="googletagmanager.com/gtag/js"]')
+                self.assertEqual(len(tags), 1)
+                self.assertEqual(tags[0]['src'],
+                                 'https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS')
+                self.assertTrue(tags[0].has_attr('async'))
+                initializers = [script for script in soup.select('script:not([src])')
+                                if "gtag('config', 'G-5QWHHDMTCS')" in script.get_text()]
+                self.assertEqual(len(initializers), 1)
+                self.assertEqual(tags[0]['nonce'], initializers[0]['nonce'])
+                directives = dict(part.strip().split(' ', 1) for part in
+                                  response.headers['Content-Security-Policy'].split(';'))
+                self.assertIn(f"'nonce-{initializers[0]['nonce']}'",
+                              directives['script-src'].split())
+                for source in ['https://www.googletagmanager.com',
+                               'https://*.google-analytics.com',
+                               'https://*.google.com']:
+                    self.assertIn(source, directives['connect-src'].split())
+
 
 if __name__ == '__main__':
     unittest.main()

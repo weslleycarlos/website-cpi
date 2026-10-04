@@ -91,7 +91,7 @@
   </script>
   {% block structured_data %}{% endblock %}
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
+  <script async nonce="{{ g.csp_nonce }}" src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
   <script nonce="{{ g.csp_nonce }}">
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
