@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "includes/icons.html" import icon %}
 
 {% block title %}Blog para Casais Cristãos | Comunicação, Perdão e Restauração - CPI{% endblock %}
 
@@ -23,48 +24,46 @@
 {% endblock %}
 
 {% block content %}
+
 <section class="page-hero page-hero--blog">
-    <div class="public-container reveal">
-        <span class="eyebrow">Conteúdo CPI</span>
-        <h1>Artigos para fortalecer casamento e família</h1>
-        <p>Reflexões práticas, princípios bíblicos e direcionamento para casais que desejam viver um relacionamento saudável.</p>
-    </div>
+<div class="public-container">
+<nav class="breadcrumb" aria-label="Localização"><a href="{{ url_for('main.home') }}">Início</a><span aria-hidden="true">/</span><span aria-current="page">Conteúdos</span>
+</nav>
+<div class="page-hero__bottom">
+<div><span class="eyebrow">O blog do CPI</span>
+<h1>Palavras que acolhem.<br><em>Ideias que aproximam.</em>
+</h1>
+<p>Reflexões sobre fé, comunicação e os pequenos gestos que fortalecem a vida a dois.</p>
+</div><span class="page-hero__symbol" aria-hidden="true">{{ icon('book') }}</span>
+</div>
+</div>
 </section>
-
 <section id="blog-list" class="section">
-    <div class="public-container">
-        <div class="cards cards--blog">
-            {% for post in posts %}
-            <article class="blog-card reveal">
-                <span class="blog-card__meta">
-                    <i class="fa-regular fa-calendar"></i>
-                    {{ post.date_posted.strftime('%d/%m/%Y') }}
-                </span>
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.summary }}</p>
-                <a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="text-link">Ler artigo completo <i class="fa-solid fa-arrow-right"></i></a>
-            </article>
-            {% else %}
-            <div class="empty-block reveal">
-                <i class="fa-regular fa-heart"></i>
-                <h3>Novos conteúdos em breve</h3>
-                <p>Estamos preparando novos materiais para apoiar casais na jornada de restauração e crescimento.</p>
-                <a href="https://wa.me/5561998039461" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Falar com a equipe</a>
-            </div>
-            {% endfor %}
-        </div>
-
-        {% if pagination and pagination.pages > 1 %}
-        <nav class="pagination-nav" aria-label="Paginação do blog">
-            {% if pagination.has_prev %}
-            <a href="{{ url_for('main.blog_list', page=pagination.prev_num) }}" class="btn btn--ghost">Anterior</a>
-            {% endif %}
-            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
-            {% if pagination.has_next %}
-            <a href="{{ url_for('main.blog_list', page=pagination.next_num) }}" class="btn btn--ghost">Próxima</a>
-            {% endif %}
-        </nav>
-        {% endif %}
-    </div>
+<div class="public-container">
+<div class="list-heading">
+<h2>Para ler com calma</h2><span>Fé & vida a dois</span>
+</div>
+<div class="cards cards--blog">
+    {% for post in posts %}
+<article class="blog-card reveal">
+<div class="blog-card__art" aria-hidden="true">{{ icon(loop.cycle('leaf', 'heart', 'book')) }}<span>REFLEXÕES CPI</span>
+</div>
+<div class="blog-card__body"><time class="blog-card__meta" datetime="{{ post.date_posted.strftime('%Y-%m-%d') }}">{{ post.date_posted.strftime('%d.%m.%Y') }}</time>
+<h2><a href="{{ url_for('main.blog_post', slug=post.slug) }}">{{ post.title }}</a>
+</h2>
+<p>{{ post.summary }}</p><a href="{{ url_for('main.blog_post', slug=post.slug) }}" class="text-link" aria-label="Ler artigo: {{ post.title }}">Ler a reflexão {{ icon('arrow-up') }}</a>
+</div>
+</article>
+{% else %}
+<div class="empty-block reveal">{{ icon('book') }}<h3>Boas palavras estão a caminho.</h3>
+<p>Estamos preparando novas reflexões para acompanhar vocês. Enquanto isso, encontre conversas e inspiração no nosso canal.</p><a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Conheça o canal {{ icon('arrow-up') }}</a>
+</div>
+{% endfor %}
+  </div>
+  {% if pagination and pagination.pages > 1 %}
+<nav class="pagination-nav" aria-label="Paginação do blog">{% if pagination.has_prev %}<a href="{{ url_for('main.blog_list', page=pagination.prev_num) }}" class="btn btn--ghost" rel="prev">Anterior</a>{% endif %}<span>Página {{ pagination.page }} de {{ pagination.pages }}</span>{% if pagination.has_next %}<a href="{{ url_for('main.blog_list', page=pagination.next_num) }}" class="btn btn--ghost" rel="next">Próxima {{ icon('arrow') }}</a>{% endif %}</nav>
+{% endif %}
+</div>
 </section>
+{% include 'includes/contact_cta.html' %}
 {% endblock %}

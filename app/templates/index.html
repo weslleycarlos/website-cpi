@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "includes/icons.html" import icon %}
 
 {% block title %}Mentoria para Casais Cristãos | Restaure Comunicação e Confiança - CPI{% endblock %}
 
@@ -52,149 +53,178 @@
 {% block content %}
 <div class="landing-page">
 <section id="inicio" class="hero">
-    <div class="hero__media" aria-hidden="true"></div>
-    <div class="public-container hero__content reveal">
-        <span class="eyebrow">Mentoria Cristã para Casais</span>
-        <h1>Recomeçar o casamento é possível, com direção, fé e prática.</h1>
-        <p>Ajudamos casais a restaurar comunicação, confiança e propósito por meio de princípios bíblicos e ferramentas aplicáveis no dia a dia.</p>
-        <div class="hero__actions">
-            <a href="#mentoria" class="btn btn--primary">Começar Jornada</a>
-            <a href="https://www.youtube.com/watch?v=FTuPH9P42cA" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
-                <i class="fa-solid fa-play"></i> Conhecer o Método
-            </a>
-        </div>
-        <div class="hero__stats">
-            <div><strong class="counter" data-count="500">500</strong><span>Casais mentorados</span></div>
-            <div><strong class="counter" data-count="98">98</strong><span>% de satisfação</span></div>
-            <div><strong>100%</strong><span>Atendimento humanizado</span></div>
-        </div>
-    </div>
+<div class="public-container hero__layout">
+<div class="hero__content">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> Mentoria cristã para casais</span>
+<h1>O amor merece<br>um <em>novo capítulo.</em>
+</h1>
+<p>Reconectar, cuidar e recomeçar. Uma jornada a dois, guiada pela fé e por passos que transformam o dia a dia.</p>
+<div class="hero__actions">
+          <a href="https://wa.me/5561998039461" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Quero dar o primeiro passo {{ icon('arrow-up') }}</a>
+          <a href="#mentoria" class="text-link">Conheça a mentoria {{ icon('arrow') }}</a>
+</div>
+<div class="hero__note"><span class="note-icon">{{ icon('heart') }}</span>
+<p>Um espaço de escuta e acolhimento.<br><strong>Uma história de cada vez.</strong>
+</p>
+</div>
+</div>
+<div class="hero__visual">
+<div class="hero__image-wrap"><img class="hero__image" src="{{ url_for('static', filename='images/jornada-casal.webp') }}" srcset="{{ url_for('static', filename='images/jornada-casal-768.webp') }} 768w, {{ url_for('static', filename='images/jornada-casal.webp') }} 1536w" sizes="(max-width: 760px) 100vw, 50vw" alt="Imagem ilustrativa de um casal caminhando de mãos dadas em um jardim" width="1536" height="1024" fetchpriority="high">
+</div>
+        <span class="hero__image-label">FÉ. CONEXÃO. PROPÓSITO.</span>
+<div class="hero__caption">{{ icon('leaf') }}<span>O melhor caminho é<br><em>aquele que fazemos juntos.</em></span>
+</div>
+        <span class="hero__side-note" aria-hidden="true">CULTIVANDO A VIDA A DOIS</span>
+</div>
+</div>
+<div class="public-container hero__bottom"><span>Pequenos passos. Novos começos.</span><a href="#sobre">Descubra o CPI <span class="scroll-cue">↓</span></a>
+</div>
 </section>
-
-<section id="sobre" class="section">
-    <div class="public-container about-layout">
-        <div class="about-layout__image reveal">
-            <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal cristão sorrindo após mentoria para restaurar casamento" width="800" height="600" loading="lazy">
-        </div>
-        <div class="about-layout__content reveal">
-            <span class="eyebrow">Sobre o CPI</span>
-            <h2>Fortalecendo famílias, um casamento por vez</h2>
-            <p>O Casamento Plano Infalível nasceu para apoiar casais em momentos de crise ou estagnação, com um processo estruturado de restauração relacional e espiritual.</p>
-            <p>Nosso foco é gerar transformação real: menos desgaste, mais conexão, mais propósito em conjunto.</p>
-            <a href="{{ url_for('main.casamento_crise') }}" class="text-link">Seu casamento está em crise? Veja como podemos ajudar <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-    </div>
+<div class="values-strip">
+<div class="public-container"><span>{{ icon('book') }} Princípios bíblicos</span><span>{{ icon('chat') }} Escuta com acolhimento</span><span>{{ icon('heart') }} Conexão de verdade</span><span>{{ icon('leaf') }} Transformação no dia a dia</span>
+</div>
+</div>
+<section id="sobre" class="section about-section">
+<div class="public-container about-layout">
+<div class="about-visual reveal"><img src="{{ url_for('static', filename='images/tempo-juntos.webp') }}" alt="Casal contemplando o pôr do sol, sentado lado a lado" width="1000" height="563" loading="lazy" decoding="async">
+<div class="about-visual__note"><span>O NOSSO PROPÓSITO</span>
+<p>Fortalecer o que<br><em>une vocês.</em>
+</p>
+</div>
+</div>
+<div class="about-layout__content reveal" id="o-que-e-cpi">
+        <span class="eyebrow">Nossa essência</span>
+<h2>Um casamento se constrói.<br><em>Todos os dias.</em>
+</h2>
+<p>O Casamento Plano Infalível é uma mentoria cristã para casais que desejam reencontrar a conexão, restaurar a confiança e viver com propósito.</p>
+<p>Acreditamos na força dos recomeços. Por isso, unimos princípios bíblicos, escuta e ferramentas práticas para cuidar do que mais importa: a história de vocês.</p>
+<div class="about-principles"><span>{{ icon('check') }} Fé que orienta</span><span>{{ icon('check') }} Cuidado que aproxima</span>
+</div>
+        <a href="{{ url_for('main.casamento_crise') }}" class="text-link">Encontre apoio para o seu momento {{ icon('arrow') }}</a>
+</div>
+</div>
 </section>
-
 <section id="mentoria" class="section section--soft">
-    <div class="public-container">
-        <div class="section-head reveal">
-            <span class="eyebrow">Método CPI</span>
-            <h2>Uma jornada clara, acolhedora e prática</h2>
-        </div>
-
-        <div class="cards cards--3">
-            <article class="feature-card reveal">
-                <span class="feature-card__index">01</span>
-                <h3>Diagnóstico do Casal</h3>
-                <p>Mapeamos dores, padrões de conflito e necessidades emocionais de ambos para criar um plano personalizado.</p>
-            </article>
-
-            <article class="feature-card reveal feature-card--highlight">
-                <span class="feature-card__index">02</span>
-                <h3>Reconstrução de Base</h3>
-                <p>Trabalhamos comunicação, perdão, aliança e intimidade com ferramentas aplicáveis em casa, semana a semana.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <span class="feature-card__index">03</span>
-                <h3>Plano de Continuidade</h3>
-                <p>Vocês saem com direção prática para manter progresso, prevenir recaídas e avançar com segurança no relacionamento.</p>
-            </article>
-        </div>
+<div class="public-container">
+<div class="section-head section-head--split reveal">
+<div><span class="eyebrow">A jornada CPI</span>
+<h2>Um passo de cada vez.<br><em>Na mesma direção.</em>
+</h2>
+</div>
+<p>Cada casal tem uma história. Nossa mentoria ajuda vocês a escreverem os próximos capítulos com mais clareza e conexão.</p>
+</div>
+<div class="cards cards--3">
+<article class="feature-card reveal">
+<div class="feature-card__top"><span class="feature-icon">{{ icon('chat') }}</span><span class="feature-card__index">01</span>
+</div><span class="card-label">ESCUTAR E COMPREENDER</span>
+<h3>Olhar para a história</h3>
+<p>Um diagnóstico do casal para entender as dores, reconhecer padrões e acolher as necessidades de cada um.</p>
+<div class="feature-card__foot">O começo é a escuta {{ icon('arrow') }}</div>
+</article>
+<article class="feature-card feature-card--highlight reveal">
+<div class="feature-card__top"><span class="feature-icon">{{ icon('heart') }}</span><span class="feature-card__index">02</span>
+</div><span class="card-label">CUIDAR E RECONSTRUIR</span>
+<h3>Reconectar o que importa</h3>
+<p>Comunicação, perdão, aliança e intimidade. Uma reconstrução de base com ferramentas para praticar juntos.</p>
+<div class="feature-card__foot">Novas formas de se encontrar {{ icon('arrow') }}</div>
+</article>
+<article class="feature-card reveal">
+<div class="feature-card__top"><span class="feature-icon">{{ icon('leaf') }}</span><span class="feature-card__index">03</span>
+</div><span class="card-label">CULTIVAR E CONTINUAR</span>
+<h3>Seguir com propósito</h3>
+<p>Um plano de continuidade para cultivar os aprendizados, fortalecer a parceria e cuidar da vida a dois.</p>
+<div class="feature-card__foot">Um compromisso com o amanhã {{ icon('arrow') }}</div>
+</article>
+</div>
+<div class="section-bottom reveal">
+<p>O primeiro passo pode ser uma simples conversa.</p><a href="https://wa.me/5561998039461" class="text-link" target="_blank" rel="noopener noreferrer">Converse com a nossa equipe {{ icon('arrow-up') }}</a>
+</div>
+</div>
+</section>
+<section id="depoimentos" class="section stories-section">
+<div class="public-container">
+      {% if depoimentos %}
+<div class="section-head section-head--center reveal"><span class="eyebrow">Histórias que nos movem</span>
+<h2>Novos capítulos.<br><em>Conexões que florescem.</em>
+</h2>
+<p>As palavras de quem caminhou com o CPI.</p>
+</div>
+<div class="cards cards--testimonials">
+        {% for depoimento in depoimentos %}
+        <figure class="testimonial-card reveal"><span class="quote-mark" aria-hidden="true">“</span>
+<blockquote>
+<p>{{ depoimento.quote }}</p>
+</blockquote>
+<figcaption><span class="testimonial-avatar" aria-hidden="true">{{ icon('heart') }}</span><span><strong>{{ depoimento.author }}</strong><small>Uma história com o CPI</small></span>
+</figcaption>
+</figure>
+        {% endfor %}
+      </div>
+{% else %}
+<div class="belief-block reveal"><span class="eyebrow">O que nos move</span><span class="belief-symbol" aria-hidden="true">{{ icon('heart') }}</span>
+<h2>Não é sobre uma história perfeita.<br>É sobre escolher <em>cuidar dela.</em>
+</h2>
+<p>Com fé, disposição e apoio, cada conversa pode abrir espaço para um novo começo.</p><a href="https://wa.me/5561998039461" class="text-link" target="_blank" rel="noopener noreferrer">Conte a sua história para nós {{ icon('arrow-up') }}</a>
+</div>
+{% endif %}
     </div>
 </section>
-
-<section id="depoimentos" class="section">
-    <div class="public-container">
-        <div class="section-head reveal">
-            <span class="eyebrow">Depoimentos</span>
-            <h2>Histórias de restauração</h2>
-        </div>
-
-        <div class="cards cards--testimonials">
-            {% for depoimento in depoimentos %}
-            <article class="testimonial-card reveal">
-                <i class="fa-solid fa-quote-left"></i>
-                <p>{{ depoimento.quote }}</p>
-                <strong>{{ depoimento.author }}</strong>
-            </article>
-            {% else %}
-            <article class="testimonial-card reveal">
-                <i class="fa-solid fa-quote-left"></i>
-                <p>O CPI nos ensinou a resolver conflitos sem nos destruir no processo. Voltamos a caminhar juntos.</p>
-                <strong>Casal mentorado</strong>
-            </article>
-            {% endfor %}
-        </div>
-    </div>
+<section id="conteudos" class="section resources-section">
+<div class="public-container">
+<div class="section-head section-head--split reveal">
+<div><span class="eyebrow">Para levar para a vida</span>
+<h2>Inspiração para<br><em>caminhar juntos.</em>
+</h2>
+</div>
+<p>Continue essa jornada com reflexões, conversas e encontros que aproximam.</p>
+</div>
+<div class="resources-grid">
+        <a class="resource-card resource-card--blog reveal" href="{{ url_for('main.blog_list') }}"><span class="resource-card__top">PARA LER {{ icon('arrow-up') }}</span>{{ icon('book', 'resource-card__icon') }}<div>
+<h3>Palavras que aproximam</h3>
+<p>Reflexões sobre fé, diálogo e a vida a dois.</p><span class="text-link">Explore o blog {{ icon('arrow') }}</span>
+</div></a>
+        <a class="resource-card resource-card--video reveal" href="https://www.youtube.com/watch?v=FTuPH9P42cA" target="_blank" rel="noopener noreferrer"><span class="resource-card__top">PARA ASSISTIR {{ icon('arrow-up') }}</span>{{ icon('play', 'resource-card__icon') }}<div>
+<h3>Uma boa conversa</h3>
+<p>Conheça a proposta e o cuidado do CPI.</p><span class="text-link">Assista no YouTube {{ icon('arrow') }}</span>
+</div></a>
+        <a class="resource-card resource-card--events reveal" href="{{ url_for('main.eventos_public') }}"><span class="resource-card__top">PARA VIVER {{ icon('arrow-up') }}</span>{{ icon('calendar', 'resource-card__icon') }}<div>
+<h3>Tempo de se encontrar</h3>
+<p>Encontros para aprender e crescer juntos.</p><span class="text-link">Veja a agenda {{ icon('arrow') }}</span>
+</div></a>
+</div>
+</div>
 </section>
-
-<section id="o-que-e-cpi" class="section section--soft">
-    <div class="public-container reveal">
-        <span class="eyebrow">Resposta direta</span>
-        <h2>O que é o Casamento Plano Infalível?</h2>
-        <p><strong>O Casamento Plano Infalível (CPI) é uma mentoria cristã para casais</strong> que ajuda a restaurar comunicação, confiança e propósito através de princípios bíblicos e ferramentas práticas para o dia a dia. O método tem 3 etapas: Diagnóstico do Casal, Reconstrução de Base e Plano de Continuidade.</p>
-    </div>
-</section>
-
 <section id="faq" class="section">
-    <div class="public-container">
-        <div class="section-head reveal">
-            <span class="eyebrow">Dúvidas frequentes</span>
-            <h2>Perguntas que todo casal faz</h2>
-        </div>
-        <div class="faq-list reveal">
-            <details>
-                <summary>O que é o Casamento Plano Infalível (CPI)?</summary>
-                <p>É uma mentoria cristã para casais com 3 etapas: Diagnóstico, Reconstrução de Base (comunicação, perdão, aliança, intimidade) e Plano de Continuidade.</p>
-            </details>
-            <details>
-                <summary>A mentoria serve para casamento em crise?</summary>
-                <p>Sim. Atendemos casais com conflitos frequentes, distanciamento emocional ou pensamento de separação, com direção prática e acompanhamento humanizado.</p>
-            </details>
-            <details>
-                <summary>Como funciona a primeira conversa?</summary>
-                <p>Você chama no WhatsApp (+55 61 99803-9461), conta sua situação e agenda uma conversa inicial para entender seu momento e definir o próximo passo.</p>
-            </details>
-            <details>
-                <summary>É terapia de casal?</summary>
-                <p>Não. É mentoria com base bíblica e prática diária. Casos clínicos devem buscar também acompanhamento profissional.</p>
-            </details>
-        </div>
-    </div>
+<div class="public-container faq-layout">
+<div class="section-head reveal"><span class="eyebrow">Com calma, sem dúvidas</span>
+<h2>Antes de dar<br><em>o primeiro passo.</em>
+</h2>
+<p>Reunimos algumas respostas para vocês conhecerem melhor a mentoria.</p><a href="https://wa.me/5561998039461" class="text-link" target="_blank" rel="noopener noreferrer">Fale com a equipe {{ icon('arrow-up') }}</a>
+</div>
+<div class="faq-list reveal">
+<details>
+<summary>O que é o Casamento Plano Infalível (CPI)?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>É uma mentoria cristã para casais com 3 etapas: Diagnóstico, Reconstrução de Base (comunicação, perdão, aliança, intimidade) e Plano de Continuidade.</p>
+</details>
+<details>
+<summary>A mentoria serve para casamento em crise?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Sim. Atendemos casais com conflitos frequentes, distanciamento emocional ou pensamento de separação, com direção prática e acompanhamento humanizado.</p>
+</details>
+<details>
+<summary>Como funciona a primeira conversa?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Você chama no WhatsApp (+55 61 99803-9461), conta sua situação e agenda uma conversa inicial para entender seu momento e definir o próximo passo.</p>
+</details>
+<details>
+<summary>É terapia de casal?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Não. É mentoria com base bíblica e prática diária. Casos clínicos devem buscar também acompanhamento profissional.</p>
+</details>
+</div>
+</div>
 </section>
-
-<section id="recursos" class="section section--dark">
-    <div class="public-container reveal">
-        <div class="cta-block">
-            <h2>Prontos para dar o próximo passo?</h2>
-            <p>Fale com a equipe CPI e agende uma conversa inicial. O primeiro movimento pode mudar toda a história do seu casamento.</p>
-            <div class="cta-block__actions">
-                <a href="https://wa.me/5561998039461" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
-                    <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp
-                </a>
-                <a href="{{ url_for('main.blog_list') }}" class="btn btn--ghost-light">Ver conteúdos gratuitos</a>
-            </div>
-
-            <div class="social-quick-links">
-                <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@cpi_plano" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="mailto:contato@casamentoplanoinfalivel.com.br" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
+  {% include 'includes/contact_cta.html' %}
 </div>
 {% endblock %}

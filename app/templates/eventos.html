@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "includes/icons.html" import icon %}
 
 {% block title %}Eventos para Casais | Encontros Presenciais e Online - CPI{% endblock %}
 
@@ -33,59 +34,45 @@
 {% endblock %}
 
 {% block content %}
+
 <section class="page-hero page-hero--events">
-    <div class="public-container reveal">
-        <span class="eyebrow">Agenda CPI</span>
-        <h1>Encontros para transformar relacionamentos</h1>
-        <p>Participe de eventos presenciais e online voltados para casais que desejam fortalecer sua aliança.</p>
-    </div>
+<div class="public-container">
+<nav class="breadcrumb" aria-label="Localização"><a href="{{ url_for('main.home') }}">Início</a><span aria-hidden="true">/</span><span aria-current="page">Eventos</span>
+</nav>
+<div class="page-hero__bottom">
+<div><span class="eyebrow">Encontros CPI</span>
+<h1>Um tempo para vocês.<br><em>Um encontro com propósito.</em>
+</h1>
+<p>Experiências presenciais e online para aprender, compartilhar e fortalecer o que une vocês.</p>
+</div><span class="page-hero__symbol" aria-hidden="true">{{ icon('calendar') }}</span>
+</div>
+</div>
 </section>
-
 <section id="eventos" class="section">
-    <div class="public-container">
-        <div class="cards cards--events">
-            {% for evento in eventos %}
-            <article class="event-card reveal">
-                <div class="event-card__date">
-                    <span>{{ evento.event_date.strftime('%d') }}</span>
-                    <small>{{ evento.event_date.strftime('%b').upper() }}</small>
-                </div>
-                <div class="event-card__content">
-                    <h2>{{ evento.title }}</h2>
-                    <p class="event-card__meta">
-                        <i class="fa-regular fa-clock"></i> {{ evento.event_date.strftime('%d/%m/%Y às %H:%M') }}
-                        <span>•</span>
-                        <i class="fa-solid fa-location-dot"></i> {{ evento.location }}
-                    </p>
-                    <p>{{ evento.description }}</p>
-                    {% if evento.registration_link %}
-                    <a href="{{ evento.registration_link }}" target="_blank" rel="noopener noreferrer nofollow" class="btn btn--primary">
-                        Garantir minha vaga <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
-                    {% endif %}
-                </div>
-            </article>
-            {% else %}
-            <div class="empty-block reveal">
-                <i class="fa-regular fa-calendar-check"></i>
-                <h3>Sem eventos ativos no momento</h3>
-                <p>Siga nossas redes e acompanhe novidades para não perder as próximas turmas e encontros.</p>
-                <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Acompanhar no Instagram</a>
-            </div>
-            {% endfor %}
-        </div>
-
-        {% if pagination and pagination.pages > 1 %}
-        <nav class="pagination-nav" aria-label="Paginação de eventos públicos">
-            {% if pagination.has_prev %}
-            <a href="{{ url_for('main.eventos_public', page=pagination.prev_num) }}" class="btn btn--ghost">Anterior</a>
-            {% endif %}
-            <span>Página {{ pagination.page }} de {{ pagination.pages }}</span>
-            {% if pagination.has_next %}
-            <a href="{{ url_for('main.eventos_public', page=pagination.next_num) }}" class="btn btn--ghost">Próxima</a>
-            {% endif %}
-        </nav>
-        {% endif %}
-    </div>
+<div class="public-container">
+<div class="list-heading">
+<h2>Na nossa agenda</h2><span>Vamos nos encontrar</span>
+</div>
+<div class="cards cards--events">
+    {% set months = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'] %}
+    {% for evento in eventos %}
+<article class="event-card reveal"><time class="event-card__date" datetime="{{ evento.event_date.isoformat() }}"><span>{{ evento.event_date.strftime('%d') }}</span><small>{{ months[evento.event_date.month - 1] }} {{ evento.event_date.year }}</small></time>
+<div class="event-card__content">
+<h2>{{ evento.title }}</h2>
+<div class="event-card__meta"><span>{{ icon('clock') }} {{ evento.event_date.strftime('%d/%m/%Y às %H:%M') }}</span><span>{{ icon('pin') }} {{ evento.location }}</span>
+</div>
+<p class="event-card__description">{{ evento.description }}</p>{% if evento.registration_link %}<a href="{{ evento.registration_link }}" target="_blank" rel="noopener noreferrer nofollow" class="btn btn--primary">Quero participar {{ icon('arrow-up') }}</a>{% endif %}</div>
+</article>
+{% else %}
+<div class="empty-block reveal">{{ icon('calendar') }}<h3>Novos encontros, em breve.</h3>
+<p>Nossa próxima oportunidade de estar juntos está sendo preparada. Acompanhe o Instagram para saber das novidades.</p><a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Acompanhe o CPI {{ icon('instagram') }}</a>
+</div>
+{% endfor %}
+  </div>
+  {% if pagination and pagination.pages > 1 %}
+<nav class="pagination-nav" aria-label="Paginação de eventos">{% if pagination.has_prev %}<a href="{{ url_for('main.eventos_public', page=pagination.prev_num) }}" class="btn btn--ghost" rel="prev">Anterior</a>{% endif %}<span>Página {{ pagination.page }} de {{ pagination.pages }}</span>{% if pagination.has_next %}<a href="{{ url_for('main.eventos_public', page=pagination.next_num) }}" class="btn btn--ghost" rel="next">Próxima {{ icon('arrow') }}</a>{% endif %}</nav>
+{% endif %}
+</div>
 </section>
+{% include 'includes/contact_cta.html' %}
 {% endblock %}
