@@ -1,6 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Eventos - CPI{% endblock %}
+{% block title %}Eventos para Casais | Encontros Presenciais e Online - CPI{% endblock %}
+
+{% block meta_description %}Participe de eventos, encontros e mentorias do CPI para casais: comunicação saudável, reconciliação e fortalecimento da aliança. Vagas presenciais e online.{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Eventos CPI para casais",
+  "itemListElement": [
+    {% for evento in eventos %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "item": {
+        "@type": "Event",
+        "name": {{ evento.title|tojson }},
+        "description": {{ evento.description|striptags|truncate(200)|tojson }},
+        "startDate": "{{ evento.event_date.isoformat() }}",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": { "@type": "Place", "name": {{ evento.location|tojson }} },
+        "organizer": { "@id": "https://www.casamentoplanoinfalivel.com.br/#organizacao" }
+      }
+    }{{ "," if not loop.last }}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="page-hero page-hero--events">

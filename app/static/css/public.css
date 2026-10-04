@@ -827,3 +827,58 @@ p {
     transition: none;
   }
 }
+
+/* SEO/AEO: blocos citáveis, FAQ e breadcrumb */
+.key-takeaways {
+  background: #fdf6ec;
+  border-left: 4px solid #b98a2f;
+  padding: 1rem 1.2rem;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.breadcrumb-nav {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.breadcrumb-nav a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.faq-list {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 800px;
+}
+
+.faq-list details {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  background: #fff;
+}
+
+.faq-list summary {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq-list details p {
+  margin: 0.6rem 0 0;
+}
+
+.steps-list {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  padding-left: 1.2rem;
+}
+
+.site-footer__tagline {
+  font-size: 0.9rem;
+  max-width: 520px;
+}

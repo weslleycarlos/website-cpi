@@ -1,22 +1,69 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.title }} - CPI Blog{% endblock %}
+{% block title %}{{ post.title }} | Blog CPI - Casamento Plano Infalível{% endblock %}
 
 {% block meta_description %}{{ post.summary|striptags|truncate(160) }}{% endblock %}
 
 {% block meta_keywords %}casamento cristão, mentoria para casais, {{ post.title|striptags|lower }}{% endblock %}
 
-{% block og_title %}{{ post.title }} - CPI Blog{% endblock %}
+{% block og_title %}{{ post.title }} | Blog CPI{% endblock %}
 
 {% block og_description %}{{ post.summary|striptags|truncate(160) }}{% endblock %}
 
-{% block twitter_title %}{{ post.title }} - CPI Blog{% endblock %}
+{% block og_type %}article{% endblock %}
+
+{% block article_meta %}
+<meta property="article:published_time" content="{{ post.date_posted.isoformat() }}">
+<meta property="article:author" content="{{ post.author.username }}">
+<meta property="article:section" content="Casamento e Família">
+{% endblock %}
+
+{% block twitter_title %}{{ post.title }} | Blog CPI{% endblock %}
 
 {% block twitter_description %}{{ post.summary|striptags|truncate(160) }}{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ post.title|tojson }},
+  "description": {{ post.summary|striptags|truncate(160)|tojson }},
+  "datePublished": "{{ post.date_posted.isoformat() }}",
+  "dateModified": "{{ post.date_posted.isoformat() }}",
+  "inLanguage": "pt-BR",
+  "author": {
+    "@type": "Person",
+    "name": {{ post.author.username|tojson }}
+  },
+  "publisher": { "@id": "https://www.casamentoplanoinfalivel.com.br/#organizacao" },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.casamentoplanoinfalivel.com.br/blog/{{ post.slug }}"
+  }
+}
+</script>
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.casamentoplanoinfalivel.com.br/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.casamentoplanoinfalivel.com.br/blog" },
+    { "@type": "ListItem", "position": 3, "name": {{ post.title|tojson }}, "item": "https://www.casamentoplanoinfalivel.com.br/blog/{{ post.slug }}" }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="page-hero page-hero--post">
     <div class="public-container reveal">
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <a href="{{ url_for('main.home') }}">Início</a> /
+            <a href="{{ url_for('main.blog_list') }}">Blog</a> /
+            <span aria-current="page">{{ post.title|truncate(60) }}</span>
+        </nav>
         <span class="eyebrow">Blog CPI</span>
         <h1>{{ post.title }}</h1>
         <p>
@@ -29,8 +76,11 @@
 
 <section id="post-detail" class="section">
     <div class="public-container">
-        <article class="article-shell reveal">
-            <div class="post-body article-content">
+        <article class="article-shell reveal" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="key-takeaways" role="note" aria-label="Resumo rápido">
+                <strong>Resumo em 30 segundos:</strong> {{ post.summary }}
+            </div>
+            <div class="post-body article-content" itemprop="articleBody">
                 {{ post.content | safe }}
             </div>
 

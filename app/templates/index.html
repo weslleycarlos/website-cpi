@@ -1,5 +1,54 @@
 {% extends "base.html" %}
 
+{% block title %}Mentoria para Casais Cristãos | Restaure Comunicação e Confiança - CPI{% endblock %}
+
+{% block meta_description %}Mentoria cristã para casais em crise ou estagnação: restaure comunicação, confiança e propósito com princípios bíblicos. Diagnóstico + plano prático. Fale no WhatsApp.{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mentoria para Casais Cristãos - CPI",
+  "url": "https://www.casamentoplanoinfalivel.com.br/",
+  "inLanguage": "pt-BR",
+  "isPartOf": { "@id": "https://www.casamentoplanoinfalivel.com.br/#website" },
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".hero__content h1", ".hero__content p", "#o-que-e-cpi p"]
+  }
+}
+</script>
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "O que é o Casamento Plano Infalível (CPI)?",
+      "acceptedAnswer": { "@type": "Answer", "text": "O CPI é uma mentoria cristã para casais que ajuda a restaurar comunicação, confiança e propósito através de princípios bíblicos e ferramentas práticas, em 3 etapas: Diagnóstico, Reconstrução de Base e Plano de Continuidade." }
+    },
+    {
+      "@type": "Question",
+      "name": "A mentoria serve para casamento em crise?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. O CPI nasceu para casais em crise ou estagnação: conflitos frequentes, distanciamento emocional ou pensamento de separação. O processo oferece direção prática e acompanhamento humanizado." }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funciona a primeira conversa?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Você chama no WhatsApp (+55 61 99803-9461), conta sua situação e agenda uma conversa inicial com a equipe CPI para entender seu momento e indicar o próximo passo." }
+    },
+    {
+      "@type": "Question",
+      "name": "É terapia de casal?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. É uma mentoria com base bíblica e ferramentas práticas para o dia a dia, focada em comunicação, perdão, aliança e intimidade. Casos clínicos devem buscar também acompanhamento profissional." }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="landing-page">
 <section id="inicio" class="hero">
@@ -25,7 +74,7 @@
 <section id="sobre" class="section">
     <div class="public-container about-layout">
         <div class="about-layout__image reveal">
-            <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal sorrindo durante mentoria" loading="lazy">
+            <img src="{{ url_for('static', filename='images/casal-feliz.jpg') }}" alt="Casal cristão sorrindo após mentoria para restaurar casamento" width="800" height="600" loading="lazy">
         </div>
         <div class="about-layout__content reveal">
             <span class="eyebrow">Sobre o CPI</span>
@@ -91,6 +140,41 @@
     </div>
 </section>
 
+<section id="o-que-e-cpi" class="section section--soft">
+    <div class="public-container reveal">
+        <span class="eyebrow">Resposta direta</span>
+        <h2>O que é o Casamento Plano Infalível?</h2>
+        <p><strong>O Casamento Plano Infalível (CPI) é uma mentoria cristã para casais</strong> que ajuda a restaurar comunicação, confiança e propósito através de princípios bíblicos e ferramentas práticas para o dia a dia. O método tem 3 etapas: Diagnóstico do Casal, Reconstrução de Base e Plano de Continuidade.</p>
+    </div>
+</section>
+
+<section id="faq" class="section">
+    <div class="public-container">
+        <div class="section-head reveal">
+            <span class="eyebrow">Dúvidas frequentes</span>
+            <h2>Perguntas que todo casal faz</h2>
+        </div>
+        <div class="faq-list reveal">
+            <details>
+                <summary>O que é o Casamento Plano Infalível (CPI)?</summary>
+                <p>É uma mentoria cristã para casais com 3 etapas: Diagnóstico, Reconstrução de Base (comunicação, perdão, aliança, intimidade) e Plano de Continuidade.</p>
+            </details>
+            <details>
+                <summary>A mentoria serve para casamento em crise?</summary>
+                <p>Sim. Atendemos casais com conflitos frequentes, distanciamento emocional ou pensamento de separação, com direção prática e acompanhamento humanizado.</p>
+            </details>
+            <details>
+                <summary>Como funciona a primeira conversa?</summary>
+                <p>Você chama no WhatsApp (+55 61 99803-9461), conta sua situação e agenda uma conversa inicial para entender seu momento e definir o próximo passo.</p>
+            </details>
+            <details>
+                <summary>É terapia de casal?</summary>
+                <p>Não. É mentoria com base bíblica e prática diária. Casos clínicos devem buscar também acompanhamento profissional.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
 <section id="recursos" class="section section--dark">
     <div class="public-container reveal">
         <div class="cta-block">
@@ -104,7 +188,7 @@
             </div>
 
             <div class="social-quick-links">
-                <a href="https://instagram.com/casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.tiktok.com/@cpi_plano" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 <a href="mailto:contato@casamentoplanoinfalivel.com.br" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
