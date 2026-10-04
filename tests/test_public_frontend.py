@@ -60,6 +60,9 @@ class PublicFrontendTests(unittest.TestCase):
         }):
             self.app = create_app()
         self.app.config['TESTING'] = True
+        # Tests own their schema, independent of development startup behavior.
+        with self.app.app_context():
+            db.create_all()
         self.client = self.app.test_client()
 
     def tearDown(self):
