@@ -1,18 +1,95 @@
 {% extends "base.html" %}
 
-{% block title %}Casamento em Crise? Encontre Solução e Reconciliação - CPI{% endblock %}
+{% block title %}Casamento em Crise? Como Restaurar e Reconciliar | CPI{% endblock %}
 
-{% block meta_description %}Seu casamento está em crise? Descubra como a mentoria do CPI pode ajudar casais a encontrar reconciliação, cura e reconstruir o relacionamento com base em princípios bíblicos.{% endblock %}
+{% block meta_description %}Casamento em crise? Veja 3 sinais de alerta, como funciona a reconciliação e quando buscar ajuda. Mentoria cristã CPI com comunicação, perdão e plano de reconexão.{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Casamento em Crise - CPI",
+  "url": "https://www.casamentoplanoinfalivel.com.br/casamento-em-crise",
+  "inLanguage": "pt-BR",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".page-hero--crisis h1", ".page-hero--crisis p", "#resposta-direta p"]
+  }
+}
+</script>
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Meu casamento tem jeito?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Na maioria dos casos, sim — se houver disposição dos dois e direção certa. Conflitos frequentes e distanciamento são sinais de que o relacionamento precisa de intervenção, não necessariamente de separação. Uma conversa com mentores pode esclarecer seu caso." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo leva para restaurar um casamento em crise?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Depende da gravidade e do comprometimento. O CPI trabalha em 3 fases: Diagnóstico do Casal, Reconstrução de Base (comunicação, perdão, aliança) e Plano de Continuidade para manter o progresso e prevenir recaídas." }
+    },
+    {
+      "@type": "Question",
+      "name": "O que fazer quando só um quer salvar o casamento?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Comece por você: mude padrões de comunicação, busque perdão e direção. Muitas restaurações começam com um cônjuge dando o primeiro passo e o outro se abrindo ao ver mudança consistente." }
+    },
+    {
+      "@type": "Question",
+      "name": "Como falar sem brigar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use escuta sem interromper, fale em primeira pessoa ('eu me sinto...'), evite ataques e escolha hora calma para conversar. O CPI ensina técnicas práticas de diálogo semana a semana." }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funciona a mentoria CPI para crise?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Você chama no WhatsApp (+55 61 99803-9461), faz um diagnóstico do casal, recebe um plano personalizado e é acompanhado na reconstrução de comunicação, perdão e reconexão." }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Como buscar ajuda para casamento em crise",
+  "inLanguage": "pt-BR",
+  "step": [
+    { "@type": "HowToStep", "name": "Reconheça os sinais", "text": "Conflitos frequentes, distanciamento emocional ou pensamento de separação." },
+    { "@type": "HowToStep", "name": "Fale com a equipe CPI", "text": "Chame no WhatsApp e conte sua situação." },
+    { "@type": "HowToStep", "name": "Faça o diagnóstico", "text": "Mapeie dores e padrões de conflito." },
+    { "@type": "HowToStep", "name": "Siga o plano de reconexão", "text": "Comunicação, perdão e rotina de aliança." }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="page-hero page-hero--crisis">
     <div class="public-container reveal">
         <span class="eyebrow">Casamento em Crise</span>
-        <h1>Vocês não precisam enfrentar isso sozinhos</h1>
-        <p>Quando a comunicação quebra, a distância aumenta e o desgaste domina, ainda existe caminho de restauração com direção certa.</p>
+        <h1>Casamento em crise tem jeito? Sim, com direção certa</h1>
+        <p>Quando a comunicação quebra, a distância aumenta e o desgaste domina, ainda existe caminho de restauração. Veja os sinais, o passo a passo e quando buscar ajuda.</p>
         <a href="https://api.whatsapp.com/send?phone=5561998039461" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
             <i class="fa-brands fa-whatsapp"></i> Falar com o CPI agora
         </a>
+    </div>
+</section>
+
+<section id="resposta-direta" class="section section--soft">
+    <div class="public-container reveal">
+        <span class="eyebrow">Resposta direta</span>
+        <h2>O que fazer quando o casamento está em crise?</h2>
+        <p><strong>Não decida a separação no pico da dor.</strong> Primeiro reconheça os sinais (brigas constantes, frieza, vontade de desistir), interrompa o ciclo de ataques, busque uma conversa guiada e siga um plano de reconstrução com comunicação, perdão e reconexão diária.</p>
+        <ol class="steps-list">
+            <li><strong>1. Pause o ciclo:</strong> escolham hora calma para conversar, sem gritos nem ultimatos.</li>
+            <li><strong>2. Diagnóstico:</strong> mapeiem dores, padrões de briga e necessidades de cada um.</li>
+            <li><strong>3. Reconstrução:</strong> pratiquem escuta, perdão e rotina de aliança semana a semana.</li>
+            <li><strong>4. Continuidade:</strong> mantenham rituais de conexão para prevenir recaídas.</li>
+        </ol>
     </div>
 </section>
 
@@ -48,6 +125,37 @@
             <h3>Não espere a crise aumentar</h3>
             <p>Uma conversa no momento certo pode preservar sua família.</p>
             <a href="https://api.whatsapp.com/send?phone=5561998039461" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Quero começar agora</a>
+        </div>
+    </div>
+</section>
+
+<section id="faq-crise" class="section">
+    <div class="public-container">
+        <div class="section-head reveal">
+            <span class="eyebrow">Perguntas frequentes</span>
+            <h2>Dúvidas de quem está em crise</h2>
+        </div>
+        <div class="faq-list reveal">
+            <details>
+                <summary>Meu casamento tem jeito?</summary>
+                <p>Na maioria dos casos, sim — se houver disposição e direção certa. Brigas e frieza são sinais de que o relacionamento precisa de intervenção, não necessariamente de separação.</p>
+            </details>
+            <details>
+                <summary>Quanto tempo leva para restaurar?</summary>
+                <p>Depende da gravidade e do comprometimento. O CPI trabalha em 3 fases: Diagnóstico, Reconstrução de Base e Plano de Continuidade.</p>
+            </details>
+            <details>
+                <summary>E se só um quer salvar?</summary>
+                <p>Comece por você. Mude sua comunicação, busque perdão e direção. Muitas restaurações começam com um dando o primeiro passo.</p>
+            </details>
+            <details>
+                <summary>Como falar sem brigar?</summary>
+                <p>Escute sem interromper, fale em primeira pessoa (“eu me sinto...”), evite ataques e escolha hora calma. O CPI treina isso semana a semana.</p>
+            </details>
+            <details>
+                <summary>Como funciona a mentoria CPI?</summary>
+                <p>Você chama no WhatsApp, faz o diagnóstico do casal, recebe um plano personalizado e é acompanhado na reconstrução.</p>
+            </details>
         </div>
     </div>
 </section>

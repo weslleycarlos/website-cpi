@@ -11,7 +11,9 @@
     content="{% block meta_keywords %}casamento cristão, mentoria para casais, reconciliação conjugal, comunicação no casamento, relacionamento conjugal, terapia para casais, casamento na igreja, crise conjugal, restauração de casamento{% endblock %}">
   <meta name="author" content="Casamento Plano Infalível">
   <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
-  <link rel="canonical" href="https://www.casamentoplanoinfalivel.com.br{{ request.path }}">
+  <meta name="theme-color" content="#7a1f2b">
+  <link rel="canonical" href="{% block canonical %}https://www.casamentoplanoinfalivel.com.br{{ request.path }}{% endblock %}">
+  {% block pagination_links %}{% endblock %}
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo.png') }}">
 
@@ -20,19 +22,24 @@
     content="{% block og_title %}Casamento Plano Infalível - Mentoria para Casais Cristãos{% endblock %}">
   <meta property="og:description"
     content="{% block og_description %}Fortalecendo casamentos através de princípios bíblicos e ferramentas práticas para comunicação e reconciliação.{% endblock %}">
-  <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}">
+  <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/og-image.jpg', _external=True) }}{% endblock %}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Casamento Plano Infalível - Mentoria para Casais Cristãos">
   <meta property="og:url" content="https://www.casamentoplanoinfalivel.com.br{{ request.path }}">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Casamento Plano Infalível">
+  {% block article_meta %}{% endblock %}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@cpi_casamento">
   <meta name="twitter:title" content="{% block twitter_title %}Casamento Plano Infalível - Mentoria para Casais{% endblock %}">
   <meta name="twitter:description" content="{% block twitter_description %}Fortalecendo casamentos através de princípios bíblicos.{% endblock %}">
   <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}">
+  <meta name="twitter:image:alt" content="Casamento Plano Infalível - Mentoria para Casais Cristãos">
+  {% block extra_head %}{% endblock %}
   <title>{% block title %}CPI - Casamento Plano Infalível{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -49,10 +56,13 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://www.casamentoplanoinfalivel.com.br/#organizacao",
       "name": "Casamento Plano Infalível",
+      "alternateName": "CPI",
       "url": "https://www.casamentoplanoinfalivel.com.br",
       "logo": "https://www.casamentoplanoinfalivel.com.br/static/images/logo.png",
-      "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos",
+      "description": "Mentoria cristã para casais focada em fortalecer relacionamentos conjugais através de princípios bíblicos. Atuamos com comunicação saudável, reconciliação, perdão e restauração de casamentos em crise.",
+      "knowsAbout": ["Mentoria para casais", "Casamento cristão", "Reconciliação conjugal", "Comunicação no casamento", "Restauração de casamento em crise"],
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "BR"
@@ -66,10 +76,23 @@
       },
       "sameAs": [
         "https://www.instagram.com/cpi_casamentoplanoinfalivel",
-        "https://www.youtube.com/@C.P.I.casamento"
+        "https://www.youtube.com/@C.P.I.casamento",
+        "https://www.tiktok.com/@cpi_plano"
       ]
     }
     </script>
+  <script type="application/ld+json" nonce="{{ g.csp_nonce }}">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.casamentoplanoinfalivel.com.br/#website",
+      "url": "https://www.casamentoplanoinfalivel.com.br",
+      "name": "Casamento Plano Infalível",
+      "inLanguage": "pt-BR",
+      "publisher": { "@id": "https://www.casamentoplanoinfalivel.com.br/#organizacao" }
+    }
+  </script>
+  {% block structured_data %}{% endblock %}
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QWHHDMTCS"></script>
   <script nonce="{{ g.csp_nonce }}">
@@ -88,7 +111,7 @@
   <header class="site-header" id="site-header">
     <div class="site-header__container">
       <a href="{{ url_for('main.home') }}" class="site-brand" aria-label="Página inicial do CPI">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Casamento Plano Infalível - Mentoria cristã para casais" width="48" height="48">
       </a>
 
       <nav class="site-nav" aria-label="Navegação principal">
@@ -130,10 +153,11 @@
 
   <footer class="site-footer">
     <div class="site-footer__container">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo CPI">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Casamento Plano Infalível - Mentoria cristã para casais" width="120" height="120" loading="lazy">
       <p>&copy; {{ current_year }} Casamento Plano Infalível. Todos os direitos reservados.</p>
+      <p class="site-footer__tagline">Mentoria cristã para casais: comunicação, reconciliação e restauração de casamentos em crise.</p>
       <div class="site-footer__links">
-        <a href="https://instagram.com/casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.instagram.com/cpi_casamentoplanoinfalivel" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://www.youtube.com/@C.P.I.casamento" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://wa.me/5561998039461" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
