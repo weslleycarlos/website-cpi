@@ -5,15 +5,17 @@
 {% block meta_robots %}noindex, nofollow{% endblock %}
 
 {% block content %}
-<section class="page-section">
-    <div class="container">
-        <div class="login-form">
-            <h2>Login Admin</h2>
+<section class="section">
+    <div class="public-container">
+        <div class="login-card">
+            <span class="eyebrow">Área administrativa</span>
+            <h1>Bem-vindo de volta.</h1>
+            <p>Acesse sua conta para cuidar dos conteúdos do CPI.</p>
             
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                        <div class="login-alert" role="alert">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
@@ -23,15 +25,15 @@
                 
                 <div class="form-group">
                     <label for="username">Usuário:</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" autocomplete="username" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
                 </div>
                 
-                <button type="submit" class="cta-button">Entrar</button>
+                <button type="submit" class="btn btn--primary">Entrar</button>
             </form>
         </div>
     </div>

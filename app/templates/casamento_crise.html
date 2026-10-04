@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "includes/icons.html" import icon %}
 
 {% block title %}Casamento em Crise? Como Restaurar e Reconciliar | CPI{% endblock %}
 
@@ -68,95 +69,122 @@
 {% endblock %}
 
 {% block content %}
+
 <section class="page-hero page-hero--crisis">
-    <div class="public-container reveal">
-        <span class="eyebrow">Casamento em Crise</span>
-        <h1>Casamento em crise tem jeito? Sim, com direção certa</h1>
-        <p>Quando a comunicação quebra, a distância aumenta e o desgaste domina, ainda existe caminho de restauração. Veja os sinais, o passo a passo e quando buscar ajuda.</p>
-        <a href="https://api.whatsapp.com/send?phone=5561998039461" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-whatsapp"></i> Falar com o CPI agora
-        </a>
-    </div>
+<div class="public-container">
+<nav class="breadcrumb" aria-label="Localização"><a href="{{ url_for('main.home') }}">Início</a><span aria-hidden="true">/</span><span aria-current="page">Casamento em crise</span>
+</nav>
+<div class="crisis-layout">
+<div><span class="eyebrow">Há espaço para um recomeço</span>
+<h1>Vocês não precisam<br><em>caminhar sozinhos.</em>
+</h1>
+<p>Quando conversar parece difícil e a distância cresce, encontrar apoio pode ser o primeiro passo. Estamos aqui para ouvir a história de vocês.</p><a href="https://wa.me/5561998039461" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Quero conversar com o CPI {{ icon('whatsapp') }}</a>
+</div><img class="crisis-image" src="{{ url_for('static', filename='images/tempo-juntos.webp') }}" alt="Casal sentado lado a lado, contemplando o pôr do sol" width="1000" height="563" fetchpriority="high">
+</div>
+</div>
 </section>
-
-<section id="resposta-direta" class="section section--soft">
-    <div class="public-container reveal">
-        <span class="eyebrow">Resposta direta</span>
-        <h2>O que fazer quando o casamento está em crise?</h2>
-        <p><strong>Não decida a separação no pico da dor.</strong> Primeiro reconheça os sinais (brigas constantes, frieza, vontade de desistir), interrompa o ciclo de ataques, busque uma conversa guiada e siga um plano de reconstrução com comunicação, perdão e reconexão diária.</p>
-        <ol class="steps-list">
-            <li><strong>1. Pause o ciclo:</strong> escolham hora calma para conversar, sem gritos nem ultimatos.</li>
-            <li><strong>2. Diagnóstico:</strong> mapeiem dores, padrões de briga e necessidades de cada um.</li>
-            <li><strong>3. Reconstrução:</strong> pratiquem escuta, perdão e rotina de aliança semana a semana.</li>
-            <li><strong>4. Continuidade:</strong> mantenham rituais de conexão para prevenir recaídas.</li>
-        </ol>
-    </div>
-</section>
-
 <section class="section">
-    <div class="public-container">
-        <div class="section-head reveal">
-            <span class="eyebrow">Sinais de alerta</span>
-            <h2>O relacionamento está pedindo socorro?</h2>
-        </div>
-
-        <div class="cards cards--3">
-            <article class="feature-card reveal"><h3>Conflitos frequentes</h3><p>Discussões constantes e sensação de que toda conversa termina em briga.</p></article>
-            <article class="feature-card reveal"><h3>Distanciamento emocional</h3><p>Menos conexão, menos intimidade e dificuldade de se sentirem no mesmo time.</p></article>
-            <article class="feature-card reveal"><h3>Pensamento de separação</h3><p>A ideia de desistir aparece com frequência por falta de direção para reconstruir.</p></article>
-        </div>
-    </div>
+<div class="public-container">
+<div class="section-head section-head--split reveal">
+<div><span class="eyebrow">Reconhecer é um começo</span>
+<h2>Quando a relação<br><em>pede cuidado.</em>
+</h2>
+</div>
+<p>Nem sempre é fácil colocar em palavras o que vocês estão vivendo. Talvez alguma dessas situações seja familiar.</p>
+</div>
+<div class="cards cards--3">
+<article class="feature-card reveal">
+<div class="feature-card__top"><span class="feature-icon">{{ icon('chat') }}</span><span class="feature-card__index">01</span>
+</div>
+<h3>Conversas que viram conflitos</h3>
+<p>Discussões frequentes e a sensação de que, mesmo tentando, vocês não conseguem se entender.</p>
+</article>
+<article class="feature-card reveal">
+<div class="feature-card__top"><span class="feature-icon">{{ icon('heart') }}</span><span class="feature-card__index">02</span>
+</div>
+<h3>Juntos, mas distantes</h3>
+<p>Menos conexão, menos intimidade e a saudade de se sentir parte do mesmo time.</p>
+</article>
+<article class="feature-card reveal">
+<div class="feature-card__top"><span class="feature-icon">{{ icon('leaf') }}</span><span class="feature-card__index">03</span>
+</div>
+<h3>Dúvidas sobre o amanhã</h3>
+<p>O pensamento de separação e a dificuldade de enxergar um caminho para reconstruir.</p>
+</article>
+</div>
+</div>
 </section>
-
-<section class="section section--soft">
-    <div class="public-container">
-        <div class="section-head reveal">
-            <span class="eyebrow">Como ajudamos</span>
-            <h2>Intervenção prática para restaurar o casamento</h2>
-        </div>
-
-        <div class="cards cards--3">
-            <article class="feature-card reveal"><h3>Comunicação saudável</h3><p>Técnicas para dialogar sem ataques, com escuta e clareza.</p></article>
-            <article class="feature-card reveal"><h3>Processo de perdão</h3><p>Passos guiados para cura de feridas e reconstrução de confiança.</p></article>
-            <article class="feature-card reveal"><h3>Plano de reconexão</h3><p>Estratégias para retomar parceria emocional e espiritual no dia a dia.</p></article>
-        </div>
-
-        <div class="crisis-cta reveal">
-            <h3>Não espere a crise aumentar</h3>
-            <p>Uma conversa no momento certo pode preservar sua família.</p>
-            <a href="https://api.whatsapp.com/send?phone=5561998039461" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Quero começar agora</a>
-        </div>
-    </div>
+<section id="resposta-direta" class="section section--soft">
+<div class="public-container faq-layout">
+<div class="section-head reveal"><span class="eyebrow">Como podemos ajudar</span>
+<h2>Acolhimento para hoje.<br><em>Direção para amanhã.</em>
+</h2>
+<p>Princípios bíblicos e ferramentas práticas para olhar com cuidado para a relação.</p><a href="{{ url_for('main.home') }}#mentoria" class="text-link">Conheça a jornada CPI {{ icon('arrow') }}</a>
+</div>
+<div class="crisis-steps">
+<article class="crisis-step reveal"><span>01</span>
+<div>
+<h3>Aprender a se ouvir</h3>
+<p>Comunicação com escuta, clareza e respeito para abrir espaço ao diálogo.</p>
+</div>
+</article>
+<article class="crisis-step reveal"><span>02</span>
+<div>
+<h3>Cuidar das feridas</h3>
+<p>Um processo de reflexão sobre o perdão e a reconstrução da confiança.</p>
+</div>
+</article>
+<article class="crisis-step reveal"><span>03</span>
+<div>
+<h3>Retomar a parceria</h3>
+<p>Passos para cultivar a conexão emocional e espiritual no dia a dia.</p>
+</div>
+</article>
+</div>
+</div>
 </section>
-
+<section class="section">
+<div class="public-container belief-block reveal"><span class="eyebrow">No tempo de vocês</span>
+<h2>Uma conversa pode abrir<br><em>novas possibilidades.</em>
+</h2>
+<p>O primeiro passo é entender o momento de vocês e conversar sobre como a mentoria pode ajudar.</p>
+</div>
+</section>
 <section id="faq-crise" class="section">
-    <div class="public-container">
-        <div class="section-head reveal">
+<div class="public-container">
+<div class="section-head reveal">
             <span class="eyebrow">Perguntas frequentes</span>
-            <h2>Dúvidas de quem está em crise</h2>
-        </div>
-        <div class="faq-list reveal">
-            <details>
-                <summary>Meu casamento tem jeito?</summary>
-                <p>Na maioria dos casos, sim — se houver disposição e direção certa. Brigas e frieza são sinais de que o relacionamento precisa de intervenção, não necessariamente de separação.</p>
-            </details>
-            <details>
-                <summary>Quanto tempo leva para restaurar?</summary>
-                <p>Depende da gravidade e do comprometimento. O CPI trabalha em 3 fases: Diagnóstico, Reconstrução de Base e Plano de Continuidade.</p>
-            </details>
-            <details>
-                <summary>E se só um quer salvar?</summary>
-                <p>Comece por você. Mude sua comunicação, busque perdão e direção. Muitas restaurações começam com um dando o primeiro passo.</p>
-            </details>
-            <details>
-                <summary>Como falar sem brigar?</summary>
-                <p>Escute sem interromper, fale em primeira pessoa (“eu me sinto...”), evite ataques e escolha hora calma. O CPI treina isso semana a semana.</p>
-            </details>
-            <details>
-                <summary>Como funciona a mentoria CPI?</summary>
-                <p>Você chama no WhatsApp, faz o diagnóstico do casal, recebe um plano personalizado e é acompanhado na reconstrução.</p>
-            </details>
-        </div>
-    </div>
+<h2>Dúvidas de quem está em crise</h2>
+</div>
+<div class="faq-list reveal">
+<details>
+<summary>Meu casamento tem jeito?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Na maioria dos casos, sim — se houver disposição e direção certa. Brigas e frieza são sinais de que o relacionamento precisa de intervenção, não necessariamente de separação.</p>
+</details>
+<details>
+<summary>Quanto tempo leva para restaurar?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Depende da gravidade e do comprometimento. O CPI trabalha em 3 fases: Diagnóstico, Reconstrução de Base e Plano de Continuidade.</p>
+</details>
+<details>
+<summary>E se só um quer salvar?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Comece por você. Mude sua comunicação, busque perdão e direção. Muitas restaurações começam com um dando o primeiro passo.</p>
+</details>
+<details>
+<summary>Como falar sem brigar?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Escute sem interromper, fale em primeira pessoa (“eu me sinto...”), evite ataques e escolha hora calma. O CPI treina isso semana a semana.</p>
+</details>
+<details>
+<summary>Como funciona a mentoria CPI?<span class="faq-plus" aria-hidden="true"></span>
+</summary>
+<p>Você chama no WhatsApp, faz o diagnóstico do casal, recebe um plano personalizado e é acompanhado na reconstrução.</p>
+</details>
+</div>
+</div>
 </section>
+
+{% include 'includes/contact_cta.html' %}
 {% endblock %}

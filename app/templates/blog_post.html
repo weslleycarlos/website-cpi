@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "includes/icons.html" import icon %}
 
 {% block title %}{{ post.title }} | Blog CPI - Casamento Plano Infalível{% endblock %}
 
@@ -57,38 +58,26 @@
 {% endblock %}
 
 {% block content %}
+
 <section class="page-hero page-hero--post">
-    <div class="public-container reveal">
-        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-            <a href="{{ url_for('main.home') }}">Início</a> /
-            <a href="{{ url_for('main.blog_list') }}">Blog</a> /
-            <span aria-current="page">{{ post.title|truncate(60) }}</span>
-        </nav>
-        <span class="eyebrow">Blog CPI</span>
-        <h1>{{ post.title }}</h1>
-        <p>
-            <i class="fa-regular fa-user"></i> {{ post.author.username }}
-            &nbsp;•&nbsp;
-            <i class="fa-regular fa-calendar"></i> {{ post.date_posted.strftime('%d/%m/%Y') }}
-        </p>
-    </div>
+<div class="public-container">
+<nav class="breadcrumb" aria-label="Localização"><a href="{{ url_for('main.home') }}">Início</a><span aria-hidden="true">/</span><a href="{{ url_for('main.blog_list') }}">Conteúdos</a><span aria-hidden="true">/</span><span aria-current="page">Reflexão</span>
+</nav>
+  <span class="eyebrow">Reflexões para a vida a dois</span>
+<h1>{{ post.title }}</h1>
+<p>Por {{ post.author.username }} <span aria-hidden="true">·</span> <time datetime="{{ post.date_posted.strftime('%Y-%m-%d') }}">{{ post.date_posted.strftime('%d/%m/%Y') }}</time>
+</p>
+</div>
 </section>
-
 <section id="post-detail" class="section">
-    <div class="public-container">
-        <article class="article-shell reveal" itemscope itemtype="https://schema.org/BlogPosting">
-            <div class="key-takeaways" role="note" aria-label="Resumo rápido">
-                <strong>Resumo em 30 segundos:</strong> {{ post.summary }}
-            </div>
-            <div class="post-body article-content" itemprop="articleBody">
-                {{ post.content | safe }}
-            </div>
-
-            <div class="article-footer">
-                <a href="{{ url_for('main.blog_list') }}" class="btn btn--ghost"><i class="fa-solid fa-arrow-left"></i> Voltar ao blog</a>
-                <a href="https://wa.me/5561998039461" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Quero ajuda para meu casamento</a>
-            </div>
-        </article>
-    </div>
+<div class="public-container">
+<article class="article-shell">
+<p class="article-intro">{{ post.summary }}</p>
+<div class="post-body article-content">{{ post.content | safe }}</div>
+<div class="article-footer"><a href="{{ url_for('main.blog_list') }}" class="text-link">{{ icon('arrow') }} Todas as reflexões</a><a href="https://wa.me/5561998039461" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Converse com a equipe {{ icon('arrow-up') }}</a>
+</div>
+</article>
+</div>
 </section>
+{% include 'includes/contact_cta.html' %}
 {% endblock %}
